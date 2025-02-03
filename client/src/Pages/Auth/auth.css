@@ -1,0 +1,396 @@
+.signinpage {
+    /* background-color: rgb(255, 143, 15); */
+    background-color: rgb(39, 40, 45);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+#signinform {
+    /* width: 500px; */
+    height: auto;
+    max-height: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* border: solid rgba(255, 255, 255, 0.233); */
+    border-radius: 5px;
+    padding: 10px 50px;
+    background-color: rgb(39, 40, 45);
+}
+
+#signinforminsidediv {
+    /* border: solid white; */
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+
+}
+
+#signinheading {
+    align-self: center;
+    font-family: "Oswald", sans-serif;
+    color: rgb(255, 143, 15);
+    font-size: 3rem;
+    margin: 0;
+    margin: 15px 0;
+}
+
+#username,
+#password {
+    align-self: center;
+    width: 100%;
+    height: 40px;
+    margin: 10px 0;
+    padding: 5px;
+    font-size: 1.2rem;
+    background-color: rgb(102, 102, 102);
+    color: rgb(255, 255, 255);
+    border: none;
+    outline: none;
+    border-radius: 3px;
+}
+
+#showpassword {
+    font-size: 1.1rem;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 3px;
+    margin-bottom: 19px;
+}
+
+#checkbox {
+
+    margin: 10px 0;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 3px;
+}
+
+::placeholder {
+    color: rgba(255, 255, 255, 0.715);
+    opacity: 1;
+    /* Firefox */
+}
+
+::-ms-input-placeholder {
+    /* Edge 12 -18 */
+    color: red;
+}
+
+#signinbutton {
+    width: 180px;
+    height: 40px;
+    margin: 10px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    background-color: rgb(255, 143, 15);
+    color: white;
+    border: none;
+    outline: none;
+    border-radius: 3px;
+    align-self: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#test{
+    width: 180px;
+    height: 40px;
+    margin: 10px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    background-color: rgb(255, 143, 15);
+    color: white;
+    border: none;
+    outline: none;
+    border-radius: 3px;
+    align-self: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.loading{
+    color: #ffffff;
+    width: 10px;
+}
+
+/* .authbox{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+} */
+
+.signup {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    font-size: 1.1rem;
+}
+
+#signup {
+    text-decoration: none;
+    color: rgb(255, 143, 15);
+}
+
+.crossicon {
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    margin: 0;
+    width: 30px;
+    height: 30px;
+    filter: invert(.6);
+    /* border: solid ; */
+    /* border-radius: 100px; */
+    /* padding: 20px; */
+    cursor: pointer;
+}
+
+#cross {
+    margin: 0;
+}
+
+#cross-alert{
+    width: 20px;
+    height: 20px;
+}
+
+.signuppage{
+    background-color:  rgb(39, 40, 45);
+    color: white;
+}
+.formcontainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* margin-top: 50px; */
+    height: 100vh;
+}
+
+#signupform{
+    font-family:"Oswald", sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.signupformheader{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.signupformheader>h1{
+    font-size: 3.5rem;
+    font-family:"Oswald", sans-serif;
+    margin: 0;
+}
+
+.signupformheader>h3{
+    font-size: 2rem;
+    margin: 0;
+    font-family:"Oswald", sans-serif ;
+}
+.signupformfullname{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: 20px;
+    margin-bottom: 10px;
+}
+
+.signupformfullname>label{
+    font-size: 1.6rem;
+    margin: 10px 20px;
+
+}
+.signupformfullname>input{
+    font-size: 1.3rem;
+    padding: 7px 10px;
+    background-color: rgb(102, 102, 102);
+    border: none;
+    outline: none;
+    border-radius: 4px;
+    width: 350px;
+    height: 30px;
+}
+
+.ageandemail{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: 10px;
+}
+
+.ageandemail>label{
+    font-size: 1.6rem;
+    margin: 10px 20px;
+
+}
+#age{
+    height: 30px;
+    font-size: 1.3rem;
+    padding: 7px 10px;
+    max-width: 80px;
+    text-align: center;
+    background-color: rgb(102, 102, 102);
+    border: none;
+    outline: none;
+    border-radius: 4px;
+}
+
+#emailsignup{
+    height: 30px;
+    font-size: 1.3rem;
+    padding: 7px 10px;
+    width: 400px;
+    text-align: left;
+    background-color: rgb(102, 102, 102);
+    border: none;
+    outline: none;
+    border-radius: 4px;
+}
+
+.usernamepassword{
+    display: flex;
+    flex-direction: row;
+    /* align-items: center; */
+    margin: 10px;
+}
+
+.usernamepassword>label{
+    font-size: 1.6rem;
+    margin: 10px 20px;
+    font-family:"Oswald", sans-serif ;
+}
+
+.usernamepassword>input{
+    font-size: 1.6rem;
+    padding: 7px 10px;
+    width: 250px;
+    height: 30px;
+    text-align: left;
+    background-color: rgb(102, 102, 102);
+    border: none;
+    outline: none;
+    border-radius: 4px;
+}
+
+.passwordbigdiv{
+    display: flex;
+    flex-direction: row;
+    align-items: last baseline;
+    /* border: solid; */
+}
+
+.passwordsectionsignup{
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    /* justify-content: space-between; */
+    /* border: solid; */
+    margin: 0 10px;
+    margin-left: 20px;
+    /* max-width: 600px; */
+}
+
+.passwordsectionsignup>label{
+    font-size: 1.6rem;
+    /* margin: 10px 20px; */
+    font-family:"Oswald", sans-serif ;
+}
+
+.createpassword>input,.confirmpassword>input{
+    font-size: 1.6rem;
+    padding: 7px 10px;
+    margin-bottom: 10px;
+    width: 250px;
+    height: 30px;
+    text-align: left;
+    background-color: rgb(102, 102, 102);
+    border: none;
+    outline: none;
+    border-radius: 4px;
+}
+
+#signuppassword1{
+    font-size: 1.6rem;
+    padding: 7px 10px;
+    /* margin-bottom: 10px; */
+    width: 250px;
+    height: 30px;
+    text-align: left;
+    background-color: rgb(102, 102, 102);
+    border: none;
+    outline: none;
+    border-radius: 4px;
+}
+.createpassword>label,.confirmpassword>label{
+    font-size: 1.6rem;
+    text-align: left;
+    margin: 0 10px;
+    margin-bottom: 10px;
+    font-family:"Oswald", sans-serif ;
+}
+
+.createpassword,.confirmpassword{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.showpassworddiv{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.signuppolicy{
+    max-width: 70%;
+    display: flex;
+    align-items: first baseline;
+}
+
+.signuppolicy>label>h4{
+    margin: 0;
+}
+
+#signupbutton{
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: 10px 30px;
+    margin:30px 20px;
+    background-color: rgb(255, 143, 15);
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    width: 300px;
+}
+
+.line{
+    display: flex;
+    align-self: center;
+    justify-self: center;
+    margin: 5px;
+    width: 50%;
+    border: solid 1px;
+}

@@ -1,0 +1,104 @@
+.dashboard{
+    font-family: "Oswald", sans-serif;
+    /* background: linear-gradient(220.55deg, #565656 0%, #181818 100%); */
+    background: url('background.png');
+    /* background-color: #020041; */
+    background-size: cover;
+    /* background-position: center; */
+    height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container{
+    margin-top: 50px;
+    /* border: black solid; */
+    width: 80%;
+    max-width: 80%;
+    height: auto;
+    z-index: 10;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+/* .brightlight{
+    position: fixed;
+    width: 50vw;
+    height: 30vh;
+    background-color: #f7f7f7;
+    border-radius: 100%;
+    box-shadow: 0 0 10px 10px rgba(255, 255, 255, 0.5);
+} */
+
+.row1{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.row1mem{
+   
+    /* border: solid red; */
+    background-color: rgb(3, 3, 73);
+    height: 200px;
+}
+
+.profile{
+    width: 200px;
+    min-width: 200px;
+    max-width: 200px;
+    /* height: 150px; */
+    /* border-color: aqua; */
+    border-radius: 100%;
+
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#profilepic{
+    width: 95%;
+    border-radius: 100%;
+}
+
+.row1rec{
+    width: 100%;
+    display: flex;
+    border-radius: 25px;
+}
+
+.row2{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.row2rec{
+    /* border: solid red; */
+    background-color: rgb(3, 3, 73);
+    height: 400px;
+    /* width: 100%; */
+    display: flex;
+    border-radius: 25px;
+}
+
+.bloglist{
+    width: 60%;
+}
+
+.socialmedia{
+    width: 40%;
+}

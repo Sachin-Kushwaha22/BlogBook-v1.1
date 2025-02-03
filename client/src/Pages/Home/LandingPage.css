@@ -1,0 +1,21 @@
+.landing-page{
+    padding: 10px 60px;
+    padding-top: 100px;
+    background-color: rgb(39, 40, 45);
+    color: white;
+}
+.intro{
+    margin-left: 150px;
+    margin-right: 150px;
+}
+
+#blogbook{
+    font-size: 3rem;
+    margin: 0;
+    padding: 0;
+    line-height:0px;
+}
+
+#intro-para{
+    font-size: 1.5rem;
+}

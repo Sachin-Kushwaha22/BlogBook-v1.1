@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HOME</title>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/home.css">
+</head>
+
+<body>
+    <div id="body-home">
+        <div class="auth-container" id="auth-container">
+            <form action="/signin" method="get">
+                <button id="signin" type="submit">SIGNIN</button>
+            </form>
+            <form action="/signup" method="get">
+                <button id="signup" type="submit">SIGNUP</button>
+            </form>
+        </div>
+        <h1 id="title">WELCOME SOCIAL MEDIA INFLUENCERS</h1>
+        <div>
+            <div>
+                <div id="story-container">
+                    <form id="story-form-1" method="get" action="/blog">
+                        <p>ADD YOUR STORY</p>
+                        <button type="submit">ADD STORY</button>
+                    </form>
+                    <form id="story-form-2" method="get" action="/post/viewblog">
+                        <p>VIEW YOUR STORYs</p>
+                        <button type="submit">VIEW STORY</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+</head>
+
+<body>
+    <form method="post" action="/user/signup">
+        <h1>Fill the details</h1>
+        <input type="text" required name="firstname" placeholder="First Name">
+        <input type="text" required name="lastname" placeholder="Last Name">
+        <input type="number" required name="age" placeholder="Age" min="1" max="100">
+        <input type="email" required name="email" placeholder="Enter your email">
+        <input type="text" required name="username" placeholder="Create your username">
+        <input type="password" required name="password" placeholder="Create your Password">
+        <button type="submit">Sign Up</button>
+    </form>
+
+</body>
+
+</html>
