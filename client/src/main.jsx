@@ -11,6 +11,7 @@ import Readblog from './Pages/Content/Read/readBlog'
 import Writeblog from './Pages/Content/Write/writeBlog'
 import Dashboard from './Pages/Dashboard/dashboard'
 import Profile from './Pages/Profile/profile'
+import Admin from './Admin/adminPanel'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -36,6 +37,7 @@ createRoot(document.getElementById('root')).render(
           theme="dark"
           transition={Bounce} />
         <Routes>
+          <Route path="/admin" element={<Admin />} />
           <Route path="/" element={<HomePage />} />
           <Route path="/home" element={<HomePage />} />
           {/* <Route path="/signin" element={<Signin />} />

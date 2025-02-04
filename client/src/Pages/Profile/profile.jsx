@@ -10,13 +10,13 @@ const UserProfile = () => {
     const [showDropdown, setShowDropdown] = useState(false);
 
     useEffect(() => {
-            // if (isAuthenticated && user) {
-            //     localStorage.setItem('picture', user.picture)
-            //  } else {
-            //      localStorage.removeItem('picture')
-            //  }
-            console.log(localStorage.getItem('picture'));
-            
+        // if (isAuthenticated && user) {
+        //     localStorage.setItem('picture', user.picture)
+        //  } else {
+        //      localStorage.removeItem('picture')
+        //  }
+        console.log(localStorage.getItem('picture'));
+
     }, [])
 
     const toggleDropdown = () => {
@@ -44,14 +44,33 @@ const UserProfile = () => {
         }
     }
 
+    const handleAdminPanel = async() => {
+        if(isAuthenticated){
+            try {
+                const response = await axios.post('http://localhost:9010/google/admin',{},{
+                    withCredentials: true
+                })
+
+                if(response.data.isAdmin){
+                    navigate('/admin')
+                }
+            } catch (error) {
+                if (!response.data.isAdmin) {
+                    setTimeout(()=>{
+                        navigate('/auth/admin')
+                    },1000)
+                }
+            }
+        }
+    }
 
     return (
         <div >
 
             <div id='profilelogo' onClick={toggleDropdown}>
-                
-           <img id='profileimg'  src={localStorage.getItem('picture')} alt="UserProfile" />
-           {/* {userProfile && (<img id='profileimg' onClick={toggleDropdown} src={localStorage.getItem('picture')} alt="UserProfile" />)} */}
+
+                <img id='profileimg' src={localStorage.getItem('picture')} alt="UserProfile" />
+                {/* {userProfile && (<img id='profileimg' onClick={toggleDropdown} src={localStorage.getItem('picture')} alt="UserProfile" />)} */}
 
                 {showDropdown && (
                     <div className="dropdown-menu">
@@ -69,11 +88,14 @@ const UserProfile = () => {
                                 <path d="M13.9201,6h-6.9201v2h4.89893c-0.464661,2.2793 -2.4845,4 -4.89893,4c-2.75684,0 -5,-2.24316 -5,-5c0,-2.75684 2.24316,-5 5,-5c1.12341,0 2.15027,0.385986 2.98602,1.01398l1.43512,-1.43512c-1.20636,-0.985657 -2.74542,-1.57886 -4.42114,-1.57886c-3.85986,0 -7,3.14062 -7,7c0,3.85938 3.14014,7 7,7c3.51947,0 6.43225,-2.61377 6.9201,-6c0.0471802,-0.327515 0.079895,-0.659607 0.079895,-1c0,-0.340393 -0.0327148,-0.672485 -0.079895,-1Z" transform="translate(1 1)"></path>
                             </svg>
                             Manage Google Account</p>
-                        <p id='aboutusprofilelogo'>
-                            <svg id='profilelogosvgs' className='profilelogosvgsaboutus' xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0 0 24 24">
-                                <path d="M 12 2 C 6.4889971 2 2 6.4889971 2 12 C 2 17.511003 6.4889971 22 12 22 C 17.511003 22 22 17.511003 22 12 C 22 6.4889971 17.511003 2 12 2 z M 12 4 C 16.430123 4 20 7.5698774 20 12 C 20 16.430123 16.430123 20 12 20 C 7.5698774 20 4 16.430123 4 12 C 4 7.5698774 7.5698774 4 12 4 z M 11 7 L 11 9 L 13 9 L 13 7 L 11 7 z M 11 11 L 11 17 L 13 17 L 13 11 L 11 11 z"></path>
+                        <p id='aboutusprofilelogo' onClick={handleAdminPanel}>
+                            <svg id='profilelogosvgs' className='adminpanelsvg' xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000" height="800px" width="800px" version="1.1" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve">
+                                <g>
+                                    <path d="M22.3,16.7l1.4-1.4L20,11.6l-5.8,5.8c-0.5-0.3-1.1-0.4-1.7-0.4C10.6,17,9,18.6,9,20.5s1.6,3.5,3.5,3.5s3.5-1.6,3.5-3.5   c0-0.6-0.2-1.2-0.4-1.7l1.9-1.9l2.3,2.3l1.4-1.4l-2.3-2.3l1.1-1.1L22.3,16.7z M12.5,22c-0.8,0-1.5-0.7-1.5-1.5s0.7-1.5,1.5-1.5   s1.5,0.7,1.5,1.5S13.3,22,12.5,22z" />
+                                    <path d="M2,19c0-3.9,3.1-7,7-7c2,0,3.9,0.9,5.3,2.4l1.5-1.3c-0.9-1-1.9-1.8-3.1-2.3C14.1,9.7,15,7.9,15,6c0-3.3-2.7-6-6-6   S3,2.7,3,6c0,1.9,0.9,3.7,2.4,4.8C2.2,12.2,0,15.3,0,19v5h8v-2H2V19z M5,6c0-2.2,1.8-4,4-4s4,1.8,4,4s-1.8,4-4,4S5,8.2,5,6z" />
+                                </g>
                             </svg>
-                            About Us</p>
+                            Admin Panel</p>
                         <div className='linegap'></div>
                         <p onClick={handleSignOutGoogle}>
                             <svg id='profilelogosvgs' viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 4C5.44772 4 5 4.44772 5 5V19C5 19.5523 5.44772 20 6 20H10C10.5523 20 11 20.4477 11 21C11 21.5523 10.5523 22 10 22H6C4.34315 22 3 20.6569 3 19V5C3 3.34315 4.34315 2 6 2H10C10.5523 2 11 2.44772 11 3C11 3.55228 10.5523 4 10 4H6ZM15.2929 7.29289C15.6834 6.90237 16.3166 6.90237 16.7071 7.29289L20.7071 11.2929C21.0976 11.6834 21.0976 12.3166 20.7071 12.7071L16.7071 16.7071C16.3166 17.0976 15.6834 17.0976 15.2929 16.7071C14.9024 16.3166 14.9024 15.6834 15.2929 15.2929L17.5858 13H11C10.4477 13 10 12.5523 10 12C10 11.4477 10.4477 11 11 11H17.5858L15.2929 8.70711C14.9024 8.31658 14.9024 7.68342 15.2929 7.29289Z" fill="currentColor"></path></svg>

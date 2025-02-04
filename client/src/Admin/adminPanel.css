@@ -1,0 +1,257 @@
+.adminPanel{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+
+    font-family: 'oswald', sans-serif;
+    box-sizing: border-box;
+    /* background-color: #1e3a67; */
+    background-color: #091522;
+    color: rgb(195, 222, 253);
+}
+
+
+.adminnavbar{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 50px;
+}
+
+.adminnavbarbuttons{
+    width: 10%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.adminlogout{
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+}
+.adminlogoutsvg{
+    width: 25px;
+}
+.adminsidebar{
+    position: relative;
+    border-radius: 0px 9px 9px 0px;
+    background-color: #213555;
+    /* border: solid green; */
+    width: 14%;
+    max-width: 14%;
+    /* min-width: 13%; */
+    height: 100vh;
+    min-height: 100vh;
+    max-height: 100vh;
+    box-sizing: border-box;
+    overflow:hidden;
+}
+.adminheading{
+    margin-top: 9px;
+
+    align-self: center;
+}
+.slidebutton{
+    margin: 0;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 2;
+}
+
+#adminsvg{
+    width: 30px;
+    height: 30px;
+    transform: rotate(90deg);
+    filter: invert(1);
+    opacity: .7;
+}
+
+.adminoptionsvg{
+    width: 20px;
+    height: 25px;
+    filter: invert(1);
+}
+
+.svgcurrency{
+    width: 15px;
+    height: 15px;
+    filter: invert(1);
+}
+
+.svg2{
+    width: 23px;
+    height: 30px;
+    /* transform: rotate(90deg); */
+    filter: invert(1);
+}
+
+.adminprofile{
+    /* position: absolute; */
+    width: 100%;
+    height: 30%;
+    margin: 0;
+    /* background: #000; */
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    /* justify-content: center; */
+}
+
+.adminprofilepic{
+    width: 120px;
+    height: 120px;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+    background: #ece6e6;
+}
+
+.profilename{
+    /* justify-self: center; */
+    margin:12px 0;
+    align-self: center;
+}
+
+.adminline{
+    margin: 30px 0;
+    width: 80%;
+    align-self: center;
+    justify-self: center;
+    border-bottom: solid 1px rgba(255, 255, 255, 0.147);
+}
+/* .optionline{
+    margin: 0;
+    width: 100%;
+    align-self: center;
+    justify-self: center;
+    border-bottom: solid 1px rgba(255, 255, 255, 0.147);
+} */
+.sidebaroption{
+    
+    
+    /* align-items: center; */
+    width: 100%;
+    height:100%;
+    /* background: #000; */
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    text-align: left;
+}
+
+.optionbox{
+    width: 80%;
+    /* margin: 20px; */
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    justify-self: center;
+    /* background: #817d7d; */
+}
+
+.options{
+    margin-left:20%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    /* justify-content: center; */
+    gap: 10px;
+}
+
+
+
+.adminbodycontainer{
+    width: 86%;
+    padding: 0 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.adminbody{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.adminanalytics{
+    /* padding: 10px; */
+    flex: 1;
+    height: auto;
+    /* border: solid ; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.analyticsbox{
+    border-radius: 9px;
+    background-color: #213555;
+}
+.analyticrow1{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    overflow: hidden;
+    width: 100%;
+}
+.analyticrow1box{
+    width: 25%;
+    /* max-width: 300px; */
+    flex-grow: 0; /* Prevent expansion */
+    height: 140px;
+    border-radius: 9px;
+    /* background-color: #1E3E62; */
+    margin: 10px 0;
+}
+
+.analyticrow2{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    overflow: hidden;
+    width: 100%;
+    height: 70vh;
+    /* border: solid greenyellow; */
+
+}
+
+.analyticrow2col1{
+    width: 65%;
+    display: flex;
+    flex-direction: column;
+    /* border: solid */
+}
+
+.box5{
+    width: 100%;
+    height: 35vh;
+}
+
+.analyticrow2col1row{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    margin:10px 0;
+    margin-bottom: 0;
+}
+
+.box6,.box7{
+    width: 50%;
+    height: 35vh;
+}
+
+.analyticrow2col2{
+    display: flex;
+    flex-direction: column;
+    /* margin: 10px 10px 0 0; */
+    width: 35%;
+}
+
+.box8{
+    width: 100%;
+    height: 74vh;
+}

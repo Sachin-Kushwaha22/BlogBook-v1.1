@@ -98,3 +98,7 @@
     width: 21px !important;
     height: 21px !important;
 }
+
+.adminpanelsvg{
+    filter: invert(1);
+}

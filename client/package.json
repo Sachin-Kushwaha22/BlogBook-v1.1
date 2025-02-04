@@ -13,10 +13,12 @@
   "dependencies": {
     "@auth0/auth0-react": "^2.2.4",
     "axios": "^1.7.7",
+    "chart.js": "^4.4.7",
     "quill": "^2.0.3",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-loader-spinner": "^6.1.6",
+    "react-pro-sidebar": "^1.1.0",
     "react-quill": "^2.0.0",
     "react-router-dom": "^6.28.1",
     "react-toastify": "^11.0.2"
