@@ -1,22 +1,17 @@
 const mongoose = require('mongoose')
 
-const adminOauthUser = new mongoose.Schema({
-    adminOAuthUser:{
+const admin = new mongoose.Schema({
+    adminOAuthData:{
         type: Object,
         required: true
     },
-    isAdmin:{
-        type:Boolean,
-        default: false,
-        required: true
-    },
-    isUser:{
-        type:Boolean,
-        default: true,
+    adminkey:{
+        type:String,
+        // default: false,
         required: true
     }
 },{timestamps:true})
 
-const ADMINUSER = mongoose.model('oauthAdminUser', adminOauthUser)
+const ADMIN = mongoose.model('admin', admin)
 
-module.exports = ADMINUSER
+module.exports = ADMIN

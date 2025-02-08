@@ -47,7 +47,7 @@ const UserProfile = () => {
     const handleAdminPanel = async() => {
         if(isAuthenticated){
             try {
-                const response = await axios.post('http://localhost:9010/google/admin',{},{
+                const response = await axios.post('http://localhost:9010/auth/admin',{},{
                     withCredentials: true
                 })
 
