@@ -1,7 +1,10 @@
-import Chart from 'chart.js/auto';
-import React, { useEffect, useState } from 'react';
+// import Chart from 'chart.js/auto';
+import React, { useEffect, useState, } from 'react';
+import { useNavigate } from 'react-router-dom'
 import { Sidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
 import './adminPanel.css'
+import config from '../config'
+
 // import { useAuth0 } from '@auth0/auth0-react'
 import axios from 'axios'
 import { toast } from 'react-toastify'
@@ -17,9 +20,44 @@ import img2 from './imageasset/8.png'
 import img8 from './imageasset/9.png'
 import img10 from './imageasset/10.png'
 
+
+
+
+import { Line, Bar, Pie } from 'react-chartjs-2';
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+  ArcElement
+} from 'chart.js';
+
+// Register the chart components you want to use
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+  ArcElement
+);
+
+
+
+
 function AdminPanel() {
+    
+    const navigate  = useNavigate()
     // const { isAuthenticated, user } = useAuth0()
-    const [profilePic, setProfilePic] = useState({})
+    const [adminInfo, setAdminInfo] = useState(JSON.parse(localStorage.getItem('adminInfo')))
     const [adminSignInPageVisible, setAdminSignInPageVisible] = useState(true)
     const [adminPageVisible, setAdminPageVisible] = useState(false)
 
@@ -30,22 +68,28 @@ function AdminPanel() {
 
     const checkAdminAuth = async () => {
         try {
-            const response = await axios.post('http://localhost:9010/admin/auth/api/check',{},{
+            const response = await axios.get(`${config.serverUrl}/admin/auth/api/check`,{
                 withCredentials:true
             })
 
-            if(response.data.isAdmin){
-                console.log('response from checkadminauth',response.data.message)
+            if(response.status == 200){
+                // console.log('response from checkadminauth',response.data.message)
                 setAdminPageVisible(true)
                 setAdminSignInPageVisible(false)
+                // navigate('/admin')
+            }else{
+                localStorage.removeItem('adminInfo')
             }
         } catch (error) {
+            localStorage.removeItem('adminInfo')
+            // console.log("UnAuthorized ", error.response?.data?.message || error.message);
             
         }
     }
 
     useEffect(() => {
         checkAdminAuth()
+        setAdminInfo(JSON.parse(localStorage.getItem('adminInfo')))
     }, [])
 
     const handleadminformonchange = (e) => {
@@ -59,25 +103,23 @@ function AdminPanel() {
         // console.log(formData);
 
         try {
-            const response = await axios.post('http://localhost:9010/admin/auth', formData, {
+            const response = await axios.post(`${config.serverUrl}/admin/auth`, formData, {
                 withCredentials: true
             })
 
-            if (response.data.isAdmin && response.data.userData) {
+            if (response.status == 200) {
                 toast.success('Admin Authorized')
+                const { name, picture } = response.data.userData
+                localStorage.setItem('adminInfo', JSON.stringify({name, picture}))
+                setAdminInfo(JSON.parse(localStorage.getItem('adminInfo')))
                 setAdminSignInPageVisible(false)
                 setAdminPageVisible(true)
-                console.log('user detail by adminpanel ',response.data.userData);
-
-                setProfilePic(response.data.userData.picture)
-            } else {
-                toast.error('Admin Not Authorized')
             }
 
         } catch (error) {
-
-            toast.error('error section Admin Not Authorized')
-
+            if(error.status == 401) toast.error('Invalid Credentials')
+            console.log("error generated from handleadminsigninform", error.response?.data?.message || error.message);
+        toast.error(error.response?.data?.message || error.message)
         }
         finally {
             setTimeout(() => {
@@ -89,8 +131,65 @@ function AdminPanel() {
         }
     }
 
+    const handleAdminLogout = async() => {
+        try {
+            const response = await axios.post(`${config.serverUrl}/admin/logout`,{},{
+                withCredentials: true
+            })
+            if(response.status == 200) {
+                localStorage.removeItem('adminInfo')
+                toast.info('ADMIN LOGOUT SUCCESSFULL')
+                window.location.href = '/admin'
+            }
+        } catch (error) {
+            window.location.href = '/admin'
+        }
+    }
 
-    return (<>
+
+        const lineData = {
+          labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+          datasets: [
+            {
+              label: 'Monthly Sales',
+              data: [65, 59, 80, 81, 56, 55],
+              borderColor: 'rgba(75, 192, 192, 1)',
+              fill: false, // No fill under the line
+            },
+          ],
+        };
+      
+        // Bar Chart Data
+        const barData = {
+          labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+          datasets: [
+            {
+              label: 'Number of Products Sold',
+              data: [12, 19, 3, 5, 2, 3],
+              backgroundColor: 'rgba(54, 162, 235, 0.2)',
+              borderColor: 'rgba(54, 162, 235, 1)',
+              borderWidth: 1,
+            },
+          ],
+        };
+      
+        // Pie Chart Data
+        const pieData = {
+          labels: ['Red', 'Blue', 'Yellow'],
+          datasets: [
+            {
+              data: [300, 50, 100],
+              backgroundColor: ['red', 'blue', 'yellow'],
+              borderColor: ['white', 'white', 'white'],
+              borderWidth: 1,
+            },
+          ],
+        };
+      
+
+      
+
+    return (<><div></div>
         {adminSignInPageVisible && (
             <div className="adminauth">
                 <div className='adminauthform'>
@@ -208,10 +307,10 @@ function AdminPanel() {
                         <div className='adminprofile'>
                             <h2 className="adminheading">ADMIN</h2>
                             <div className='adminprofilepic'>
-                                <img id='adminprofilepic' src={profilePic.picture} alt="pic" />
+                                <img id='adminprofilepic' src={adminInfo?.picture} alt="pic" />
                             </div>
                             <div className='profilename'>
-                                {profilePic.name}
+                                {adminInfo?.name}
                             </div>
                         </div>
                         <div className='adminline'></div>
@@ -254,34 +353,46 @@ function AdminPanel() {
                                 <nav className='adminnavbar'>
                                     <h2 className='heading'>DASHBOARD</h2>
                                     <div className="searchbar">
-                                        search
+                                    
                                     </div>
                                     <div className='adminnavbarbuttons'>
                                         <div className='changetheme'>
 
                                         </div>
-                                        <div className='adminlogout'><svg className='adminlogoutsvg' viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 4C5.44772 4 5 4.44772 5 5V19C5 19.5523 5.44772 20 6 20H10C10.5523 20 11 20.4477 11 21C11 21.5523 10.5523 22 10 22H6C4.34315 22 3 20.6569 3 19V5C3 3.34315 4.34315 2 6 2H10C10.5523 2 11 2.44772 11 3C11 3.55228 10.5523 4 10 4H6ZM15.2929 7.29289C15.6834 6.90237 16.3166 6.90237 16.7071 7.29289L20.7071 11.2929C21.0976 11.6834 21.0976 12.3166 20.7071 12.7071L16.7071 16.7071C16.3166 17.0976 15.6834 17.0976 15.2929 16.7071C14.9024 16.3166 14.9024 15.6834 15.2929 15.2929L17.5858 13H11C10.4477 13 10 12.5523 10 12C10 11.4477 10.4477 11 11 11H17.5858L15.2929 8.70711C14.9024 8.31658 14.9024 7.68342 15.2929 7.29289Z" fill="currentColor"></path></svg> Logout</div>
+                                        <div onClick={handleAdminLogout} className='adminlogout'><svg className='adminlogoutsvg' viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 4C5.44772 4 5 4.44772 5 5V19C5 19.5523 5.44772 20 6 20H10C10.5523 20 11 20.4477 11 21C11 21.5523 10.5523 22 10 22H6C4.34315 22 3 20.6569 3 19V5C3 3.34315 4.34315 2 6 2H10C10.5523 2 11 2.44772 11 3C11 3.55228 10.5523 4 10 4H6ZM15.2929 7.29289C15.6834 6.90237 16.3166 6.90237 16.7071 7.29289L20.7071 11.2929C21.0976 11.6834 21.0976 12.3166 20.7071 12.7071L16.7071 16.7071C16.3166 17.0976 15.6834 17.0976 15.2929 16.7071C14.9024 16.3166 14.9024 15.6834 15.2929 15.2929L17.5858 13H11C10.4477 13 10 12.5523 10 12C10 11.4477 10.4477 11 11 11H17.5858L15.2929 8.70711C14.9024 8.31658 14.9024 7.68342 15.2929 7.29289Z" fill="currentColor"></path></svg> Logout</div>
                                     </div>
                                 </nav>
                             </div>
 
                             <div className='adminanalytics'>
                                 <div className='analyticrow1'>
-                                    <div className="analyticrow1box analyticsbox box1"></div>
-                                    <div className="analyticrow1box analyticsbox box2"></div>
-                                    <div className="analyticrow1box analyticsbox box3"></div>
-                                    <div className="analyticrow1box analyticsbox box4"></div>
+                                    <div className="analyticrow1box analyticsbox box1">Box1</div>
+                                    <div className="analyticrow1box analyticsbox box2">BOX2</div>
+                                    <div className="analyticrow1box analyticsbox box3">BOX3</div>
+                                    <div className="analyticrow1box analyticsbox box4">Box4</div>
                                 </div>
                                 <div className="analyticrow2">
                                     <div className='analyticrow2col1'>
-                                        <div className="analyticrow2col1box analyticsbox box5"></div>
+                                        <div className="analyticrow2col1box analyticsbox box5 chart-container">box5
+                                            
+                                            <Line className='chart' data={lineData} options={{ responsive: true }} />
+                                            
+                                        </div>
                                         <div className="analyticrow2col1row">
-                                            <div className="analyticrow2col1rowbox analyticsbox box6"></div>
-                                            <div className="analyticrow2col1rowbox analyticsbox box7"></div>
+                                            <div className="analyticrow2col1rowbox analyticsbox box6 chart-container">box6
+                                                <div>
+                                                <Bar className='chart' data={barData} options={{ responsive: true }} />
+                                                </div>
+                                            </div>
+                                            <div className="analyticrow2col1rowbox analyticsbox box7 chart-container">box7
+                                                <div>
+                                                <Pie className='chart' data={pieData} options={{ responsive: true }} />
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div className="analyticrow2col2">
-                                        <div className="analyticsbox box8"></div>
+                                        <div className="analyticsbox box8">box8</div>
                                     </div>
                                 </div>
                             </div>
