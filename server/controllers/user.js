@@ -57,8 +57,26 @@ async function handleUserSignIn(req, res) {
     }
 }
 
+async function handleUserLogout(req, res){
+    try {
+        const oauthToken = req.cookies?.oauthToken
+
+        if (!oauthToken) {
+            return res.status(401).json({ message: "Token not found, unauthorized", isSignOut: false });
+        }
+
+        //else
+        res.clearCookie('oauthToken'); // If token is stored in cookies
+        return res.status(200).json({ message: "Logged out successfully", isSignOut: true })
+
+
+    } catch (error) {
+        console.log('error from handleUserLogout func',error)
+    }
+}
 
 module.exports = {
     handleUserSignUp,
     handleUserSignIn,
+    handleUserLogout
 };

@@ -18,7 +18,7 @@ async function handleFrontendCheckAuth(req, res) {
 
 
     } catch (error) {
-        console.log(error)
+        console.log('error from handlefrontendCheckauth server',error)
     }
 }
 

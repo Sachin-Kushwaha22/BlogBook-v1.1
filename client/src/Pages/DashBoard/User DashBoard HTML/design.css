@@ -1,0 +1,2392 @@
+html,
+body,
+#main {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale
+}
+
+* {
+    box-sizing: border-box;
+    -webkit-font-smoothing: inherit
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+figure {
+    margin: 0
+}
+
+body,
+input,
+textarea,
+select,
+button {
+    font-size: 12px;
+    font-family: sans-serif
+}
+
+#__framer-badge-container {
+    position: fixed;
+    bottom: 0;
+    padding: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: right;
+    pointer-events: none;
+    z-index: 314159
+}
+
+.__framer-badge {
+    pointer-events: auto
+}
+
+@font-face {
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/poppins/v22/pxiEyp8kv8JHgFVrJJnecmNE.woff2) format("woff2");
+    unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF
+}
+
+@font-face {
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/poppins/v22/pxiEyp8kv8JHgFVrJJfecg.woff2) format("woff2");
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD
+}
+
+@font-face {
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/poppins/v22/pxiByp8kv8JHgFVrLGT9Z1JlFc-K.woff2) format("woff2");
+    unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF
+}
+
+@font-face {
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/poppins/v22/pxiByp8kv8JHgFVrLGT9Z1xlFQ.woff2) format("woff2");
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD
+}
+
+@font-face {
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/poppins/v22/pxiByp8kv8JHgFVrLEj6Z1JlFc-K.woff2) format("woff2");
+    unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF
+}
+
+@font-face {
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/poppins/v22/pxiByp8kv8JHgFVrLEj6Z1xlFQ.woff2) format("woff2");
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD
+}
+
+@font-face {
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/poppins/v22/pxiByp8kv8JHgFVrLCz7Z1JlFc-K.woff2) format("woff2");
+    unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF
+}
+
+@font-face {
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url(https://fonts.gstatic.com/s/poppins/v22/pxiByp8kv8JHgFVrLCz7Z1xlFQ.woff2) format("woff2");
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD
+}
+
+@font-face {
+    font-family: Poppins Placeholder;
+    src: local("Arial");
+    ascent-override: 92.83%;
+    descent-override: 30.94%;
+    line-gap-override: 8.84%;
+    size-adjust: 113.11%
+}
+
+body {
+    --framer-will-change-override: none
+}
+
+@supports (background: -webkit-named-image(i)) and (not (grid-template-rows: subgrid)) {
+    body {
+        --framer-will-change-override: transform
+    }
+}
+
+[data-framer-component-type] {
+    position: absolute
+}
+
+[data-framer-component-type=Text] {
+    cursor: inherit
+}
+
+[data-framer-component-text-autosized] * {
+    white-space: pre
+}
+
+[data-framer-component-type=Text]>* {
+    text-align: var(--framer-text-alignment, start)
+}
+
+[data-framer-component-type=Text] span span,
+[data-framer-component-type=Text] p span,
+[data-framer-component-type=Text] h1 span,
+[data-framer-component-type=Text] h2 span,
+[data-framer-component-type=Text] h3 span,
+[data-framer-component-type=Text] h4 span,
+[data-framer-component-type=Text] h5 span,
+[data-framer-component-type=Text] h6 span {
+    display: block
+}
+
+[data-framer-component-type=Text] span span span,
+[data-framer-component-type=Text] p span span,
+[data-framer-component-type=Text] h1 span span,
+[data-framer-component-type=Text] h2 span span,
+[data-framer-component-type=Text] h3 span span,
+[data-framer-component-type=Text] h4 span span,
+[data-framer-component-type=Text] h5 span span,
+[data-framer-component-type=Text] h6 span span {
+    display: unset
+}
+
+[data-framer-component-type=Text] div div span,
+[data-framer-component-type=Text] a div span,
+[data-framer-component-type=Text] span span span,
+[data-framer-component-type=Text] p span span,
+[data-framer-component-type=Text] h1 span span,
+[data-framer-component-type=Text] h2 span span,
+[data-framer-component-type=Text] h3 span span,
+[data-framer-component-type=Text] h4 span span,
+[data-framer-component-type=Text] h5 span span,
+[data-framer-component-type=Text] h6 span span,
+[data-framer-component-type=Text] a {
+    font-family: var(--font-family);
+    font-style: var(--font-style);
+    font-weight: min(calc(var(--framer-font-weight-increase, 0) + var(--font-weight, 400)), 900);
+    color: var(--text-color);
+    letter-spacing: var(--letter-spacing);
+    font-size: var(--font-size);
+    text-transform: var(--text-transform);
+    text-decoration: var(--text-decoration);
+    line-height: var(--line-height)
+}
+
+[data-framer-component-type=Text] div div span,
+[data-framer-component-type=Text] a div span,
+[data-framer-component-type=Text] span span span,
+[data-framer-component-type=Text] p span span,
+[data-framer-component-type=Text] h1 span span,
+[data-framer-component-type=Text] h2 span span,
+[data-framer-component-type=Text] h3 span span,
+[data-framer-component-type=Text] h4 span span,
+[data-framer-component-type=Text] h5 span span,
+[data-framer-component-type=Text] h6 span span,
+[data-framer-component-type=Text] a {
+    --font-family: var(--framer-font-family);
+    --font-style: var(--framer-font-style);
+    --font-weight: var(--framer-font-weight);
+    --text-color: var(--framer-text-color);
+    --letter-spacing: var(--framer-letter-spacing);
+    --font-size: var(--framer-font-size);
+    --text-transform: var(--framer-text-transform);
+    --text-decoration: var(--framer-text-decoration);
+    --line-height: var(--framer-line-height)
+}
+
+[data-framer-component-type=Text] a,
+[data-framer-component-type=Text] a div span,
+[data-framer-component-type=Text] a span span span,
+[data-framer-component-type=Text] a p span span,
+[data-framer-component-type=Text] a h1 span span,
+[data-framer-component-type=Text] a h2 span span,
+[data-framer-component-type=Text] a h3 span span,
+[data-framer-component-type=Text] a h4 span span,
+[data-framer-component-type=Text] a h5 span span,
+[data-framer-component-type=Text] a h6 span span {
+    --font-family: var(--framer-link-font-family, var(--framer-font-family));
+    --font-style: var(--framer-link-font-style, var(--framer-font-style));
+    --font-weight: var(--framer-link-font-weight, var(--framer-font-weight));
+    --text-color: var(--framer-link-text-color, var(--framer-text-color));
+    --font-size: var(--framer-link-font-size, var(--framer-font-size));
+    --text-transform: var(--framer-link-text-transform, var(--framer-text-transform));
+    --text-decoration: var(--framer-link-text-decoration, var(--framer-text-decoration))
+}
+
+[data-framer-component-type=Text] a:hover,
+[data-framer-component-type=Text] a div span:hover,
+[data-framer-component-type=Text] a span span span:hover,
+[data-framer-component-type=Text] a p span span:hover,
+[data-framer-component-type=Text] a h1 span span:hover,
+[data-framer-component-type=Text] a h2 span span:hover,
+[data-framer-component-type=Text] a h3 span span:hover,
+[data-framer-component-type=Text] a h4 span span:hover,
+[data-framer-component-type=Text] a h5 span span:hover,
+[data-framer-component-type=Text] a h6 span span:hover {
+    --font-family: var(--framer-link-hover-font-family, var(--framer-link-font-family, var(--framer-font-family)));
+    --font-style: var(--framer-link-hover-font-style, var(--framer-link-font-style, var(--framer-font-style)));
+    --font-weight: var(--framer-link-hover-font-weight, var(--framer-link-font-weight, var(--framer-font-weight)));
+    --text-color: var(--framer-link-hover-text-color, var(--framer-link-text-color, var(--framer-text-color)));
+    --font-size: var(--framer-link-hover-font-size, var(--framer-link-font-size, var(--framer-font-size)));
+    --text-transform: var(--framer-link-hover-text-transform, var(--framer-link-text-transform, var(--framer-text-transform)));
+    --text-decoration: var(--framer-link-hover-text-decoration, var(--framer-link-text-decoration, var(--framer-text-decoration)))
+}
+
+[data-framer-component-type=Text].isCurrent a,
+[data-framer-component-type=Text].isCurrent a div span,
+[data-framer-component-type=Text].isCurrent a span span span,
+[data-framer-component-type=Text].isCurrent a p span span,
+[data-framer-component-type=Text].isCurrent a h1 span span,
+[data-framer-component-type=Text].isCurrent a h2 span span,
+[data-framer-component-type=Text].isCurrent a h3 span span,
+[data-framer-component-type=Text].isCurrent a h4 span span,
+[data-framer-component-type=Text].isCurrent a h5 span span,
+[data-framer-component-type=Text].isCurrent a h6 span span {
+    --font-family: var(--framer-link-current-font-family, var(--framer-link-font-family, var(--framer-font-family)));
+    --font-style: var(--framer-link-current-font-style, var(--framer-link-font-style, var(--framer-font-style)));
+    --font-weight: var(--framer-link-current-font-weight, var(--framer-link-font-weight, var(--framer-font-weight)));
+    --text-color: var(--framer-link-current-text-color, var(--framer-link-text-color, var(--framer-text-color)));
+    --font-size: var(--framer-link-current-font-size, var(--framer-link-font-size, var(--framer-font-size)));
+    --text-transform: var(--framer-link-current-text-transform, var(--framer-link-text-transform, var(--framer-text-transform)));
+    --text-decoration: var(--framer-link-current-text-decoration, var(--framer-link-text-decoration, var(--framer-text-decoration)))
+}
+
+p.framer-text,
+div.framer-text,
+h1.framer-text,
+h2.framer-text,
+h3.framer-text,
+h4.framer-text,
+h5.framer-text,
+h6.framer-text,
+ol.framer-text,
+ul.framer-text {
+    margin: 0;
+    padding: 0
+}
+
+p.framer-text,
+div.framer-text,
+h1.framer-text,
+h2.framer-text,
+h3.framer-text,
+h4.framer-text,
+h5.framer-text,
+h6.framer-text,
+li.framer-text,
+ol.framer-text,
+ul.framer-text,
+span.framer-text:not([data-text-fill]) {
+    font-family: var(--framer-blockquote-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif));
+    font-style: var(--framer-blockquote-font-style, var(--framer-font-style, normal));
+    font-weight: var(--framer-blockquote-font-weight, var(--framer-font-weight, 400));
+    color: var(--framer-blockquote-text-color, var(--framer-text-color, #000));
+    font-size: calc(var(--framer-blockquote-font-size, var(--framer-font-size, 16px)) * var(--framer-font-size-scale, 1));
+    letter-spacing: var(--framer-blockquote-letter-spacing, var(--framer-letter-spacing, 0));
+    text-transform: var(--framer-blockquote-text-transform, var(--framer-text-transform, none));
+    text-decoration: var(--framer-blockquote-text-decoration, var(--framer-text-decoration, none));
+    line-height: var(--framer-blockquote-line-height, var(--framer-line-height, 1.2em));
+    text-align: var(--framer-blockquote-text-alignment, var(--framer-text-alignment, start));
+    -webkit-text-stroke-width: var(--framer-text-stroke-width, initial);
+    -webkit-text-stroke-color: var(--framer-text-stroke-color, initial);
+    -moz-font-feature-settings: var(--framer-font-open-type-features, initial);
+    -webkit-font-feature-settings: var(--framer-font-open-type-features, initial);
+    font-feature-settings: var(--framer-font-open-type-features, initial);
+    font-variation-settings: var(--framer-font-variation-axes, normal);
+    text-wrap: var(--framer-text-wrap-override, var(--framer-text-wrap))
+}
+
+.framer-fit-text .framer-text {
+    white-space: nowrap;
+    white-space-collapse: preserve
+}
+
+strong.framer-text {
+    font-family: var(--framer-blockquote-font-family-bold, var(--framer-font-family-bold));
+    font-style: var(--framer-blockquote-font-style-bold, var(--framer-font-style-bold));
+    font-weight: var(--framer-blockquote-font-weight-bold, var(--framer-font-weight-bold, bolder));
+    font-variation-settings: var(--framer-blockquote-font-variation-axes-bold, var(--framer-font-variation-axes-bold))
+}
+
+em.framer-text {
+    font-family: var(--framer-blockquote-font-family-italic, var(--framer-font-family-italic));
+    font-style: var(--framer-blockquote-font-style-italic, var(--framer-font-style-italic, italic));
+    font-weight: var(--framer-blockquote-font-weight-italic, var(--framer-font-weight-italic));
+    font-variation-settings: var(--framer-blockquote-font-variation-axes-italic, var(--framer-font-variation-axes-italic))
+}
+
+em.framer-text>strong.framer-text {
+    font-family: var(--framer-blockquote-font-family-bold-italic, var(--framer-font-family-bold-italic));
+    font-style: var(--framer-blockquote-font-style-bold-italic, var(--framer-font-style-bold-italic, italic));
+    font-weight: var(--framer-blockquote-font-weight-bold-italic, var(--framer-font-weight-bold-italic, bolder));
+    font-variation-settings: var(--framer-blockquote-font-variation-axes-bold-italic, var(--framer-font-variation-axes-bold-italic))
+}
+
+p.framer-text:not(:first-child),
+div.framer-text:not(:first-child),
+h1.framer-text:not(:first-child),
+h2.framer-text:not(:first-child),
+h3.framer-text:not(:first-child),
+h4.framer-text:not(:first-child),
+h5.framer-text:not(:first-child),
+h6.framer-text:not(:first-child),
+ol.framer-text:not(:first-child),
+ul.framer-text:not(:first-child),
+blockquote.framer-text:not(:first-child),
+.framer-image.framer-text:not(:first-child) {
+    margin-top: var(--framer-blockquote-paragraph-spacing, var(--framer-paragraph-spacing, 0))
+}
+
+li.framer-text>ul.framer-text:nth-child(2),
+li.framer-text>ol.framer-text:nth-child(2) {
+    margin-top: 0
+}
+
+.framer-text[data-text-fill] {
+    display: inline-block;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    padding: max(0em, calc(calc(1.3em - var(--framer-blockquote-line-height, var(--framer-line-height, 1.3em))) / 2));
+    margin: min(0em, calc(calc(1.3em - var(--framer-blockquote-line-height, var(--framer-line-height, 1.3em))) / -2))
+}
+
+code.framer-text,
+code.framer-text span.framer-text:not([data-text-fill]) {
+    font-family: var(--framer-code-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif));
+    font-style: var(--framer-blockquote-font-style, var(--framer-code-font-style, var(--framer-font-style, normal)));
+    font-weight: var(--framer-blockquote-font-weight, var(--framer-code-font-weight, var(--framer-font-weight, 400)));
+    color: var(--framer-blockquote-text-color, var(--framer-code-text-color, var(--framer-text-color, #000)));
+    font-size: calc(var(--framer-blockquote-font-size, var(--framer-font-size, 16px)) * var(--framer-font-size-scale, 1));
+    letter-spacing: var(--framer-blockquote-letter-spacing, var(--framer-letter-spacing, 0));
+    line-height: var(--framer-blockquote-line-height, var(--framer-line-height, 1.2em))
+}
+
+blockquote.framer-text {
+    margin-block-start: initial;
+    margin-block-end: initial;
+    margin-inline-start: initial;
+    margin-inline-end: initial;
+    unicode-bidi: initial
+}
+
+a.framer-text,
+a.framer-text span.framer-text:not([data-text-fill]),
+span.framer-text[data-nested-link],
+span.framer-text[data-nested-link] span.framer-text:not([data-text-fill]) {
+    font-family: var(--framer-blockquote-font-family, var(--framer-link-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif)));
+    font-style: var(--framer-blockquote-font-style, var(--framer-link-font-style, var(--framer-font-style, normal)));
+    font-weight: var(--framer-blockquote-font-weight, var(--framer-link-font-weight, var(--framer-font-weight, 400)));
+    color: var(--framer-blockquote-text-color, var(--framer-link-text-color, var(--framer-text-color, #000)));
+    font-size: calc(var(--framer-blockquote-font-size, var(--framer-font-size, 16px)) * var(--framer-font-size-scale, 1));
+    text-transform: var(--framer-blockquote-text-transform, var(--framer-link-text-transform, var(--framer-text-transform, none)));
+    text-decoration: var(--framer-blockquote-text-decoration, var(--framer-link-text-decoration, var(--framer-text-decoration, none)));
+    cursor: var(--framer-custom-cursors, pointer)
+}
+
+code.framer-text a.framer-text,
+code.framer-text a.framer-text span.framer-text:not([data-text-fill]),
+code.framer-text span.framer-text[data-nested-link],
+code.framer-text span.framer-text[data-nested-link] span.framer-text:not([data-text-fill]) {
+    font-family: var(--framer-code-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif));
+    font-style: var(--framer-blockquote-font-style, var(--framer-code-font-style, var(--framer-font-style, normal)));
+    font-weight: var(--framer-blockquote-font-weight, var(--framer-code-font-weight, var(--framer-font-weight, 400)));
+    color: var(--framer-blockquote-text-color, var(--framer-link-text-color, var(--framer-code-text-color, var(--framer-text-color, #000))));
+    font-size: calc(var(--framer-blockquote-font-size, var(--framer-font-size, 16px)) * var(--framer-font-size-scale, 1))
+}
+
+a.framer-text:hover,
+a.framer-text:hover span.framer-text:not([data-text-fill]),
+span.framer-text[data-nested-link]:hover,
+span.framer-text[data-nested-link]:hover span.framer-text:not([data-text-fill]) {
+    font-family: var(--framer-link-hover-font-family, var(--framer-blockquote-font-family, var(--framer-link-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif))));
+    font-style: var(--framer-link-hover-font-style, var(--framer-blockquote-font-style, var(--framer-link-font-style, var(--framer-font-style, normal))));
+    font-weight: var(--framer-link-hover-font-weight, var(--framer-blockquote-font-weight, var(--framer-link-font-weight, var(--framer-font-weight, 400))));
+    color: var(--framer-link-hover-text-color, var(--framer-blockquote-text-color, var(--framer-link-text-color, var(--framer-text-color, #000))));
+    font-size: calc(var(--framer-link-hover-font-size, var(--framer-blockquote-font-size, var(--framer-font-size, 16px))) * var(--framer-font-size-scale, 1));
+    text-transform: var(--framer-link-hover-text-transform, var(--framer-blockquote-text-transform, var(--framer-link-text-transform, var(--framer-text-transform, none))));
+    text-decoration: var(--framer-link-hover-text-decoration, var(--framer-blockquote-text-decoration, var(--framer-link-text-decoration, var(--framer-text-decoration, none))))
+}
+
+code.framer-text a.framer-text:hover,
+code.framer-text a.framer-text:hover span.framer-text:not([data-text-fill]),
+code.framer-text span.framer-text[data-nested-link]:hover,
+code.framer-text span.framer-text[data-nested-link]:hover span.framer-text:not([data-text-fill]) {
+    font-family: var(var(--framer-code-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif)));
+    font-style: var(--framer-blockquote-font-style, var(--framer-code-font-style, var(--framer-font-style, normal)));
+    font-weight: var(--framer-blockquote-font-weight, var(--framer-code-font-weight, var(--framer-font-weight, 400)));
+    color: var(--framer-link-hover-text-color, var(--framer-blockquote-text-color, var(--framer-link-text-color, var(--framer-code-text-color, var(--framer-text-color, #000)))));
+    font-size: calc(var(--framer-link-hover-font-size, var(--framer-blockquote-font-size, var(--framer-link-font-size, var(--framer-font-size, 16px)))) * var(--framer-font-size-scale, 1))
+}
+
+a.framer-text[data-framer-page-link-current],
+a.framer-text[data-framer-page-link-current] span.framer-text:not([data-text-fill]),
+span.framer-text[data-framer-page-link-current],
+span.framer-text[data-framer-page-link-current] span.framer-text:not([data-text-fill]) {
+    font-family: var(--framer-link-current-font-family, var(--framer-link-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif)));
+    font-style: var(--framer-link-current-font-style, var(--framer-link-font-style, var(--framer-font-style, normal)));
+    font-weight: var(--framer-link-current-font-weight, var(--framer-link-font-weight, var(--framer-font-weight, 400)));
+    color: var(--framer-link-current-text-color, var(--framer-link-text-color, var(--framer-text-color, #000)));
+    font-size: calc(var(--framer-link-current-font-size, var(--framer-link-font-size, var(--framer-font-size, 16px))) * var(--framer-font-size-scale, 1));
+    text-transform: var(--framer-link-current-text-transform, var(--framer-link-text-transform, var(--framer-text-transform, none)));
+    text-decoration: var(--framer-link-current-text-decoration, var(--framer-link-text-decoration, var(--framer-text-decoration, none)))
+}
+
+code.framer-text a.framer-text[data-framer-page-link-current],
+code.framer-text a.framer-text[data-framer-page-link-current] span.framer-text:not([data-text-fill]),
+code.framer-text span.framer-text[data-framer-page-link-current],
+code.framer-text span.framer-text[data-framer-page-link-current] span.framer-text:not([data-text-fill]) {
+    font-family: var(--framer-code-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif));
+    font-style: var(--framer-code-font-style, var(--framer-font-style, normal));
+    font-weight: var(--framer-code-font-weight, var(--framer-font-weight, 400));
+    color: var(--framer-link-current-text-color, var(--framer-link-text-color, var(--framer-code-text-color, var(--framer-text-color, #000))));
+    font-size: calc(var(--framer-link-current-font-size, var(--framer-link-font-size, var(--framer-font-size, 16px))) * var(--framer-font-size-scale, 1))
+}
+
+a.framer-text[data-framer-page-link-current]:hover,
+a.framer-text[data-framer-page-link-current]:hover span.framer-text:not([data-text-fill]),
+span.framer-text[data-framer-page-link-current]:hover,
+span.framer-text[data-framer-page-link-current]:hover span.framer-text:not([data-text-fill]) {
+    font-family: var(--framer-link-hover-font-family, var(--framer-link-current-font-family, var(--framer-link-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif))));
+    font-style: var(--framer-link-hover-font-style, var(--framer-link-current-font-style, var(--framer-link-font-style, var(--framer-font-style, normal))));
+    font-weight: var(--framer-link-hover-font-weight, var(--framer-link-current-font-weight, var(--framer-link-font-weight, var(--framer-font-weight, 400))));
+    color: var(--framer-link-hover-text-color, var(--framer-link-current-text-color, var(--framer-link-text-color, var(--framer-text-color, #000))));
+    font-size: calc(var(--framer-link-hover-font-size, var(--framer-link-current-font-size, var(--framer-link-font-size, var(--framer-font-size, 16px)))) * var(--framer-font-size-scale, 1));
+    text-transform: var(--framer-link-hover-text-transform, var(--framer-link-current-text-transform, var(--framer-link-text-transform, var(--framer-text-transform, none))));
+    text-decoration: var(--framer-link-hover-text-decoration, var(--framer-link-current-text-decoration, var(--framer-link-text-decoration, var(--framer-text-decoration, none))))
+}
+
+code.framer-text a.framer-text[data-framer-page-link-current]:hover,
+code.framer-text a.framer-text[data-framer-page-link-current]:hover span.framer-text:not([data-text-fill]),
+code.framer-text span.framer-text[data-framer-page-link-current]:hover,
+code.framer-text span.framer-text[data-framer-page-link-current]:hover span.framer-text:not([data-text-fill]) {
+    font-family: var(--framer-code-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif));
+    font-style: var(--framer-code-font-style, var(--framer-font-style, normal));
+    font-weight: var(--framer-code-font-weight, var(--framer-font-weight, 400));
+    color: var(--framer-link-hover-text-color, var(--framer-link-current-text-color, var(--framer-link-text-color, var(--framer-code-text-color, var(--framer-text-color, #000)))));
+    font-size: calc(var(--framer-link-hover-font-size, var(--framer-link-current-font-size, var(--framer-link-font-size, var(--framer-font-size, 16px)))) * var(--framer-font-size-scale, 1))
+}
+
+.framer-image.framer-text {
+    display: block;
+    max-width: 100%;
+    height: auto
+}
+
+.text-styles-preset-reset.framer-text {
+    --framer-font-family: Inter, Inter Placeholder, sans-serif;
+    --framer-font-style: normal;
+    --framer-font-weight: 500;
+    --framer-text-color: #000;
+    --framer-font-size: 16px;
+    --framer-letter-spacing: 0;
+    --framer-text-transform: none;
+    --framer-text-decoration: none;
+    --framer-line-height: 1.2em;
+    --framer-text-alignment: start;
+    --framer-font-open-type-features: normal
+}
+
+ol.framer-text {
+    --list-style-type: decimal
+}
+
+ul.framer-text,
+ol.framer-text {
+    display: table;
+    width: 100%
+}
+
+li.framer-text {
+    display: table-row;
+    counter-increment: list-item;
+    list-style: none
+}
+
+ol.framer-text>li.framer-text:before {
+    display: table-cell;
+    width: 2.25ch;
+    box-sizing: border-box;
+    padding-inline-end: .75ch;
+    content: counter(list-item, var(--list-style-type)) ".";
+    white-space: nowrap
+}
+
+ul.framer-text>li.framer-text:before {
+    display: table-cell;
+    width: 2.25ch;
+    box-sizing: border-box;
+    padding-inline-end: .75ch;
+    content: "\2022"
+}
+
+.framer-text-module[style*=aspect-ratio]>:first-child {
+    width: 100%
+}
+
+@supports not (aspect-ratio: 1) {
+    .framer-text-module[style*=aspect-ratio] {
+        position: relative
+    }
+}
+
+@supports not (aspect-ratio: 1) {
+    .framer-text-module[style*=aspect-ratio]:before {
+        content: "";
+        display: block;
+        padding-bottom: calc(100% / calc(var(--aspect-ratio)))
+    }
+}
+
+@supports not (aspect-ratio: 1) {
+    .framer-text-module[style*=aspect-ratio]>:first-child {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%
+    }
+}
+
+[data-framer-component-type=DeprecatedRichText] {
+    cursor: inherit
+}
+
+[data-framer-component-type=DeprecatedRichText] .text-styles-preset-reset {
+    --framer-font-family: Inter, Inter Placeholder, sans-serif;
+    --framer-font-style: normal;
+    --framer-font-weight: 500;
+    --framer-text-color: #000;
+    --framer-font-size: 16px;
+    --framer-letter-spacing: 0;
+    --framer-text-transform: none;
+    --framer-text-decoration: none;
+    --framer-line-height: 1.2em;
+    --framer-text-alignment: start;
+    --framer-font-open-type-features: normal;
+    --font-variation-settings: normal
+}
+
+[data-framer-component-type=DeprecatedRichText] p,
+[data-framer-component-type=DeprecatedRichText] div,
+[data-framer-component-type=DeprecatedRichText] h1,
+[data-framer-component-type=DeprecatedRichText] h2,
+[data-framer-component-type=DeprecatedRichText] h3,
+[data-framer-component-type=DeprecatedRichText] h4,
+[data-framer-component-type=DeprecatedRichText] h5,
+[data-framer-component-type=DeprecatedRichText] h6 {
+    margin: 0;
+    padding: 0
+}
+
+[data-framer-component-type=DeprecatedRichText] p,
+[data-framer-component-type=DeprecatedRichText] div,
+[data-framer-component-type=DeprecatedRichText] h1,
+[data-framer-component-type=DeprecatedRichText] h2,
+[data-framer-component-type=DeprecatedRichText] h3,
+[data-framer-component-type=DeprecatedRichText] h4,
+[data-framer-component-type=DeprecatedRichText] h5,
+[data-framer-component-type=DeprecatedRichText] h6,
+[data-framer-component-type=DeprecatedRichText] li,
+[data-framer-component-type=DeprecatedRichText] ol,
+[data-framer-component-type=DeprecatedRichText] ul,
+[data-framer-component-type=DeprecatedRichText] span:not([data-text-fill]) {
+    font-family: var(--framer-font-family, Inter, Inter Placeholder, sans-serif);
+    font-style: var(--framer-font-style, normal);
+    font-weight: var(--framer-font-weight, 400);
+    color: var(--framer-text-color, #000);
+    font-size: var(--framer-font-size, 16px);
+    letter-spacing: var(--framer-letter-spacing, 0);
+    text-transform: var(--framer-text-transform, none);
+    text-decoration: var(--framer-text-decoration, none);
+    line-height: var(--framer-line-height, 1.2em);
+    text-align: var(--framer-text-alignment, start)
+}
+
+[data-framer-component-type=DeprecatedRichText] p:not(:first-child),
+[data-framer-component-type=DeprecatedRichText] div:not(:first-child),
+[data-framer-component-type=DeprecatedRichText] h1:not(:first-child),
+[data-framer-component-type=DeprecatedRichText] h2:not(:first-child),
+[data-framer-component-type=DeprecatedRichText] h3:not(:first-child),
+[data-framer-component-type=DeprecatedRichText] h4:not(:first-child),
+[data-framer-component-type=DeprecatedRichText] h5:not(:first-child),
+[data-framer-component-type=DeprecatedRichText] h6:not(:first-child),
+[data-framer-component-type=DeprecatedRichText] ol:not(:first-child),
+[data-framer-component-type=DeprecatedRichText] ul:not(:first-child),
+[data-framer-component-type=DeprecatedRichText] .framer-image:not(:first-child) {
+    margin-top: var(--framer-paragraph-spacing, 0)
+}
+
+[data-framer-component-type=DeprecatedRichText] span[data-text-fill] {
+    display: inline-block;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent
+}
+
+[data-framer-component-type=DeprecatedRichText] a,
+[data-framer-component-type=DeprecatedRichText] a span:not([data-text-fill]) {
+    font-family: var(--framer-link-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif));
+    font-style: var(--framer-link-font-style, var(--framer-font-style, normal));
+    font-weight: var(--framer-link-font-weight, var(--framer-font-weight, 400));
+    color: var(--framer-link-text-color, var(--framer-text-color, #000));
+    font-size: var(--framer-link-font-size, var(--framer-font-size, 16px));
+    text-transform: var(--framer-link-text-transform, var(--framer-text-transform, none));
+    text-decoration: var(--framer-link-text-decoration, var(--framer-text-decoration, none))
+}
+
+[data-framer-component-type=DeprecatedRichText] a:hover,
+[data-framer-component-type=DeprecatedRichText] a:hover span:not([data-text-fill]) {
+    font-family: var(--framer-link-hover-font-family, var(--framer-link-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif)));
+    font-style: var(--framer-link-hover-font-style, var(--framer-link-font-style, var(--framer-font-style, normal)));
+    font-weight: var(--framer-link-hover-font-weight, var(--framer-link-font-weight, var(--framer-font-weight, 400)));
+    color: var(--framer-link-hover-text-color, var(--framer-link-text-color, var(--framer-text-color, #000)));
+    font-size: var(--framer-link-hover-font-size, var(--framer-link-font-size, var(--framer-font-size, 16px)));
+    text-transform: var(--framer-link-hover-text-transform, var(--framer-link-text-transform, var(--framer-text-transform, none)));
+    text-decoration: var(--framer-link-hover-text-decoration, var(--framer-link-text-decoration, var(--framer-text-decoration, none)))
+}
+
+[data-framer-component-type=DeprecatedRichText] a[data-framer-page-link-current],
+[data-framer-component-type=DeprecatedRichText] a[data-framer-page-link-current] span:not([data-text-fill]):not([data-nested-link]) {
+    font-family: var(--framer-link-current-font-family, var(--framer-link-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif)));
+    font-style: var(--framer-link-current-font-style, var(--framer-link-font-style, var(--framer-font-style, normal)));
+    font-weight: var(--framer-link-current-font-weight, var(--framer-link-font-weight, var(--framer-font-weight, 400)));
+    color: var(--framer-link-current-text-color, var(--framer-link-text-color, var(--framer-text-color, #000)));
+    font-size: var(--framer-link-current-font-size, var(--framer-link-font-size, var(--framer-font-size, 16px)));
+    text-transform: var(--framer-link-current-text-transform, var(--framer-link-text-transform, var(--framer-text-transform, none)));
+    text-decoration: var(--framer-link-current-text-decoration, var(--framer-link-text-decoration, var(--framer-text-decoration, none)))
+}
+
+[data-framer-component-type=DeprecatedRichText] a[data-framer-page-link-current]:hover,
+[data-framer-component-type=DeprecatedRichText] a[data-framer-page-link-current]:hover span:not([data-text-fill]):not([data-nested-link]) {
+    font-family: var(--framer-link-hover-font-family, var(--framer-link-current-font-family, var(--framer-link-font-family, var(--framer-font-family, Inter, Inter Placeholder, sans-serif))));
+    font-style: var(--framer-link-hover-font-style, var(--framer-link-current-font-style, var(--framer-link-font-style, var(--framer-font-style, normal))));
+    font-weight: var(--framer-link-hover-font-weight, var(--framer-link-current-font-weight, var(--framer-link-font-weight, var(--framer-font-weight, 400))));
+    color: var(--framer-link-hover-text-color, var(--framer-link-current-text-color, var(--framer-link-text-color, var(--framer-text-color, #000))));
+    font-size: var(--framer-link-hover-font-size, var(--framer-link-current-font-size, var(--framer-link-font-size, var(--framer-font-size, 16px))));
+    text-transform: var(--framer-link-hover-text-transform, var(--framer-link-current-text-transform, var(--framer-link-text-transform, var(--framer-text-transform, none))));
+    text-decoration: var(--framer-link-hover-text-decoration, var(--framer-link-current-text-decoration, var(--framer-link-text-decoration, var(--framer-text-decoration, none))))
+}
+
+[data-framer-component-type=DeprecatedRichText] strong {
+    font-weight: bolder
+}
+
+[data-framer-component-type=DeprecatedRichText] em {
+    font-style: italic
+}
+
+[data-framer-component-type=DeprecatedRichText] .framer-image {
+    display: block;
+    max-width: 100%;
+    height: auto
+}
+
+[data-framer-component-type=DeprecatedRichText] ul,
+[data-framer-component-type=DeprecatedRichText] ol {
+    display: table;
+    width: 100%;
+    padding-left: 0;
+    margin: 0
+}
+
+[data-framer-component-type=DeprecatedRichText] li {
+    display: table-row;
+    counter-increment: list-item;
+    list-style: none
+}
+
+[data-framer-component-type=DeprecatedRichText] ol>li:before {
+    display: table-cell;
+    width: 2.25ch;
+    box-sizing: border-box;
+    padding-right: .75ch;
+    content: counter(list-item) ".";
+    white-space: nowrap
+}
+
+[data-framer-component-type=DeprecatedRichText] ul>li:before {
+    display: table-cell;
+    width: 2.25ch;
+    box-sizing: border-box;
+    padding-right: .75ch;
+    content: "\2022"
+}
+
+:not([data-framer-generated])>[data-framer-stack-content-wrapper]>*,
+:not([data-framer-generated])>[data-framer-stack-content-wrapper]>[data-framer-component-type],
+:not([data-framer-generated])>[data-framer-stack-content-wrapper]>[data-framer-legacy-stack-gap-enabled]>*,
+:not([data-framer-generated])>[data-framer-stack-content-wrapper]>[data-framer-legacy-stack-gap-enabled]>[data-framer-component-type] {
+    position: relative
+}
+
+.flexbox-gap-not-supported [data-framer-legacy-stack-gap-enabled=true]>*,
+[data-framer-legacy-stack-gap-enabled=true][data-framer-stack-flexbox-gap=false] {
+    margin-top: calc(var(--stack-gap-y) / 2);
+    margin-bottom: calc(var(--stack-gap-y) / 2);
+    margin-right: calc(var(--stack-gap-x) / 2);
+    margin-left: calc(var(--stack-gap-x) / 2)
+}
+
+[data-framer-stack-content-wrapper][data-framer-stack-gap-enabled=true] {
+    row-gap: var(--stack-native-row-gap);
+    column-gap: var(--stack-native-column-gap)
+}
+
+.flexbox-gap-not-supported [data-framer-stack-content-wrapper][data-framer-stack-gap-enabled=true] {
+    row-gap: unset;
+    column-gap: unset
+}
+
+.flexbox-gap-not-supported [data-framer-stack-direction-reverse=false] [data-framer-legacy-stack-gap-enabled=true]>*:first-child,
+[data-framer-stack-direction-reverse=false] [data-framer-legacy-stack-gap-enabled=true][data-framer-stack-flexbox-gap=false]>*:first-child,
+.flexbox-gap-not-supported [data-framer-stack-direction-reverse=true] [data-framer-legacy-stack-gap-enabled=true]>*:last-child,
+[data-framer-stack-direction-reverse=true] [data-framer-legacy-stack-gap-enabled=true][data-framer-stack-flexbox-gap=false]>*:last-child {
+    margin-top: 0;
+    margin-left: 0
+}
+
+.flexbox-gap-not-supported [data-framer-stack-direction-reverse=false] [data-framer-legacy-stack-gap-enabled=true]>*:last-child,
+[data-framer-stack-direction-reverse=false] [data-framer-legacy-stack-gap-enabled=true][data-framer-stack-flexbox-gap=false]>*:last-child,
+.flexbox-gap-not-supported [data-framer-stack-direction-reverse=true] [data-framer-legacy-stack-gap-enabled=true]>*:first-child,
+[data-framer-stack-direction-reverse=true] [data-framer-legacy-stack-gap-enabled=true][data-framer-stack-flexbox-gap=false]>*:first-child {
+    margin-right: 0;
+    margin-bottom: 0
+}
+
+NavigationContainer [data-framer-component-type=NavigationContainer]>*,
+[data-framer-component-type=NavigationContainer]>[data-framer-component-type] {
+    position: relative
+}
+
+
+
+[data-framer-component-type=PageContentWrapper]>*,
+[data-framer-component-type=PageContentWrapper]>[data-framer-component-type] {
+    position: relative
+}
+
+[data-framer-component-type=DeviceComponent].no-device>* {
+    width: 100% !important;
+    height: 100% !important
+}
+
+[data-is-present=false],
+[data-is-present=false] * {
+    pointer-events: none !important
+}
+
+[data-framer-cursor=pointer] {
+    cursor: pointer
+}
+
+[data-framer-cursor=grab] {
+    cursor: grab
+}
+
+[data-framer-cursor=grab]:active {
+    cursor: grabbing
+}
+
+[data-framer-component-type=Frame] *,
+[data-framer-component-type=Stack] * {
+    pointer-events: auto
+}
+
+[data-framer-generated] * {
+    pointer-events: unset
+}
+
+.svgContainer svg {
+    display: block
+}
+
+[data-reset=button] {
+    border-width: 0;
+    padding: 0;
+    background: none
+}
+
+
+
+.framer-cursor-none,
+.framer-cursor-none * {
+    cursor: none !important
+}
+
+.framer-pointer-events-none,
+.framer-pointer-events-none * {
+    pointer-events: none !important
+}
+
+@supports (aspect-ratio: 1) {
+    body {
+        --framer-aspect-ratio-supported: auto
+    }
+}
+
+.framer-Qz91J.framer-lux5qc,
+.framer-Qz91J .framer-lux5qc {
+    display: block
+}
+
+.framer-Qz91J.framer-72rtr7 {
+    background-color: #fff;
+    height: 1199px;
+    overflow: hidden;
+    position: relative;
+    width: 1387px
+}
+
+.framer-Qz91J .framer-ezv516 {
+    flex: none;
+    height: 812px;
+    left: 377px;
+    overflow: visible;
+    position: absolute;
+    top: 308px;
+    width: 968px
+}
+
+.framer-Qz91J .framer-jw4e1b {
+    flex: none;
+    height: 812px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 968px
+}
+
+.framer-Qz91J .framer-qgd9c4 {
+    --framer-paragraph-spacing: 0px;
+    flex: none;
+    height: auto;
+    left: 38px;
+    position: absolute;
+    top: 750px;
+    white-space: pre;
+    width: auto
+}
+
+.framer-Qz91J .framer-1hyv4kg {
+    --framer-paragraph-spacing: 0px;
+    flex: none;
+    height: auto;
+    left: 38px;
+    position: absolute;
+    top: 30px;
+    white-space: pre;
+    width: auto
+}
+
+.framer-Qz91J .framer-2bwa0j {
+    --framer-paragraph-spacing: 0px;
+    flex: none;
+    height: auto;
+    left: 38px;
+    position: absolute;
+    top: 70px;
+    white-space: pre;
+    width: auto
+}
+
+.framer-Qz91J .framer-1jq0a9d {
+    flex: none;
+    height: 587px;
+    left: 0;
+    overflow: visible;
+    position: absolute;
+    top: 131px;
+    width: 968px
+}
+
+.framer-Qz91J .framer-1trknah {
+    flex: none;
+    height: 21px;
+    left: 38px;
+    overflow: visible;
+    position: absolute;
+    top: 0;
+    width: 863px
+}
+
+.framer-Qz91J .framer-ndsu3d,
+.framer-Qz91J .framer-1rgnp7y {
+    --framer-paragraph-spacing: 0px;
+    flex: none;
+    height: auto;
+    left: 0;
+    position: absolute;
+    top: 0;
+    white-space: pre;
+    width: auto
+}
+
+.framer-Qz91J .framer-p8asn6 {
+    --framer-paragraph-spacing: 0px;
+    flex: none;
+    height: auto;
+    left: 172px;
+    position: absolute;
+    top: 0;
+    white-space: pre;
+    width: auto
+}
+
+.framer-Qz91J .framer-q0945i {
+    --framer-paragraph-spacing: 0px;
+    flex: none;
+    height: auto;
+    left: 303px;
+    position: absolute;
+    top: 0;
+    white-space: pre;
+    width: auto
+}
+
+.framer-Qz91J .framer-sun0rp {
+    --framer-paragraph-spacing: 0px;
+    flex: none;
+    height: auto;
+    left: 459px;
+    position: absolute;
+    top: 0;
+    white-space: pre;
+    width: auto
+}
+
+.framer-Qz91J .framer-116nvc6 {
+    --framer-paragraph-spacing: 0px;
+    flex: none;
+    height: auto;
+    left: 666px;
+    position: absolute;
+    top: 0;
+    white-space: pre;
+    width: auto
+}
+
+.framer-Qz91J .framer-1a8xizx {
+    --framer-paragraph-spacing: 0px;
+    flex: none;
+    height: auto;
+    left: 818px;
+    position: absolute;
+    top: 0;
+    white-space: pre;
+    width: auto
+}
+
+.framer-Qz91J .framer-u8ot88 {
+    flex: none;
+    height: 29px;
+    left: 38px;
+    overflow: visible;
+    position: absolute;
+    top: 55px;
+    width: 886px
+}
+
+.framer-Qz91J .framer-1judf3b,
+.framer-Qz91J .framer-1i2969n,
+.framer-Qz91J .framer-1hp0uni,
+.framer-Qz91J .framer-x9iqsd,
+.framer-Qz91J .framer-1vcn87u,
+.framer-Qz91J .framer-r08zrv,
+.framer-Qz91J .framer-1e9wltb,
+.framer-Qz91J .framer-matz9k {
+    --framer-paragraph-spacing: 0px;
+    flex: none;
+    height: auto;
+    left: 0;
+    position: absolute;
+    top: 4px;
+    white-space: pre;
+    width: auto
+}
+
+.framer-Qz91J .framer-y4x5j6,
+.framer-Qz91J .framer-9hmgdv,
+.framer-Qz91J .framer-1pvqgs8,
+.framer-Qz91J .framer-1cyz9zz,
+.framer-Qz91J .framer-1fqxmz6,
+.framer-Qz91J .framer-b67wz0,
+.framer-Qz91J .framer-72wy7g,
+.framer-Qz91J .framer-4r7d5x {
+    --framer-paragraph-spacing: 0px;
+    flex: none;
+    height: auto;
+    left: 172px;
+    position: absolute;
+    top: 4px;
+    white-space: pre;
+    width: auto
+}
+
+.framer-Qz91J .framer-xzt7r6,
+.framer-Qz91J .framer-gywts4,
+.framer-Qz91J .framer-o6tnpk,
+.framer-Qz91J .framer-11j3dk7,
+.framer-Qz91J .framer-1i2fxgp,
+.framer-Qz91J .framer-oxm25y,
+.framer-Qz91J .framer-1s1fc78,
+.framer-Qz91J .framer-1yue06c {
+    --framer-paragraph-spacing: 0px;
+    flex: none;
+    height: auto;
+    left: 303px;
+    position: absolute;
+    top: 4px;
+    white-space: pre;
+    width: auto
+}
+
+.framer-Qz91J .framer-1gltly9,
+.framer-Qz91J .framer-gld5pk,
+.framer-Qz91J .framer-oarhj5,
+.framer-Qz91J .framer-vo1q7l,
+.framer-Qz91J .framer-fcjq82,
+.framer-Qz91J .framer-ikvpke,
+.framer-Qz91J .framer-1dm6amv,
+.framer-Qz91J .framer-1ay7vsy {
+    --framer-paragraph-spacing: 0px;
+    flex: none;
+    height: auto;
+    left: 459px;
+    position: absolute;
+    top: 4px;
+    white-space: pre;
+    width: auto
+}
+
+.framer-Qz91J .framer-1qsumpw,
+.framer-Qz91J .framer-1bhffm0,
+.framer-Qz91J .framer-efz9fs,
+.framer-Qz91J .framer-pun39,
+.framer-Qz91J .framer-ulut34,
+.framer-Qz91J .framer-1wo14tc,
+.framer-Qz91J .framer-m4d53j,
+.framer-Qz91J .framer-1yh9jtt {
+    --framer-paragraph-spacing: 0px;
+    flex: none;
+    height: auto;
+    left: 666px;
+    position: absolute;
+    top: 4px;
+    white-space: pre;
+    width: auto
+}
+
+.framer-Qz91J .framer-hjyv8j,
+.framer-Qz91J .framer-1rja4or,
+.framer-Qz91J .framer-1haxeo8 {
+    --border-bottom-width: 1px;
+    --border-color: #00b086;
+    --border-left-width: 1px;
+    --border-right-width: 1px;
+    --border-style: solid;
+    --border-top-width: 1px;
+    align-content: center;
+    align-items: center;
+    background-color: #15c09861;
+    border-radius: 4px;
+    display: flex;
+    flex: none;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 10px;
+    height: min-content;
+    justify-content: center;
+    left: 806px;
+    overflow: visible;
+    padding: 4px 12px;
+    position: absolute;
+    top: 0;
+    width: 80px
+}
+
+.framer-Qz91J .framer-1nro1qy,
+.framer-Qz91J .framer-1dvmrmm,
+.framer-Qz91J .framer-pr17oc,
+.framer-Qz91J .framer-1qob6tb,
+.framer-Qz91J .framer-1twjamw,
+.framer-Qz91J .framer-16elxr3,
+.framer-Qz91J .framer-15i7i2v,
+.framer-Qz91J .framer-1ebsslq,
+.framer-Qz91J .framer-1wu8rbc,
+.framer-Qz91J .framer-id4kwz,
+.framer-Qz91J .framer-veufqp,
+.framer-Qz91J .framer-flxsmp,
+.framer-Qz91J .framer-16dirxm,
+.framer-Qz91J .framer-5n3ufa,
+.framer-Qz91J .framer-1lqoz0p {
+    --framer-paragraph-spacing: 0px;
+    flex: none;
+    height: auto;
+    position: relative;
+    white-space: pre;
+    width: auto
+}
+
+.framer-Qz91J .framer-ccou6f {
+    flex: none;
+    height: 29px;
+    left: 38px;
+    overflow: visible;
+    position: absolute;
+    top: 124px;
+    width: 886px
+}
+
+.framer-Qz91J .framer-1ng0btk,
+.framer-Qz91J .framer-llp8l5 {
+    --border-bottom-width: 1px;
+    --border-color: #df0404;
+    --border-left-width: 1px;
+    --border-right-width: 1px;
+    --border-style: solid;
+    --border-top-width: 1px;
+    align-content: center;
+    align-items: center;
+    background-color: #ffc4c4;
+    border-radius: 4px;
+    display: flex;
+    flex: none;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 10px;
+    height: min-content;
+    justify-content: center;
+    left: 806px;
+    overflow: visible;
+    padding: 4px 12px;
+    position: absolute;
+    top: 0;
+    width: min-content
+}
+
+.framer-Qz91J .framer-14ec3m9 {
+    flex: none;
+    height: 29px;
+    left: 38px;
+    overflow: visible;
+    position: absolute;
+    top: 193px;
+    width: 886px
+}
+
+.framer-Qz91J .framer-o4354m {
+    flex: none;
+    height: 29px;
+    left: 38px;
+    overflow: visible;
+    position: absolute;
+    top: 262px;
+    width: 886px
+}
+
+.framer-Qz91J .framer-1qxylbz {
+    flex: none;
+    height: 29px;
+    left: 38px;
+    overflow: visible;
+    position: absolute;
+    top: 331px;
+    width: 886px
+}
+
+.framer-Qz91J .framer-dwjv9c {
+    flex: none;
+    height: 29px;
+    left: 38px;
+    overflow: visible;
+    position: absolute;
+    top: 400px;
+    width: 890px
+}
+
+.framer-Qz91J .framer-5sofqy,
+.framer-Qz91J .framer-123z5vz {
+    --border-bottom-width: 1px;
+    --border-color: #00b086;
+    --border-left-width: 1px;
+    --border-right-width: 1px;
+    --border-style: solid;
+    --border-top-width: 1px;
+    align-content: center;
+    align-items: center;
+    background-color: #15c09861;
+    border-radius: 4px;
+    display: flex;
+    flex: none;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 10px;
+    height: min-content;
+    justify-content: center;
+    left: 806px;
+    overflow: visible;
+    padding: 4px 12px;
+    position: absolute;
+    top: 0;
+    width: 84px
+}
+
+.framer-Qz91J .framer-1aaypjv {
+    flex: none;
+    height: 29px;
+    left: 38px;
+    overflow: visible;
+    position: absolute;
+    top: 469px;
+    width: 890px
+}
+
+.framer-Qz91J .framer-1oiu8o4 {
+    flex: none;
+    height: 29px;
+    left: 38px;
+    overflow: visible;
+    position: absolute;
+    top: 538px;
+    width: 890px
+}
+
+.framer-Qz91J .framer-esl61q {
+    --border-bottom-width: 1px;
+    --border-color: #df0404;
+    --border-left-width: 1px;
+    --border-right-width: 1px;
+    --border-style: solid;
+    --border-top-width: 1px;
+    align-content: center;
+    align-items: center;
+    background-color: #ffc4c4;
+    border-radius: 4px;
+    display: flex;
+    flex: none;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 10px;
+    height: min-content;
+    justify-content: center;
+    left: 806px;
+    overflow: visible;
+    padding: 4px 12px;
+    position: absolute;
+    top: 0;
+    width: 84px
+}
+
+.framer-Qz91J .framer-aiwu7f {
+    flex: none;
+    height: 3px;
+    left: -1px;
+    position: absolute;
+    top: 34px;
+    width: 970px
+}
+
+.framer-Qz91J .framer-ej71dr {
+    flex: none;
+    height: 3px;
+    left: 39px;
+    position: absolute;
+    top: 103px;
+    width: 890px
+}
+
+.framer-Qz91J .framer-1tniyjf {
+    flex: none;
+    height: 3px;
+    left: 39px;
+    position: absolute;
+    top: 172px;
+    width: 890px
+}
+
+.framer-Qz91J .framer-6lyh8v {
+    flex: none;
+    height: 3px;
+    left: 39px;
+    position: absolute;
+    top: 241px;
+    width: 890px
+}
+
+.framer-Qz91J .framer-7eyqju {
+    flex: none;
+    height: 3px;
+    left: 39px;
+    position: absolute;
+    top: 310px;
+    width: 890px
+}
+
+.framer-Qz91J .framer-pqmm7f {
+    flex: none;
+    height: 3px;
+    left: 39px;
+    position: absolute;
+    top: 379px;
+    width: 890px
+}
+
+.framer-Qz91J .framer-18pzv29 {
+    flex: none;
+    height: 3px;
+    left: 39px;
+    position: absolute;
+    top: 448px;
+    width: 890px
+}
+
+.framer-Qz91J .framer-114f9jl {
+    flex: none;
+    height: 3px;
+    left: 39px;
+    position: absolute;
+    top: 517px;
+    width: 890px
+}
+
+.framer-Qz91J .framer-1fq05wh {
+    flex: none;
+    height: 3px;
+    left: 39px;
+    position: absolute;
+    top: 586px;
+    width: 890px
+}
+
+.framer-Qz91J .framer-1ylbkrf {
+    flex: none;
+    height: 38px;
+    left: 538px;
+    overflow: visible;
+    position: absolute;
+    top: 44px;
+    width: 216px
+}
+
+.framer-Qz91J .framer-8wtlrk {
+    background-color: #f9fbff;
+    border-radius: 10px;
+    flex: none;
+    height: 38px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 216px
+}
+
+.framer-Qz91J .framer-16efbma,
+.framer-Qz91J .framer-tqcdvr {
+    --framer-paragraph-spacing: 0px;
+    flex: none;
+    height: auto;
+    left: 40px;
+    position: absolute;
+    top: 10px;
+    white-space: pre;
+    width: auto
+}
+
+.framer-Qz91J .framer-he2tn7,
+.framer-Qz91J .framer-1d03ws1 {
+    flex: none;
+    height: 24px;
+    left: 8px;
+    position: absolute;
+    top: 7px;
+    width: 24px
+}
+
+.framer-Qz91J .framer-14m3m9q {
+    flex: none;
+    height: 38px;
+    left: 770px;
+    overflow: visible;
+    position: absolute;
+    top: 44px;
+    width: 154px
+}
+
+.framer-Qz91J .framer-62zknf {
+    background-color: #f9fbff;
+    border-radius: 10px;
+    flex: none;
+    height: 38px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 154px
+}
+
+.framer-Qz91J .framer-lyx86m {
+    flex: none;
+    height: 18px;
+    left: 124px;
+    position: absolute;
+    top: 10px;
+    width: 18px
+}
+
+.framer-Qz91J .framer-10hbh7k {
+    --framer-paragraph-spacing: 0px;
+    flex: none;
+    height: auto;
+    left: 15px;
+    position: absolute;
+    top: 10px;
+    white-space: pre;
+    width: auto
+}
+
+.framer-Qz91J .framer-1ajt6c5 {
+    flex: none;
+    height: 24px;
+    left: 657px;
+    overflow: visible;
+    position: absolute;
+    top: 748px;
+    width: 271px
+}
+
+.framer-Qz91J .framer-15voa5y {
+    --border-bottom-width: 1px;
+    --border-color: #5932ea;
+    --border-left-width: 1px;
+    --border-right-width: 1px;
+    --border-style: solid;
+    --border-top-width: 1px;
+    align-content: center;
+    align-items: center;
+    background-color: #5932ea;
+    border-radius: 4px;
+    display: flex;
+    flex: none;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: 10px;
+    height: min-content;
+    justify-content: center;
+    left: 38px;
+    overflow: visible;
+    padding: 6px 10px;
+    position: absolute;
+    top: 0;
+    width: min-content
+}
+
+.framer-Qz91J .framer-9sqnxu {
+    --border-bottom-width: 1px;
+    --border-color: #eeeeee;
+    --border-left-width: 1px;
+    --border-right-width: 1px;
+    --border-style: solid;
+    --border-top-width: 1px;
+    align-content: center;
+    align-items: center;
+    background-color: #f5f5f5;
+    border-radius: 4px;
+    display: flex;
+    flex: none;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: 10px;
+    height: min-content;
+    justify-content: center;
+    left: 75px;
+    overflow: visible;
+    padding: 6px 9px;
+    position: absolute;
+    top: 0;
+    width: min-content
+}
+
+.framer-Qz91J .framer-5frs0x {
+    --border-bottom-width: 1px;
+    --border-color: #eeeeee;
+    --border-left-width: 1px;
+    --border-right-width: 1px;
+    --border-style: solid;
+    --border-top-width: 1px;
+    align-content: center;
+    align-items: center;
+    background-color: #f5f5f5;
+    border-radius: 4px;
+    display: flex;
+    flex: none;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: 10px;
+    height: min-content;
+    justify-content: center;
+    left: 148px;
+    overflow: visible;
+    padding: 6px 9px;
+    position: absolute;
+    top: 0;
+    width: min-content
+}
+
+.framer-Qz91J .framer-14h5cvj {
+    --border-bottom-width: 1px;
+    --border-color: #eeeeee;
+    --border-left-width: 1px;
+    --border-right-width: 1px;
+    --border-style: solid;
+    --border-top-width: 1px;
+    align-content: center;
+    align-items: center;
+    background-color: #f5f5f5;
+    border-radius: 4px;
+    display: flex;
+    flex: none;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: 10px;
+    height: min-content;
+    justify-content: center;
+    left: 207px;
+    overflow: visible;
+    padding: 6px 5px;
+    position: absolute;
+    top: 0;
+    width: min-content
+}
+
+.framer-Qz91J .framer-117r81g {
+    --border-bottom-width: 1px;
+    --border-color: #eeeeee;
+    --border-left-width: 1px;
+    --border-right-width: 1px;
+    --border-style: solid;
+    --border-top-width: 1px;
+    align-content: center;
+    align-items: center;
+    background-color: #f5f5f5;
+    border-radius: 4px;
+    display: flex;
+    flex: none;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: 10px;
+    height: min-content;
+    justify-content: center;
+    left: 245px;
+    overflow: visible;
+    padding: 6px 9px;
+    position: absolute;
+    top: 0;
+    width: min-content
+}
+
+.framer-Qz91J .framer-8dg8v5 {
+    --border-bottom-width: 1px;
+    --border-color: #eeeeee;
+    --border-left-width: 1px;
+    --border-right-width: 1px;
+    --border-style: solid;
+    --border-top-width: 1px;
+    align-content: center;
+    align-items: center;
+    background-color: #f5f5f5;
+    border-radius: 4px;
+    display: flex;
+    flex: none;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: 10px;
+    height: min-content;
+    justify-content: center;
+    left: 0;
+    overflow: visible;
+    padding: 6px 9px;
+    position: absolute;
+    top: 0;
+    width: min-content
+}
+
+.framer-Qz91J .framer-1lplqt4 {
+    --framer-paragraph-spacing: 0px;
+    flex: none;
+    height: auto;
+    left: 186px;
+    position: absolute;
+    top: 8px;
+    white-space: pre;
+    width: auto
+}
+
+.framer-Qz91J .framer-6uko {
+    --border-bottom-width: 1px;
+    --border-color: #eeeeee;
+    --border-left-width: 1px;
+    --border-right-width: 1px;
+    --border-style: solid;
+    --border-top-width: 1px;
+    align-content: center;
+    align-items: center;
+    background-color: #f5f5f5;
+    border-radius: 4px;
+    display: flex;
+    flex: none;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: 10px;
+    height: min-content;
+    justify-content: center;
+    left: 112px;
+    overflow: visible;
+    padding: 6px 8px;
+    position: absolute;
+    top: 0;
+    width: min-content
+}
+
+.framer-Qz91J .framer-kxe45y {
+    flex: none;
+    height: 38px;
+    left: 1129px;
+    overflow: visible;
+    position: absolute;
+    top: 40px;
+    width: 216px
+}
+
+.framer-Qz91J .framer-1n6pwyv {
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 10px 60px #e1ecf880;
+    flex: none;
+    height: 38px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 216px
+}
+
+.framer-Qz91J .framer-1m5f348 {
+    flex: none;
+    height: 1198px;
+    left: 0;
+    overflow: visible;
+    position: absolute;
+    top: 0;
+    width: 306px
+}
+
+.framer-Qz91J .framer-tx74uh {
+    background-color: #fff;
+    box-shadow: 0 10px 60px #e1ecf880;
+    flex: none;
+    height: 1198px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 306px
+}
+
+.framer-Qz91J .framer-15igo4i {
+    background-color: #5932ea;
+    border-radius: 8px;
+    flex: none;
+    height: 46px;
+    left: 28px;
+    position: absolute;
+    top: 256px;
+    width: 250px
+}
+
+.framer-Qz91J .framer-4sfeoh {
+    flex: none;
+    height: 24px;
+    left: 39px;
+    overflow: visible;
+    position: absolute;
+    top: 139px;
+    width: 116px
+}
+
+.framer-Qz91J .framer-t24566,
+.framer-Qz91J .framer-7p5y5p,
+.framer-Qz91J .framer-1rcnvpz,
+.framer-Qz91J .framer-1eodd77,
+.framer-Qz91J .framer-4bl6mu,
+.framer-Qz91J .framer-1rur56m {
+    flex: none;
+    height: 24px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 24px
+}
+
+.framer-Qz91J .framer-j38u7l {
+    --framer-paragraph-spacing: 0px;
+    flex: none;
+    height: auto;
+    left: 38px;
+    position: absolute;
+    top: 1px;
+    white-space: pre;
+    width: auto
+}
+
+.framer-Qz91J .framer-1f1zqo9 {
+    flex: none;
+    height: 24px;
+    left: 39px;
+    overflow: visible;
+    position: absolute;
+    top: 203px;
+    width: 231px
+}
+
+.framer-Qz91J .framer-zj8s0w,
+.framer-Qz91J .framer-1exdaw7,
+.framer-Qz91J .framer-mjyzsr,
+.framer-Qz91J .framer-1s3nw0o,
+.framer-Qz91J .framer-9qdc5 {
+    --framer-paragraph-spacing: 0px;
+    flex: none;
+    height: auto;
+    left: 38px;
+    position: absolute;
+    top: 2px;
+    white-space: pre;
+    width: auto
+}
+
+.framer-Qz91J .framer-1mbdp3p,
+.framer-Qz91J .framer-hj62sj,
+.framer-Qz91J .framer-ax3erd,
+.framer-Qz91J .framer-1oljfnb,
+.framer-Qz91J .framer-p5h1bx {
+    flex: none;
+    height: 16px;
+    left: 215px;
+    position: absolute;
+    top: 4px;
+    width: 16px
+}
+
+.framer-Qz91J .framer-py3r7z {
+    flex: none;
+    height: 24px;
+    left: 39px;
+    overflow: visible;
+    position: absolute;
+    top: 267px;
+    width: 231px
+}
+
+.framer-Qz91J .framer-15alptw {
+    flex: none;
+    height: 24px;
+    left: 39px;
+    overflow: visible;
+    position: absolute;
+    top: 331px;
+    width: 231px
+}
+
+.framer-Qz91J .framer-fa42ey {
+    flex: none;
+    height: 24px;
+    left: 39px;
+    overflow: visible;
+    position: absolute;
+    top: 395px;
+    width: 231px
+}
+
+.framer-Qz91J .framer-i4kxjy {
+    flex: none;
+    height: 24px;
+    left: 39px;
+    overflow: visible;
+    position: absolute;
+    top: 459px;
+    width: 231px
+}
+
+.framer-Qz91J .framer-89xx81 {
+    border-radius: 100%;
+    flex: none;
+    height: 42px;
+    left: 28px;
+    position: absolute;
+    top: 1080px;
+    width: 42px
+}
+
+.framer-Qz91J .framer-1gha5ck {
+    flex: none;
+    height: 38px;
+    left: 82px;
+    overflow: visible;
+    position: absolute;
+    top: 1082px;
+    width: 101px
+}
+
+.framer-Qz91J .framer-zth9m5 {
+    --framer-paragraph-spacing: 0px;
+    flex: none;
+    height: auto;
+    left: 0;
+    position: absolute;
+    top: 20px;
+    white-space: pre;
+    width: auto
+}
+
+.framer-Qz91J .framer-1t16enk {
+    flex: none;
+    height: 24px;
+    left: 254px;
+    position: absolute;
+    top: 1089px;
+    width: 24px
+}
+
+.framer-Qz91J .framer-1twb5bt {
+    flex: none;
+    height: 150px;
+    left: 28px;
+    overflow: visible;
+    position: absolute;
+    top: 884px;
+    width: 250px
+}
+
+.framer-Qz91J .framer-pvt86a {
+    background: linear-gradient(94.45995229954869deg, #eaabf0 0%, rgba(70, 34, 232, 1) 100%);
+    border-radius: 20px;
+    flex: none;
+    height: 150px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 250px
+}
+
+.framer-Qz91J .framer-a1e8fd {
+    --framer-paragraph-spacing: 0px;
+    flex: none;
+    height: auto;
+    left: 34px;
+    position: absolute;
+    top: 26px;
+    white-space: pre-wrap;
+    width: 183px;
+    word-break: break-word;
+    word-wrap: break-word
+}
+
+.framer-Qz91J .framer-mh3b1k {
+    flex: none;
+    height: 40px;
+    left: 24px;
+    overflow: visible;
+    position: absolute;
+    top: 88px;
+    width: 203px
+}
+
+.framer-Qz91J .framer-f1owvf {
+    background-color: #fff;
+    border-radius: 20px;
+    box-shadow: 2px 4px 4px #4f29ea2b;
+    flex: none;
+    height: 40px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 203px
+}
+
+.framer-Qz91J .framer-9b4exp {
+    --framer-paragraph-spacing: 0px;
+    flex: none;
+    height: auto;
+    left: 55px;
+    position: absolute;
+    top: 10px;
+    white-space: pre;
+    width: auto
+}
+
+.framer-Qz91J .framer-cs7w99 {
+    flex: none;
+    height: 39px;
+    left: 28px;
+    overflow: visible;
+    position: absolute;
+    top: 36px;
+    width: 195px
+}
+
+.framer-Qz91J .framer-1yrvc1b {
+    --framer-paragraph-spacing: 0px;
+    flex: none;
+    height: auto;
+    left: 45px;
+    position: absolute;
+    top: 0;
+    white-space: pre;
+    width: auto
+}
+
+.framer-Qz91J .framer-dmmfbh {
+    flex: none;
+    height: 37px;
+    left: 0;
+    position: absolute;
+    top: 1px;
+    width: 37px
+}
+
+.framer-Qz91J .framer-e96eq5 {
+    --framer-paragraph-spacing: 0px;
+    flex: none;
+    height: auto;
+    left: 227px;
+    position: absolute;
+    top: 54px;
+    white-space: pre;
+    width: auto
+}
+
+.framer-Qz91J .framer-8irzoy {
+    --framer-paragraph-spacing: 0px;
+    flex: none;
+    height: auto;
+    left: 377px;
+    position: absolute;
+    top: 41px;
+    white-space: pre;
+    width: auto
+}
+
+.framer-Qz91J .framer-ctihsd {
+    flex: none;
+    height: 151px;
+    left: 377px;
+    overflow: visible;
+    position: absolute;
+    top: 117px;
+    width: 968px
+}
+
+.framer-Qz91J .framer-10q3ixv {
+    flex: none;
+    height: 151px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 968px
+}
+
+.framer-Qz91J .framer-1oypn44 {
+    flex: none;
+    height: 87px;
+    left: 50px;
+    overflow: visible;
+    position: absolute;
+    top: 31px;
+    width: 830px
+}
+
+.framer-Qz91J .framer-1l9qrkl {
+    flex: none;
+    height: 84px;
+    left: 0;
+    overflow: visible;
+    position: absolute;
+    top: 1px;
+    width: 218px
+}
+
+.framer-Qz91J .framer-jqyycw,
+.framer-Qz91J .framer-1murtpg,
+.framer-Qz91J .framer-1ihap23 {
+    --framer-paragraph-spacing: 0px;
+    flex: none;
+    height: auto;
+    left: 104px;
+    position: absolute;
+    top: 0;
+    white-space: pre;
+    width: auto
+}
+
+.framer-Qz91J .framer-1kf0jby,
+.framer-Qz91J .framer-unqlh4,
+.framer-Qz91J .framer-19kerup {
+    --framer-paragraph-spacing: 0px;
+    flex: none;
+    height: auto;
+    left: 104px;
+    position: absolute;
+    top: 25px;
+    white-space: pre;
+    width: auto
+}
+
+.framer-Qz91J .framer-17bklai,
+.framer-Qz91J .framer-fzlvgr,
+.framer-Qz91J .framer-19xfl97 {
+    flex: none;
+    height: 84px;
+    left: 0;
+    overflow: visible;
+    position: absolute;
+    top: 0;
+    width: 84px
+}
+
+.framer-Qz91J .framer-12f47k7,
+.framer-Qz91J .framer-la5sfc,
+.framer-Qz91J .framer-bb8ggn {
+    background: linear-gradient(201.18134941488887deg, #d3ffe7 0%, rgba(239, 255, 246, 1) 100%);
+    border-radius: 100%;
+    flex: none;
+    height: 84px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 84px
+}
+
+.framer-Qz91J .framer-11na78c {
+    flex: none;
+    inset: 22px 20px 20px 22px;
+    overflow: visible;
+    position: absolute
+}
+
+.framer-Qz91J .framer-1woeqbt,
+.framer-Qz91J .framer-11a6vzg {
+    flex: none;
+    height: 42px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 42px
+}
+
+.framer-Qz91J .framer-1w75rv6 {
+    flex: none;
+    height: 20px;
+    left: 104px;
+    overflow: visible;
+    position: absolute;
+    top: 63px;
+    width: 112px
+}
+
+.framer-Qz91J .framer-1u2s7jo,
+.framer-Qz91J .framer-1crd458 {
+    --framer-paragraph-spacing: 0px;
+    flex: none;
+    height: auto;
+    left: 23px;
+    position: absolute;
+    top: 2px;
+    white-space: pre;
+    width: auto
+}
+
+.framer-Qz91J .framer-edo7hm,
+.framer-Qz91J .framer-nsx6gk {
+    flex: none;
+    height: 20px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 20px
+}
+
+.framer-Qz91J .framer-11xhtz1 {
+    flex: none;
+    height: 84px;
+    left: 330px;
+    overflow: visible;
+    position: absolute;
+    top: 1px;
+    width: 208px
+}
+
+.framer-Qz91J .framer-djw01o {
+    flex: none;
+    inset: 22px;
+    overflow: visible;
+    position: absolute
+}
+
+.framer-Qz91J .framer-189kjip {
+    flex: none;
+    height: 40px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 40px
+}
+
+.framer-Qz91J .framer-erugml {
+    flex: none;
+    height: 20px;
+    left: 104px;
+    overflow: visible;
+    position: absolute;
+    top: 63px;
+    width: 104px
+}
+
+.framer-Qz91J .framer-s97fj6 {
+    flex: none;
+    height: 84px;
+    left: 650px;
+    overflow: visible;
+    position: absolute;
+    top: 1px;
+    width: 180px
+}
+
+.framer-Qz91J .framer-1t8c27u {
+    flex: none;
+    inset: 21px;
+    overflow: visible;
+    position: absolute
+}
+
+.framer-Qz91J .framer-1kl7wb3 {
+    flex: none;
+    height: 89px;
+    left: 272px;
+    position: absolute;
+    top: -1px;
+    width: 3px
+}
+
+.framer-Qz91J .framer-1yq30cc {
+    flex: none;
+    height: 89px;
+    left: 592px;
+    position: absolute;
+    top: -1px;
+    width: 3px
+}
+
+.framer-Qz91J .framer-1egpuv3 {
+    --border-bottom-width: 1.3000000715255737px;
+    --border-color: #ffffff;
+    --border-left-width: 1.3000000715255737px;
+    --border-right-width: 1.3000000715255737px;
+    --border-style: solid;
+    --border-top-width: 1.3000000715255737px;
+    border-radius: 100%;
+    flex: none;
+    height: 26px;
+    left: 1182px;
+    position: absolute;
+    top: 209px;
+    width: 26px
+}
+
+.framer-Qz91J .framer-w4xgbi {
+    --border-bottom-width: 1.3000000715255737px;
+    --border-color: #ffffff;
+    --border-left-width: 1.3000000715255737px;
+    --border-right-width: 1.3000000715255737px;
+    --border-style: solid;
+    --border-top-width: 1.3000000715255737px;
+    border-radius: 100%;
+    flex: none;
+    height: 26px;
+    left: 1200px;
+    position: absolute;
+    top: 209px;
+    width: 26px
+}
+
+.framer-Qz91J .framer-1xi7m4n {
+    --border-bottom-width: 1.3000000715255737px;
+    --border-color: #ffffff;
+    --border-left-width: 1.3000000715255737px;
+    --border-right-width: 1.3000000715255737px;
+    --border-style: solid;
+    --border-top-width: 1.3000000715255737px;
+    border-radius: 100%;
+    flex: none;
+    height: 26px;
+    left: 1218px;
+    position: absolute;
+    top: 209px;
+    width: 26px
+}
+
+.framer-Qz91J .framer-18bl17w {
+    --border-bottom-width: 1.3000000715255737px;
+    --border-color: #ffffff;
+    --border-left-width: 1.3000000715255737px;
+    --border-right-width: 1.3000000715255737px;
+    --border-style: solid;
+    --border-top-width: 1.3000000715255737px;
+    border-radius: 100%;
+    flex: none;
+    height: 26px;
+    left: 1237px;
+    position: absolute;
+    top: 209px;
+    width: 26px
+}
+
+.framer-Qz91J .framer-cqda1n {
+    --border-bottom-width: 1.3000000715255737px;
+    --border-color: #ffffff;
+    --border-left-width: 1.3000000715255737px;
+    --border-right-width: 1.3000000715255737px;
+    --border-style: solid;
+    --border-top-width: 1.3000000715255737px;
+    border-radius: 100%;
+    flex: none;
+    height: 26px;
+    left: 1255px;
+    position: absolute;
+    top: 209px;
+    width: 26px
+}
+
+@supports (background: -webkit-named-image(i)) and (not (scale:1)) {
+
+    .framer-Qz91J .framer-hjyv8j,
+    .framer-Qz91J .framer-1ng0btk,
+    .framer-Qz91J .framer-llp8l5,
+    .framer-Qz91J .framer-1rja4or,
+    .framer-Qz91J .framer-1haxeo8,
+    .framer-Qz91J .framer-5sofqy,
+    .framer-Qz91J .framer-123z5vz,
+    .framer-Qz91J .framer-esl61q,
+    .framer-Qz91J .framer-15voa5y,
+    .framer-Qz91J .framer-9sqnxu,
+    .framer-Qz91J .framer-5frs0x,
+    .framer-Qz91J .framer-14h5cvj,
+    .framer-Qz91J .framer-117r81g,
+    .framer-Qz91J .framer-8dg8v5,
+    .framer-Qz91J .framer-6uko {
+        gap: 0px
+    }
+
+    .framer-Qz91J .framer-hjyv8j>*,
+    .framer-Qz91J .framer-1ng0btk>*,
+    .framer-Qz91J .framer-llp8l5>*,
+    .framer-Qz91J .framer-1rja4or>*,
+    .framer-Qz91J .framer-1haxeo8>*,
+    .framer-Qz91J .framer-5sofqy>*,
+    .framer-Qz91J .framer-123z5vz>*,
+    .framer-Qz91J .framer-esl61q>* {
+        margin: 0 5px
+    }
+
+    .framer-Qz91J .framer-hjyv8j>:first-child,
+    .framer-Qz91J .framer-1ng0btk>:first-child,
+    .framer-Qz91J .framer-llp8l5>:first-child,
+    .framer-Qz91J .framer-1rja4or>:first-child,
+    .framer-Qz91J .framer-1haxeo8>:first-child,
+    .framer-Qz91J .framer-5sofqy>:first-child,
+    .framer-Qz91J .framer-123z5vz>:first-child,
+    .framer-Qz91J .framer-esl61q>:first-child {
+        margin-left: 0
+    }
+
+    .framer-Qz91J .framer-hjyv8j>:last-child,
+    .framer-Qz91J .framer-1ng0btk>:last-child,
+    .framer-Qz91J .framer-llp8l5>:last-child,
+    .framer-Qz91J .framer-1rja4or>:last-child,
+    .framer-Qz91J .framer-1haxeo8>:last-child,
+    .framer-Qz91J .framer-5sofqy>:last-child,
+    .framer-Qz91J .framer-123z5vz>:last-child,
+    .framer-Qz91J .framer-esl61q>:last-child {
+        margin-right: 0
+    }
+
+    .framer-Qz91J .framer-15voa5y>*,
+    .framer-Qz91J .framer-9sqnxu>*,
+    .framer-Qz91J .framer-5frs0x>*,
+    .framer-Qz91J .framer-14h5cvj>*,
+    .framer-Qz91J .framer-117r81g>*,
+    .framer-Qz91J .framer-8dg8v5>*,
+    .framer-Qz91J .framer-6uko>* {
+        margin: 5px 0
+    }
+
+    .framer-Qz91J .framer-15voa5y>:first-child,
+    .framer-Qz91J .framer-9sqnxu>:first-child,
+    .framer-Qz91J .framer-5frs0x>:first-child,
+    .framer-Qz91J .framer-14h5cvj>:first-child,
+    .framer-Qz91J .framer-117r81g>:first-child,
+    .framer-Qz91J .framer-8dg8v5>:first-child,
+    .framer-Qz91J .framer-6uko>:first-child {
+        margin-top: 0
+    }
+
+    .framer-Qz91J .framer-15voa5y>:last-child,
+    .framer-Qz91J .framer-9sqnxu>:last-child,
+    .framer-Qz91J .framer-5frs0x>:last-child,
+    .framer-Qz91J .framer-14h5cvj>:last-child,
+    .framer-Qz91J .framer-117r81g>:last-child,
+    .framer-Qz91J .framer-8dg8v5>:last-child,
+    .framer-Qz91J .framer-6uko>:last-child {
+        margin-bottom: 0
+    }
+}
+
+.framer-Qz91J[data-border=true]:after,
+.framer-Qz91J [data-border=true]:after {
+    content: "";
+    border-width: var(--border-top-width, 0) var(--border-right-width, 0) var(--border-bottom-width, 0) var(--border-left-width, 0);
+    border-color: var(--border-color, none);
+    border-style: var(--border-style, none);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    box-sizing: border-box;
+    left: 0;
+    top: 0;
+    border-radius: inherit;
+    pointer-events: none
+}
