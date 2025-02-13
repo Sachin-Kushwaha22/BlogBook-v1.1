@@ -187,3 +187,29 @@ input[name="fullname"]::placeholder {
     width: 20px;
     transform: rotate(90deg);
 }
+
+.socialmedialinktext{
+    margin-top: 20px;
+}
+#social{
+    width: 500px;
+    max-width: 500px;
+    height: 40px;
+    font-size: 1.1rem;
+    color: #525151;
+    padding: 0px 10px;
+    border: solid 1px rgb(106, 104, 104);
+    border-radius: 5px;
+    outline: none;
+    text-align: center;
+    margin:7px 0px;
+    overflow: auto;
+}
+
+#social::placeholder {
+    /* font-family: 'oswald', sans-serif; */
+    font-size: .9rem;
+    color: rgba(0, 0, 0, 0.706);
+    opacity: 1;
+    /* Adjust opacity if needed */
+}

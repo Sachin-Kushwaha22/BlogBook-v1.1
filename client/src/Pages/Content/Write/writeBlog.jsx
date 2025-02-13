@@ -76,7 +76,10 @@ const BlogEditor = () => {
         const formData = new FormData(e.target)
         const data = {
             fullname: formData.get("fullname"),
-            purpose: formData.get("purpose")
+            instagram: formData.get("instagram") === "" ? null : formData.get("instagram"),
+            linkedin: formData.get("linkedin") === "" ? null : formData.get("linkedin"),
+            twitter: formData.get("twitter") === "" ? null : formData.get("twitter"),
+
         };
 
         // saving data to lacal storage
@@ -90,7 +93,8 @@ const BlogEditor = () => {
             const personalDetail = JSON.parse(localStorage.getItem('personalDetail'))
             localStorage.removeItem('personalDetail')
             const blogData = {
-                userid:user.sub,
+                userid: user.sub,
+                userPicture: user.picture,
                 personalDetail,
                 title,
                 content
@@ -101,8 +105,8 @@ const BlogEditor = () => {
                 })
                 console.log(response.data)
                 // console.log('Blog published:', blogData);
-                toast.success('Your blog has been published!',{
-                    autoClose:3000
+                toast.success('Your blog has been published!', {
+                    autoClose: 3000
                 });
                 setTimeout(() => {
                     window.location.href = '/'
@@ -121,14 +125,16 @@ const BlogEditor = () => {
                 <form className='personaldetail' onSubmit={handlePersonalDetail}>
                     <h1>GIVE THE FOLLOWING DETAILS</h1>
                     <div className='note'>
-                        Note: Please provide accurate details! Your full name and purpose of writing the blog will be displayed with your post.
+                        Note: Please provide accurate details! Your full name will be displayed with your post.
                     </div>
                     <div className="namepurpose">
                         {/* <label htmlFor="name">Name</label> */}
                         <input id='name' type="text" name='fullname' required placeholder='FULL NAME' />
+                        <p className="socialmedialinktext">Provide Your Social Media Links ( Optional )</p>
+                        <input id='social' type="text" name='instagram' placeholder='instagram ( https://instagram.com/example_123 )' />
+                        <input id='social' type="text" name='linkedin' placeholder='linkedin ( https://linkedin.com/in/example-456 )' />
+                        <input id='social' type="text" name='twitter' placeholder='twitter ( https://twitter.com/example789 )' />
 
-                        <label htmlFor="purpose">DESCRIPTION OF YOUR BLOG</label>
-                        <textarea id='purpose' type="text" name='purpose' required />
                     </div>
                     <div className='buttons'>
                         <button id='backbutton' onClick={() => navigate(-1)}>
