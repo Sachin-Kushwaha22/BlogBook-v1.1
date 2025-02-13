@@ -44,8 +44,8 @@
 }
 
 #blog-date {
-    margin: 0;
-    margin-top: 10px;
+    margin-right: 10px;
+    /* margin-top: 10px; */
     font-size: .9rem;
     color: rgba(243, 243, 243, 0.612);
 }
@@ -77,4 +77,26 @@
 #blog-readmore:hover{
     transition: .3s;
     text-decoration: underline 1px;
+}
+
+#blogposts-userPicture{
+    height: 25px;
+    width: 25px;
+    overflow: hidden;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+#blogposts-userPicture>img{
+    height: 25px;
+    width: 25px;
+}
+
+.blog-posts-authordetail{
+    margin-top: 5px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    /* gap: 10px; */
+    justify-content: flex-start;
 }

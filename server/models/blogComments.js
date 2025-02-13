@@ -17,6 +17,10 @@ const blogComments = new mongoose.Schema({
         type:String,
         required:true
     },
+    senderPicture:{
+        type:String,
+        required:true
+    },
     comments:{
         type:String,
         required:true

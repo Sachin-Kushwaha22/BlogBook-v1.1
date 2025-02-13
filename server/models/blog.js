@@ -5,13 +5,25 @@ const blogScheme = new mongoose.Schema({
         type:String,
         required:true,
     }, 
+    userPicture:{
+        type:String,
+        required:true,
+    },
     name:{
         type:String,
         required:true,
     },
-    purpose:{
-        type:String,
-        required:true,
+    instagram:{
+        type: String,
+        
+    },
+    linkedin:{
+        type: String,
+        
+    },
+    twitter:{
+        type: String,
+        
     },
     title: {
         type: String,

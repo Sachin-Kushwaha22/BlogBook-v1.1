@@ -4,7 +4,6 @@ const path = require("path")
 const { connectToDatabase } = require("./connection")
 const cookieParser = require("cookie-parser")
 const bodyParser = require("body-parser")
-const app = express()
 require('dotenv').config();
 const PORT = process.env.PORT || 9010
 const userRoute = require("./routes/user")
@@ -16,6 +15,13 @@ const feedbackRoute = require("./routes/feedback")
 const oauthGoogleRoute = require('./routes/oauthGoogle')
 const { restrictUserLogin, checkauth } = require("./middlewares/auth")
 
+const http = require("http"); // Import HTTP for WebSocket support
+const setupSocket = require("./socket"); // Import Socket.IO setup
+
+
+const app = express()
+const server = http.createServer(app); // Create HTTP server
+
 connectToDatabase("mongodb+srv://sachin8n:sachin2219@nodetesting01.n48lb.mongodb.net/authentication-practise-database")
     .then(() => { console.log("Connected to database !!") })
     .catch((err) => { console.log("Error connecting to database !!", err) })
@@ -26,8 +32,8 @@ app.use(
         credentials: true,
     })
 );
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
+app.use(express.json({ limit: '5mb'}))
+app.use(express.urlencoded({ extended: true, limit: '5mb' }))
 app.use(cookieParser())
 app.use(bodyParser.json())
 app.use(express.static(path.join('public')))
@@ -43,6 +49,9 @@ app.use('/blog', restrictUserLogin, blogRoute)
 app.use('/post', checkauth, blogPostRoute)
 app.use('/feedback', checkauth, feedbackRoute)
 
-app.listen(PORT, () => {
+// setup socket.io
+setupSocket(server); // Pass the HTTP server to the Socket.IO setup
+
+server.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`)
 })

@@ -13,7 +13,7 @@ function BlogPosts() {
 
             setBlogData(response.data);
             // console.log('heyy',response.data);
-            
+
         } catch (err) {
             setError(err);
             console.error(err);
@@ -46,7 +46,8 @@ function BlogPosts() {
                     blogData.map((post) => (
                         <div key={post._id} className="blog-post2">
                             <Link id='blog-title' to={`/readBlog/${post._id}`} ><h2 id='blog-title'>{post.title}</h2></Link>
-                            <p style={{ display: 'flex', flexDirection: 'row', gap: '10px' }}>
+                            <p className='blog-posts-authordetail' >
+                                <p id='blogposts-userPicture'><img src={post.userPicture} alt="" /></p>
                                 <p id='blog-date'>{post.name}</p>
                                 <p id='blog-date'>{date(post.updatedAt)}</p>
                             </p>

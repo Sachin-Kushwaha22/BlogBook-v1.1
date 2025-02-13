@@ -5,13 +5,17 @@ const COMMENTS = require('../models/blogComments')
 
 async function handleBlogPost(req, res) {
 
-    const { userid, personalDetail, title, content, } = req.body
-
+    const { userid, userPicture, personalDetail, title, content, } = req.body
+    console.log(personalDetail);
+    
     try {
         await BLOG.create({
             userid: userid,
+            userPicture: userPicture,
             name: personalDetail.fullname,
-            purpose: personalDetail.purpose,
+            instagram: personalDetail.instagram,
+            linkedin: personalDetail.linkedin,
+            twitter: personalDetail.twitter,
             title,
             description: content,
         });
@@ -50,7 +54,7 @@ async function handleBlogPostAnalytics(req, res) {
 
 async function handleBlogComments(req, res) {
     const { id } = req.params;
-    const { senderId, senderName, comments } = req.body
+    const { senderId, senderName, senderPicture, comments } = req.body
 
     if (id && senderId && senderName && comments) {
         const blog = await BLOG.findById(id)
@@ -63,19 +67,46 @@ async function handleBlogComments(req, res) {
                 authorId: AutherId,
                 senderId: senderId,
                 senderName: senderName,
+                senderPicture: senderPicture,
                 comments: comments
             })
 
-            if (!commentSave) return res.status(400).json({ message: 'Data Not Saved In DataBase' })
 
-            return res.status(200).json({ message: 'Comments Data Successfully Stored' })
+            if (commentSave) {
+                const commentFullData = await COMMENTS.findOne({
+                    blogId: id,
+                    authorId: AutherId,
+                    senderId: senderId,
+                    senderName: senderName,
+                    comments: comments
+                })
+
+                return res.status(200).json(commentFullData)
+            }
+
+
+            // return res.status(400).json({ message: 'Data Not Saved In DataBase' })
+
         } catch (error) {
 
         }
     } else return res.status(400).json({ message: 'Data Not Found or Invalid Data' })
 
+}
 
+const handleGetBlogComments = async (req, res) => {
+    const { id } = req.params
 
+    try {
+        const commentData = await COMMENTS.find({ blogId: id }).sort({ updatedAt: -1 })
+
+        if (commentData) return res.status(200).json(commentData)
+
+        return res.status(404).json({ message: 'No Comment Data found from Database' })
+
+    } catch (error) {
+        console.log("error from handlegetblogcomments func backend", error.response?.data?.message || error.message);
+    }
 }
 
 module.exports = {
@@ -83,5 +114,6 @@ module.exports = {
     handleViewBlogPost,
     handleViewBlogPostId,
     handleBlogPostAnalytics,
-    handleBlogComments
+    handleBlogComments,
+    handleGetBlogComments
 }
