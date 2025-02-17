@@ -9,9 +9,9 @@
     color: white;
     display: flex;
     flex-direction: column;
-    /* font-family: "Geist Mono", monospace; */
-    /* font-family: "Funnel Display", sans-serif; */
     font-family: "Host Grotesk", sans-serif;
+    /* width: 100vw; */
+    overflow: hidden;
 }
 
 .readblogcontainer {
@@ -52,6 +52,27 @@
     height: 30px;
 }
 
+#authorfollowbtn{
+    padding: 6px 30px;
+    border: none;
+    background: #014ca2;
+    color: white;
+    outline: none;
+    border-radius: 100px;
+    font-size: .9rem;
+    cursor: pointer;
+}
+#authorfollowingbtn{
+    padding: 6px 30px;
+    border: solid 1px #a2a4a5;
+    background: #4c4c4c;
+    color: white;
+    outline: none;
+    border-radius: 100px;
+    font-size: .9rem;
+    cursor: pointer;
+}
+
 #authorsocialmedialogo{
     fill: rgb(196, 195, 195);
     width: 30px;
@@ -68,9 +89,33 @@
 #blogcontent {
     margin: 20px 0;
     font-size: 1.5rem;
-    color: aliceblue;
-    line-height: 30px;
+    color: rgb(217, 217, 218);
+    line-height: 40px;
+    text-align: justify;
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+    box-sizing: border-box;
+    overflow: hidden;
 }
+
+#blogcontent img {
+    width: 50%;
+    display: flex;
+    align-self: center;
+    justify-self: center;
+    height: auto;
+    object-fit: contain;
+    margin: 20px;
+    border-radius: 20px;
+  }
+
+  #blogcontent h1, #blogcontent h2, #blogcontent h3, #blogcontent h4, #blogcontent h5, #blogcontent h6{
+    margin: 0;
+    margin: 10px 0;
+    font-style:oblique;
+    color: white;
+  }
 
 .readbloglinebreak {
     width: 100%;
@@ -163,6 +208,7 @@
 }
 
 .commentbox {
+    position: relative;
     border: solid 1px rgb(136, 134, 134);
     outline: none;
     border-radius: 0px 20px 20px 20px;
@@ -229,4 +275,46 @@
     word-wrap: break-word;
     overflow-wrap: break-word;
     white-space: normal;
+}
+
+.reply-delete{
+    display: flex;
+    /* border: solid 1px wheat; */
+    flex-direction: row;
+    position: absolute;
+    bottom: -10px;
+    right: 10px;
+    width: fit-content;
+}
+
+.rb-comment-reply{
+    display: flex;
+    /* border: solid 1px wheat; */
+    flex-direction: row;
+    position: absolute;
+    bottom: -6px;
+    right: 25px;
+    width: fit-content;
+    font-size: .8rem;
+    color: #e1dbdbaa;
+    background: #27282d;
+    padding:0 5px;
+    cursor: pointer;
+}
+
+#rb-comment-delete{
+    fill: #e1dbdbaa;
+    display: flex;
+    /* border: solid 1px wheat; */
+    flex-direction: row;
+    position: absolute;
+    bottom: -7px;
+    right: -10px;
+    width: fit-content;
+    width: 23px;
+    height: 23px;
+    background: #27282d;
+    border-radius: 10px;
+    padding: 2px;
+    cursor: pointer;
 }
