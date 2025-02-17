@@ -2,12 +2,15 @@ const BLOG = require("../models/blog")
 const USER = require("../models/user")
 const googleUsers = require('../models/oauthGoogle')
 const COMMENTS = require('../models/blogComments')
+const DELETEDBLOG = require('../models/deletedBlogs')
+const DELETEDCOMMENTS = require('../models/deletedComments')
+const requestIp = require('request-ip')
 
 async function handleBlogPost(req, res) {
 
     const { userid, userPicture, personalDetail, title, content, } = req.body
     console.log(personalDetail);
-    
+
     try {
         await BLOG.create({
             userid: userid,
@@ -35,7 +38,11 @@ async function handleViewBlogPost(req, res) {
 async function handleViewBlogPostId(req, res) {
     try {
         const { id } = req.params
+
         const blog = await BLOG.findById(id)
+
+        if (!blog) return res.status(404).json({ message: "Blog not found" });
+
         return res.status(200).json(blog)
     } catch (error) {
         console.log('error from handleviewblogpostid', error);
@@ -109,11 +116,114 @@ const handleGetBlogComments = async (req, res) => {
     }
 }
 
+const handleGetAllBlogComments = async (req, res) => {
+    const { AuthorId } = req.body
+
+    try {
+        const commentData = await COMMENTS.find({ authorId: AuthorId }).sort({ updatedAt: -1 })
+
+        if (commentData) return res.status(200).json(commentData)
+
+        return res.status(404).json({ message: 'No Comment Data found from Database' })
+
+    } catch (error) {
+        console.log("error from handlegetblogcomments func backend", error.response?.data?.message || error.message);
+    }
+}
+
+const handleDeletedBlog = async (req, res) => {
+    const { id } = req.params
+
+    try {
+        // console.log("Heere", urlid);
+        const blog = await BLOG.findById(id)
+        // console.log(blog);
+
+        if (!blog) {
+            return res.status(404).json({ message: 'Blog Not Found' })
+        }
+        // const {_id, userid, userPicture, name, instagram, linkedin, twitter, title, description} = blog
+
+        const deletedBlog = await DELETEDBLOG.create({
+            deletedblogData: blog
+        })
+
+        if (!deletedBlog) {
+            return res.status(404).json({ message: 'Blog Not Found' })
+        }
+
+        const comment = await COMMENTS.find({ blogId: id })
+
+        if (!comment) return res.status(404).json({ message: 'comment for specific blog not found' })
+
+        await DELETEDCOMMENTS.create({
+            deletedCommentData: comment
+        })
+
+        const deleteBlogComments = await COMMENTS.deleteMany({ blogId: id });
+
+        if (!deleteBlogComments) {
+
+            return res.status(400).json({ message: 'Error While Deleting ! Try Again' })
+        }
+
+
+        await BLOG.findByIdAndDelete(id).then(() => {
+            return res.status(200).json({ message: 'Blog Deleted Successfully' })
+        })
+
+    } catch (error) {
+        console.log('Error from handleDeletedBlog func', error.response?.data?.message || error.message);
+    }
+}
+
+const handleDeleteComments = async (req, res) => {
+    const { commentId } = req.body
+    const { id } = req.params
+
+    try {
+        const commentData = await COMMENTS.find({ blogId: id })
+        if (!commentData) return res.status(404).json({ message: 'Comment Not found'})
+
+        const comment = await COMMENTS.findByIdAndDelete(commentId)
+        if (!comment) return res.status(400).json({ message: 'error while deleting comment' })
+
+
+
+        return res.status(200).json({ message: 'Comment Deleted' , commentData:commentData })
+
+    } catch (error) {
+        console.log('error from handleDeleteComment func server :', error.response?.data?.message || error.message);
+    }
+}
+
+const handleViewCount = async (req, res) => {
+    try {
+        const { id } = req.params
+
+        const blog = await BLOG.findById(id)
+
+        if (!blog) return res.status(404).json({ message: "Blog not found" });
+
+
+        blog.views += 1;
+        await blog.save()
+
+        return res.status(200).json({ message: 'views increases' })
+    } catch (error) {
+        console.log('error from handleViewCount', error);
+
+    }
+}
 module.exports = {
     handleBlogPost,
     handleViewBlogPost,
     handleViewBlogPostId,
     handleBlogPostAnalytics,
     handleBlogComments,
-    handleGetBlogComments
+    handleGetBlogComments,
+    handleGetAllBlogComments,
+    handleDeletedBlog,
+    handleDeleteComments,
+    handleViewCount,
 }

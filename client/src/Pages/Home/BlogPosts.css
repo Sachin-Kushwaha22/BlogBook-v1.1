@@ -5,6 +5,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    min-height: 30vh;
 }
 
 .blog-post {
@@ -38,7 +39,7 @@
     transition: .2s;
 }
 
-#blog-title:hover{
+#blog-title:hover {
     transition: .3s;
     text-decoration: underline 1.5px;
 }
@@ -65,7 +66,7 @@
     text-overflow: ellipsis;
 }
 
-#blog-readmore{
+#blog-readmore {
     text-decoration: none;
     color: rgb(255, 143, 15);
     display: block;
@@ -74,12 +75,12 @@
     transition: .2s;
 }
 
-#blog-readmore:hover{
+#blog-readmore:hover {
     transition: .3s;
     text-decoration: underline 1px;
 }
 
-#blogposts-userPicture{
+#blogposts-userPicture {
     height: 25px;
     width: 25px;
     overflow: hidden;
@@ -87,12 +88,12 @@
     margin-right: 5px;
 }
 
-#blogposts-userPicture>img{
+#blogposts-userPicture>img {
     height: 25px;
     width: 25px;
 }
 
-.blog-posts-authordetail{
+.blog-posts-authordetail {
     margin-top: 5px;
     display: flex;
     flex-direction: row;

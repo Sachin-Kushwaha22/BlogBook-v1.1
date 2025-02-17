@@ -1,9 +1,9 @@
 .landing-page{
     padding: 10px 60px;
     padding-top: 100px;
-    background-color: rgb(39, 40, 45);
+    background-color: #27282d;
     color: white;
-    min-height: 50vh;
+    min-height: 35vh;
 }
 .intro{
     margin-left: 150px;
