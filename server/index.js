@@ -14,6 +14,7 @@ const adminRoute = require('./routes/adminRoute')
 const feedbackRoute = require("./routes/feedback")
 const oauthGoogleRoute = require('./routes/oauthGoogle')
 const { restrictUserLogin, checkauth } = require("./middlewares/auth")
+const followFeature = require('./routes/followFeature')
 
 const http = require("http"); // Import HTTP for WebSocket support
 const setupSocket = require("./socket"); // Import Socket.IO setup
@@ -48,6 +49,7 @@ app.use('/user', userRoute)
 app.use('/', checkauth, userStaticRoute)
 app.use('/blog', restrictUserLogin, blogRoute)
 app.use('/post', checkauth, blogPostRoute)
+app.use('/follow', checkauth, followFeature)
 app.use('/feedback', checkauth, feedbackRoute)
 
 // setup socket.io

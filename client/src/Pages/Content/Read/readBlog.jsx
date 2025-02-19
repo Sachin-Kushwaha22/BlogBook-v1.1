@@ -7,6 +7,7 @@ import Footer from '../../Home/Footer'
 import { useAuth0 } from '@auth0/auth0-react';
 import { toast } from 'react-toastify';
 import config from '../../../config'
+import { Oval } from 'react-loader-spinner'
 
 import io from 'socket.io-client';
 
@@ -26,28 +27,25 @@ function ReadBlog() {
     const [fullDetailOfComment, setFullDetailOfComment] = useState();
     const [allComments, setAllComments] = useState([]); // For storing real-time comments
     const [reload, setReload] = useState(0)
+    const [blogReload, setBlogReload] = useState(0)
     const [userId, setUserId] = useState('')
-    const [follow, setFollow] = useState(true)
+    const [follow, setFollow] = useState(false)
     const [following, setFollowing] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
+
 
 
     const increaseViews = async () => {
 
-        let viewBlogId = JSON.parse(sessionStorage.getItem('blogid-view'))
-
-
-        if (!viewBlogId) {
-            sessionStorage.setItem('blogid-view', JSON.stringify(id))
             try {
                 const response = await axios.get(`${config.serverUrl}/post/viewblog/viewCount/${id}`, {
                     withCredentials: true,
-                }).then(() => console.log(response.data.message))
+                })
 
             } catch (error) {
                 console.error('error generated from incrementViews func client', error.response?.data?.message || error.message);
             }
         }
-    }
 
     const fetchBlogPost = async () => {
 
@@ -60,7 +58,11 @@ function ReadBlog() {
             console.log('heyy2');
             if (response.status == 200) {
                 setBlogPost(response.data);
-                console.log('heyy3');
+                setTimeout(() => {
+                    
+                    FollowerStatus(response.data.userid)
+                }, 1000);
+
             }
 
             // Fetch existing comments from backend
@@ -91,13 +93,52 @@ function ReadBlog() {
     }
 
 
+    const FollowerStatus = async (authorId) => {
+        if (isAuthenticated && user) {
+        setIsLoading(true)
+            if (authorId === user.sub) {
+                setFollow(false)
+                setFollowing(false)
+                setIsLoading(false)
+                return;
+            }
+
+            try {
+                const isFollowing = await axios.post(`${config.serverUrl}/follow/api/checkFollower`, {
+                    authorId: authorId,
+                    followerId: user.sub,
+                }, {
+                    withCredentials: true
+                })
+
+                if (isFollowing.status == 200) {
+
+                    setFollow(!isFollowing.data.isFollowing)
+                    setFollowing(isFollowing.data.isFollowing)
+
+                }
+            } catch (error) {
+              
+                console.log('error from followerStatus func client :', error.response?.data?.message || error.message);
+                toast.error(error.response?.data?.message || error.message)
+            } finally {
+                setIsLoading(false)
+            }
+
+        } else {
+            setFollow(true)
+            setFollowing(false)
+        }
+    }
+
     useEffect(() => {
-        if(isAuthenticated && user){
+        if (isAuthenticated && user) {
             setUserId(user.sub)
         }
 
         fetchBlogPost();
         increaseViews();
+        // FollowerStatus();
 
         socket.connect(); // Ensure socket is connecting
 
@@ -212,9 +253,73 @@ function ReadBlog() {
         }
     }
 
-    const handleFollowBtn = async() => {
-        
+    const handleFollowBtn = async (authorId, autherName) => {
+        setIsLoading(true);
+        if (isAuthenticated && user) {
+
+            try {
+                const follow = await axios.post(`${config.serverUrl}/follow/api/follow`, {
+                    authorId: authorId,
+                    followerId: user.sub,
+                }, {
+                    withCredentials: true
+                })
+
+                if (follow.status == 200) {
+                    setTimeout(() => {
+                        setFollow(false)
+                        setFollowing(true)
+                        toast.info(`You'r now following ${autherName}`)
+                        setIsLoading(false)
+                    }, 1000);
+                }
+            } catch (error) {
+                console.log('error from handlefollowbtn func client :', error.response?.data?.message || error.message);
+                toast.error(error.response?.data?.message || error.message)
+            }
+        } else {
+            toast.error('Please login to Continue')
+            setTimeout(() => {
+                loginWithPopup()
+                setIsLoading(false)
+            }, 2000);
+        }
     }
+
+    const handleFollowingBtn = async (authorId, autherName) => {
+        setIsLoading(true);
+        if (isAuthenticated && user) {
+
+            try {
+                const following = await axios.post(`${config.serverUrl}/follow/api/unfollow`, {
+                    authorId: authorId,
+                    followerId: user.sub,
+                }, {
+                    withCredentials: true
+                })
+
+                if (following.status == 200) {
+                    setTimeout(() => {
+                        setFollow(true)
+                        setFollowing(false)
+                        toast.info(`You unfollow ${autherName}`)
+                        setIsLoading(false)
+                    }, 1000);
+                }
+            } catch (error) {
+                console.log('error from handlefollowingbtn func client :', error.response?.data?.message || error.message);
+                toast.error(error.response?.data?.message || error.message)
+            }
+        } else {
+            toast.error('Please login to Continue')
+            setTimeout(() => {
+                loginWithPopup()
+                setIsLoading(false)
+            }, 2000);
+        }
+    }
+
+
 
     return (
         <>
@@ -222,7 +327,7 @@ function ReadBlog() {
                 <div className="headercontainer">
                     <Header />
                 </div>
-                <div className='readblog'>
+                <div key={blogReload} className='readblog'>
                     <div>
 
                         {!blogPost ? (<p>Loading...</p>)
@@ -235,13 +340,36 @@ function ReadBlog() {
                                         <h1 id='blogtitle'>{blogPost.title}</h1>
                                     </div>
                                 </div>
-                                <div style={{ display: 'flex',flexDirection:'row', justifyContent: 'space-between' }}>
+                                <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
                                     <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
                                         <p id='userPicture'><img src={blogPost.userPicture} alt="" /></p>
-                                        <p id='blogdate'> {blogPost.name}</p> 
+                                        <p id='blogdate'> {blogPost.name}</p>
                                         <p id='blogdate'>{dateFunction(blogPost.updatedAt)}</p>
-                                        {follow && (<button onClick={() => handleFollowBtn()} id='authorfollowbtn'>Follow</button>)}
-                                        { following && (<button id='authorfollowingbtn'>Following</button>)}
+                                        {follow && (
+                                            isLoading ? (
+                                                <div className="loaderSpinner">
+                                                    <Oval type="Oval" color="#ffffff" strokeWidth={4}
+                                                        secondaryColor="#ffffff95"
+                                                        ariaLabel="oval-loading" />
+                                                </div>
+                                            ) : (
+
+                                                <button onClick={() => handleFollowBtn(blogPost.userid, blogPost.name)} id='authorfollowbtn'>Follow</button>
+                                            )
+                                        )}
+                                        {following && (
+                                            isLoading ? (
+                                                <div className="loaderSpinner">
+                                                    <Oval type="Oval" color="#ffffff" strokeWidth={4}
+                                                        secondaryColor="#ffffff95"
+                                                        ariaLabel="oval-loading" />
+                                                </div>
+                                            ) : (
+
+                                                < button onClick={() => handleFollowingBtn(blogPost.userid, blogPost.name)} id='authorfollowingbtn'>Following</button>
+                                            )
+                                        )}
+
                                     </div>
 
                                     <div className="author-socialmedia">
@@ -320,7 +448,7 @@ function ReadBlog() {
                                                 </div>
                                             </div>
 
-                                            
+
                                             {isSender && (
                                                 <svg onClick={() => handleCommentDelete(comment._id)} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" id="rb-comment-delete">
                                                     <path d="M24.2,12.193,23.8,24.3a3.988,3.988,0,0,1-4,3.857H12.2a3.988,3.988,0,0,1-4-3.853L7.8,12.193a1,1,0,0,1,2-.066l.4,12.11a2,2,0,0,0,2,1.923h7.6a2,2,0,0,0,2-1.927l.4-12.106a1,1,0,0,1,2,.066Zm1.323-4.029a1,1,0,0,1-1,1H7.478a1,1,0,0,1,0-2h3.1a1.276,1.276,0,0,0,1.273-1.148,2.991,2.991,0,0,1,2.984-2.694h2.33a2.991,2.991,0,0,1,2.984,2.694,1.276,1.276,0,0,0,1.273,1.148h3.1A1,1,0,0,1,25.522,8.164Zm-11.936-1h4.828a3.3,3.3,0,0,1-.255-.944,1,1,0,0,0-.994-.9h-2.33a1,1,0,0,0-.994.9A3.3,3.3,0,0,1,13.586,7.164Zm1.007,15.151V13.8a1,1,0,0,0-2,0v8.519a1,1,0,0,0,2,0Zm4.814,0V13.8a1,1,0,0,0-2,0v8.519a1,1,0,0,0,2,0Z"></path>
