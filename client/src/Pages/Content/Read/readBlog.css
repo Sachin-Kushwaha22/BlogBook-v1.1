@@ -61,6 +61,7 @@
     border-radius: 100px;
     font-size: .9rem;
     cursor: pointer;
+    width: 130px;
 }
 #authorfollowingbtn{
     padding: 6px 30px;
@@ -71,8 +72,26 @@
     border-radius: 100px;
     font-size: .9rem;
     cursor: pointer;
+    width: 130px;
 }
 
+.loaderSpinner{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 130px;
+    border: solid 1px #a2a4a5;
+    background: #4c4c4c;
+    border-radius: 100px;
+
+    padding: 2px 30px;
+}
+
+.loaderSpinner svg {
+    width: 25px !important;
+    height: 25px !important;
+}
 #authorsocialmedialogo{
     fill: rgb(196, 195, 195);
     width: 30px;

@@ -201,18 +201,19 @@ const handleViewCount = async (req, res) => {
     try {
         const { id } = req.params
 
-        const blog = await BLOG.findById(id)
+        const blog = await BLOG.findByIdAndUpdate(
+            id,
+            { $inc: { views: 1 } }, // Atomic increment
+            { new: true } // Return updated document
+        );
 
         if (!blog) return res.status(404).json({ message: "Blog not found" });
 
 
-        blog.views += 1;
-        await blog.save()
-
-        return res.status(200).json({ message: 'views increases' })
+        return res.status(200).json({  })
     } catch (error) {
         console.log('error from handleViewCount', error);
-
+        return res.status(500).json({ message: "Internal server error" });
     }
 }
 module.exports = {
