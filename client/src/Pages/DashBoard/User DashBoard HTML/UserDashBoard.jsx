@@ -87,7 +87,8 @@ function UserDashBoard() {
     useEffect(() => {
         // toast.info('User DashBoard Open')
         if (isAuthenticated && user) {
-            checkUserAuth();
+            setUserData(user)
+            setIsAuth(true)
             fetchData();
         }
 
