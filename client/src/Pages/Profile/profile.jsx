@@ -31,17 +31,18 @@ const UserProfile = () => {
     document.addEventListener('click', handleOutsideClick);
 
     const handleSignOutGoogle = async () => {
-        try {
-            const response = await axios.post('https://blogbook-v1-backend.onrender.com/google/user/signout', {}, {
-                withCredentials: true
-            })
+        logout({ logoutParams: { returnTo: window.location.origin } })
+        // try {
+        //     const response = await axios.post('https://blogbook-v1-backend.onrender.com/google/user/signout', {}, {
+        //         withCredentials: true
+        //     })
 
-            // console.log('response from logout function ', response.data);
-            logout({ logoutParams: { returnTo: window.location.origin } })
+        //     // console.log('response from logout function ', response.data);
+        //     logout({ logoutParams: { returnTo: window.location.origin } })
 
-        } catch (error) {
-            // console.log('error from logout function react ', error);
-        }
+        // } catch (error) {
+        //     // console.log('error from logout function react ', error);
+        // }
     }
 
 
