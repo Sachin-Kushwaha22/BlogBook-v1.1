@@ -15,7 +15,7 @@ const UserProfile = () => {
         //  } else {
         //      localStorage.removeItem('picture')
         //  }
-        console.log(localStorage.getItem('picture'));
+        // console.log(localStorage.getItem('picture'));
 
     }, [])
 
@@ -36,11 +36,11 @@ const UserProfile = () => {
                 withCredentials: true
             })
 
-            console.log('response from logout function ', response.data);
+            // console.log('response from logout function ', response.data);
             logout({ logoutParams: { returnTo: window.location.origin } })
 
         } catch (error) {
-            console.log('error from logout function react ', error);
+            // console.log('error from logout function react ', error);
         }
     }
 
@@ -73,7 +73,7 @@ const UserProfile = () => {
                                 <path d="M13.9201,6h-6.9201v2h4.89893c-0.464661,2.2793 -2.4845,4 -4.89893,4c-2.75684,0 -5,-2.24316 -5,-5c0,-2.75684 2.24316,-5 5,-5c1.12341,0 2.15027,0.385986 2.98602,1.01398l1.43512,-1.43512c-1.20636,-0.985657 -2.74542,-1.57886 -4.42114,-1.57886c-3.85986,0 -7,3.14062 -7,7c0,3.85938 3.14014,7 7,7c3.51947,0 6.43225,-2.61377 6.9201,-6c0.0471802,-0.327515 0.079895,-0.659607 0.079895,-1c0,-0.340393 -0.0327148,-0.672485 -0.079895,-1Z" transform="translate(1 1)"></path>
                             </svg>
                             Manage Google Account</p>
-                        <p id='aboutusprofilelogo' onClick={() => navigate('/admin')}>
+                        <p id='aboutusprofilelogo' >
                             <svg id='profilelogosvgs' className='adminpanelsvg' xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000" height="800px" width="800px" version="1.1" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve">
                                 <g>
                                     <path d="M22.3,16.7l1.4-1.4L20,11.6l-5.8,5.8c-0.5-0.3-1.1-0.4-1.7-0.4C10.6,17,9,18.6,9,20.5s1.6,3.5,3.5,3.5s3.5-1.6,3.5-3.5   c0-0.6-0.2-1.2-0.4-1.7l1.9-1.9l2.3,2.3l1.4-1.4l-2.3-2.3l1.1-1.1L22.3,16.7z M12.5,22c-0.8,0-1.5-0.7-1.5-1.5s0.7-1.5,1.5-1.5   s1.5,0.7,1.5,1.5S13.3,22,12.5,22z" />

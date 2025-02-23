@@ -43,7 +43,7 @@ function UserDashBoard() {
             }
 
         } catch (error) {
-            console.log("error generated from user dashboard checkUserAuth func", error.response?.data?.message || error.message);
+            // console.log("error generated from user dashboard checkUserAuth func", error.response?.data?.message || error.message);
             toast.error(error.response?.data?.message || error.message)
         }
     };
@@ -61,11 +61,11 @@ function UserDashBoard() {
                 withCredentials: true
             });
             if (commentsResponse.status == 200) {
-                console.log("this is comment", commentsResponse.data);
+                // console.log("this is comment", commentsResponse.data);
 
                 setCommentsData(commentsResponse.data);
                 setNewComment(commentsResponse.data)
-                console.log("new comment", newComment);
+                // console.log("new comment", newComment);
             }
 
 
@@ -79,7 +79,7 @@ function UserDashBoard() {
             }
 
         } catch (error) {
-            console.log("error generated from user dashboard fetchData func", error.response?.data?.message || error.message);
+            // console.log("error generated from user dashboard fetchData func", error.response?.data?.message || error.message);
             toast.error(error.response?.data?.message || error.message)
         }
     };
@@ -173,7 +173,7 @@ function UserDashBoard() {
                 }, 1500);
             }
         } catch (error) {
-            console.log('Error from logout details:', error.response?.data?.message || error.message);
+            // console.log('Error from logout details:', error.response?.data?.message || error.message);
             toast.error(error.response?.data?.message || error.message)
         }
     }
@@ -219,7 +219,7 @@ function UserDashBoard() {
     const handleSpecificComments = (blogid) => {
 
         setNewComment(commentsData.filter((comment) => comment.blogId === blogid))
-        console.log(newComment);
+        // console.log(newComment);
 
     }
 
@@ -238,7 +238,7 @@ function UserDashBoard() {
             }
         } catch (error) {
             toast.error(error.response?.data?.message || error.message)
-            console.log('error from handleBlogDelete func ', error.response?.data?.message || error.message);
+            // console.log('error from handleBlogDelete func ', error.response?.data?.message || error.message);
 
         }
     }

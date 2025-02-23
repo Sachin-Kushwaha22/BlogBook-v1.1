@@ -72,7 +72,7 @@ function dashboard() {
                 }, 1500);
             }
         } catch (error) {
-            console.log('Error from logout details:', error.response || error.message || error);
+            // console.log('Error from logout details:', error.response || error.message || error);
             toast.error('Unexpected Error Occur, Try Again')
             setLoading(false)
         }
@@ -90,7 +90,7 @@ function dashboard() {
                 setBlogPost(response.data.blogPost)
             }
         } catch (error) {
-            console.log('error from handleuseranalytics', error);
+            // console.log('error from handleuseranalytics', error);
 
         }
     }
@@ -113,7 +113,7 @@ function dashboard() {
                 withCredentials: true,
             })
         } catch (error) {
-            console.log("error from delete svg:", error);
+            // console.log("error from delete svg:", error);
 
         }
     }
@@ -122,7 +122,7 @@ function dashboard() {
         return null;
     }
 
-    console.log('this is pic', pic);
+    // console.log('this is pic', pic);
 
     // handleUserAnalytics()
     return (
