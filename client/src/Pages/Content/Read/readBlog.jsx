@@ -37,15 +37,34 @@ function ReadBlog() {
 
     const increaseViews = async () => {
 
-            try {
-                const response = await axios.get(`${config.serverUrl}/post/viewblog/viewCount/${id}`, {
-                    withCredentials: true,
-                })
+        const storageKey = userId ? `viewCount_${id}_${userId}` : `viewCount_${id}_guest`;
 
-            } catch (error) {
-                console.error('error generated from incrementViews func client', error.response?.data?.message || error.message);
-            }
+        // Retrieve stored views from localStorage
+        let viewsData = JSON.parse(localStorage.getItem(storageKey)) || [];
+
+        // Filter out views older than 24 hours
+        const now = Date.now();
+        viewsData = viewsData.filter(timestamp => now - timestamp < 24 * 60 * 60 * 1000);
+
+        if (viewsData.length >= 5) {
+            console.log("View limit reached for this blog in the last 24 hours.");
+            return;
         }
+
+        try {
+            const response = await axios.get(`${config.serverUrl}/post/viewblog/viewCount/${id}`, {
+                withCredentials: true,
+            })
+            if (response.status == 200) {
+                // Store the new view timestamp
+                viewsData.push(now);  // Add the current timestamp to the views data
+                localStorage.setItem(storageKey, JSON.stringify(viewsData));  // Save updated views data to localStorage
+            }
+
+        } catch (error) {
+            console.error('error generated from incrementViews func client', error.response?.data?.message || error.message);
+        }
+    }
 
     const fetchBlogPost = async () => {
 
@@ -59,7 +78,7 @@ function ReadBlog() {
             if (response.status == 200) {
                 setBlogPost(response.data);
                 setTimeout(() => {
-                    
+
                     FollowerStatus(response.data.userid)
                 }, 1000);
 
@@ -95,7 +114,7 @@ function ReadBlog() {
 
     const FollowerStatus = async (authorId) => {
         if (isAuthenticated && user) {
-        setIsLoading(true)
+            setIsLoading(true)
             if (authorId === user.sub) {
                 setFollow(false)
                 setFollowing(false)
@@ -118,7 +137,7 @@ function ReadBlog() {
 
                 }
             } catch (error) {
-              
+
                 console.log('error from followerStatus func client :', error.response?.data?.message || error.message);
                 toast.error(error.response?.data?.message || error.message)
             } finally {
@@ -340,7 +359,7 @@ function ReadBlog() {
                                         <h1 id='blogtitle'>{blogPost.title}</h1>
                                     </div>
                                 </div>
-                                <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
+                                <div className='auther-detail-box' >
                                     <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
                                         <p id='userPicture'><img src={blogPost.userPicture} alt="" /></p>
                                         <p id='blogdate'> {blogPost.name}</p>
@@ -407,6 +426,8 @@ function ReadBlog() {
                                 </div>
                                 <div>
                                     <div>
+
+                                        <p id='blogintroduction' dangerouslySetInnerHTML={{ __html: blogPost.introduction }}></p>
                                         <p id='blogcontent' dangerouslySetInnerHTML={{ __html: blogPost.description }}></p>
                                     </div>
                                 </div>

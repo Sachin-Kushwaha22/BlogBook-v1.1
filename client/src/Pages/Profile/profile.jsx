@@ -47,7 +47,6 @@ const UserProfile = () => {
 
 
     return (
-        <div >
 
             <div id='profilelogo' onClick={toggleDropdown}>
 
@@ -92,10 +91,6 @@ const UserProfile = () => {
 
             </div>
 
-
-
-
-        </div>
     )
 }
 

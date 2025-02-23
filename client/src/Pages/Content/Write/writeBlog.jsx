@@ -56,9 +56,11 @@ const BlogEditor = () => {
     const { loginWithRedirect, isAuthenticated, user, logout } = useAuth0();
     const navigate = useNavigate()
     const [title, setTitle] = useState('');
+    const [introduction, setIntroduction] = useState('');
     const [content, setContent] = useState('');
     const [display, setDisplay] = useState(false)
     const [personalDetail, setPersonalDetail] = useState({});
+    const [slide, setSlide] = useState(true)
     const quillRef = useRef(null)
     const scrollTop = useRef()
 
@@ -109,6 +111,7 @@ const BlogEditor = () => {
                 userPicture: user.picture,
                 personalDetail,
                 title,
+                introduction,
                 content
             };
             try {
@@ -173,6 +176,8 @@ const BlogEditor = () => {
                         onChange={(e) => setTitle(e.target.value)}
                     />
 
+                    <textarea value={introduction} onChange={(e) => setIntroduction(e.target.value)} type='text' name="introduction" id="wb-blog-intro" placeholder='Provide Brief introduction of your Blog' />
+
                     {/* Quill Editor */}
                     <ReactQuill
                         id='quillc'
@@ -185,9 +190,16 @@ const BlogEditor = () => {
 
 
                 </div>
-                <div className='writeblogrightside'>
+
+                <button onClick={() => {
+                    setSlide(true)
+                }} className="wb-menu">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="800px" height="800px" viewBox="0 0 16 16" id="wb-menu-svg"><path d="M8 12C9.10457 12 10 12.8954 10 14C10 15.1046 9.10457 16 8 16C6.89543 16 6 15.1046 6 14C6 12.8954 6.89543 12 8 12Z"></path><path d="M8 6C9.10457 6 10 6.89543 10 8C10 9.10457 9.10457 10 8 10C6.89543 10 6 9.10457 6 8C6 6.89543 6.89543 6 8 6Z"></path><path d="M10 2C10 0.89543 9.10457 -4.82823e-08 8 0C6.89543 4.82823e-08 6 0.895431 6 2C6 3.10457 6.89543 4 8 4C9.10457 4 10 3.10457 10 2Z"></path></svg>
+                </button>
+                <div style={{ display: slide ? 'flex' : 'none' }} className='writeblogrightside'>
 
                     <div className="wb-buttonsdiv">
+                        
                         <button
                             onClick={handlePublish}
                             className='wb-previewbutton'
@@ -199,6 +211,14 @@ const BlogEditor = () => {
                             className='wb-publishbutton'
                         >
                             Publish<svg version="1.1" id="publishsvg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 122.88 80.98" xml:space="preserve"><g><path class="st0" d="M100.66,40.49L60.58,80.98V60.81C35.23,55.56,15.21,61.35,0,80.63c2.64-39.65,29.73-58.78,60.58-60.05V0 L100.66,40.49L100.66,40.49z M122.88,40.49L82.79,80.98V68.04l27.28-27.55L82.79,12.94V0L122.88,40.49L122.88,40.49z" /></g></svg>
+                        </button>
+
+                        <button onClick={() => {
+                            setSlide(false)
+                        }} className="wb-menu-inside">
+                            <svg id='wb-menu-svg' xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0 0 30 30">
+                                <path d="M 7 4 C 6.744125 4 6.4879687 4.0974687 6.2929688 4.2929688 L 4.2929688 6.2929688 C 3.9019687 6.6839688 3.9019687 7.3170313 4.2929688 7.7070312 L 11.585938 15 L 4.2929688 22.292969 C 3.9019687 22.683969 3.9019687 23.317031 4.2929688 23.707031 L 6.2929688 25.707031 C 6.6839688 26.098031 7.3170313 26.098031 7.7070312 25.707031 L 15 18.414062 L 22.292969 25.707031 C 22.682969 26.098031 23.317031 26.098031 23.707031 25.707031 L 25.707031 23.707031 C 26.098031 23.316031 26.098031 22.682969 25.707031 22.292969 L 18.414062 15 L 25.707031 7.7070312 C 26.098031 7.3170312 26.098031 6.6829688 25.707031 6.2929688 L 23.707031 4.2929688 C 23.316031 3.9019687 22.682969 3.9019687 22.292969 4.2929688 L 15 11.585938 L 7.7070312 4.2929688 C 7.5115312 4.0974687 7.255875 4 7 4 z"></path>
+                            </svg>
                         </button>
 
                     </div>
