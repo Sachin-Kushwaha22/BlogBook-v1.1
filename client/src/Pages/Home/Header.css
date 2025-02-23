@@ -315,6 +315,7 @@ body {
 @media (max-width: 700px){
     #logo{
         padding-top: 0;
+        padding: 20px;
     }
     #buttons-div{
         padding-right: 0;
@@ -330,5 +331,35 @@ body {
     }
     #nav-bar{
         height: 60px;
+    }
+    #buttons-div{
+        padding-left: 0;
+    }
+}
+@media (max-width:380px){
+    #logo{
+        font-size: 1.6rem;
+        padding-left: 20px;
+    }
+    #nav-bar{
+        height: 60px;
+    }
+    #buttons-div{
+        padding-left: 0;
+    }
+}
+@media (max-width:350px){
+    #logo{
+        font-size: 1.6rem;
+        padding-left: 10px;
+    }
+    #nav-bar{
+        height: 60px;
+    }
+    #buttons-div{
+        padding-left: 0;
+    }
+    #signin{
+        margin-left: 5px;
     }
 }
