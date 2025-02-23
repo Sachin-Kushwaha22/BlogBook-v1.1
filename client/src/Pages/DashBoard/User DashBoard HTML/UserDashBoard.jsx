@@ -1,7 +1,7 @@
 import react, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import './UserDashBoard.css'
-
+import './otherSection.css'
 import { toast } from 'react-toastify'
 import { useAuth0 } from '@auth0/auth0-react'
 import config from '../../../config'
@@ -20,6 +20,7 @@ function UserDashBoard() {
     const [newComment, setNewComment] = useState([])
     const [deleteConfirmationPopup, setDeleteConfirmationPopup] = useState(false)
     const [followerDetails, setFollowerDetails] = useState([])
+    const [followingDetails, setFollowingDetails] = useState([])
 
     const [dashboard, setDashboard] = useState(false)
     const [blogs, setBlogs] = useState(false)
@@ -67,17 +68,15 @@ function UserDashBoard() {
                 console.log("new comment", newComment);
             }
 
-            
-            const followerDetails = user.sub && await axios.get(`${config.serverUrl}/follow/api/getFollower/${user.sub}`,{
-                withCredentials:true,
-            }) 
 
-            if(followerDetails.status == 200){
-                console.log(followerDetails.data);
-                setFollowerDetails(followerDetails.data)
+            const followerDetails = user.sub && await axios.get(`${config.serverUrl}/follow/api/getFollower/${user.sub}`, {
+                withCredentials: true,
+            })
+
+            if (followerDetails.status == 200) {
+                setFollowerDetails(followerDetails.data.followerDetail)
+                setFollowingDetails(followerDetails.data.followingDetail)
             }
-
-
 
         } catch (error) {
             console.log("error generated from user dashboard fetchData func", error.response?.data?.message || error.message);
@@ -364,198 +363,313 @@ function UserDashBoard() {
                                 </div>
                             </div>
 
-                            { dashboard && (
+                            {dashboard && (
                                 <div className='ud-rightside-body'>
-                                <div className="navbar-dimension"></div>
-                                <div className='ud-navbar'>
-                                    <p className='ud-navbar-greeting'>Hello {userData.name} 👋🏼,</p>
-                                    <div onClick={() => setIsVisible(!isVisible)} className='menubutton'><svg xmlns="http://www.w3.org/2000/svg" width="800px" height="800px" viewBox="0 0 16 16" id="ud-svgs2">
-                                        <path d="M8 12C9.10457 12 10 12.8954 10 14C10 15.1046 9.10457 16 8 16C6.89543 16 6 15.1046 6 14C6 12.8954 6.89543 12 8 12Z" />
-                                        <path d="M8 6C9.10457 6 10 6.89543 10 8C10 9.10457 9.10457 10 8 10C6.89543 10 6 9.10457 6 8C6 6.89543 6.89543 6 8 6Z" />
-                                        <path d="M10 2C10 0.89543 9.10457 -4.82823e-08 8 0C6.89543 4.82823e-08 6 0.895431 6 2C6 3.10457 6.89543 4 8 4C9.10457 4 10 3.10457 10 2Z" />
-                                    </svg></div>
-                                    <div className='ud-nav-buttons'>
+                                    <div className="navbar-dimension"></div>
+                                    <div className='ud-navbar'>
+                                        <p className='ud-navbar-greeting'>Hello {userData.name} 👋🏼,</p>
+                                        <div onClick={() => setIsVisible(!isVisible)} className='menubutton'><svg xmlns="http://www.w3.org/2000/svg" width="800px" height="800px" viewBox="0 0 16 16" id="ud-svgs2">
+                                            <path d="M8 12C9.10457 12 10 12.8954 10 14C10 15.1046 9.10457 16 8 16C6.89543 16 6 15.1046 6 14C6 12.8954 6.89543 12 8 12Z" />
+                                            <path d="M8 6C9.10457 6 10 6.89543 10 8C10 9.10457 9.10457 10 8 10C6.89543 10 6 9.10457 6 8C6 6.89543 6.89543 6 8 6Z" />
+                                            <path d="M10 2C10 0.89543 9.10457 -4.82823e-08 8 0C6.89543 4.82823e-08 6 0.895431 6 2C6 3.10457 6.89543 4 8 4C9.10457 4 10 3.10457 10 2Z" />
+                                        </svg></div>
+                                        <div className='ud-nav-buttons'>
 
-                                        <p onClick={() => navigate(-1)} className='backbutton'><svg id='ud-svgs2' xmlns="http://www.w3.org/2000/svg" width="800px" height="800px" viewBox="0 0 24 24" fill="none">
-                                            <path d="M9 22H15C20 22 22 20 22 15V9C22 4 20 2 15 2H9C4 2 2 4 2 9V15C2 20 4 22 9 22Z" stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                            <path d="M9.00002 15.3802H13.92C15.62 15.3802 17 14.0002 17 12.3002C17 10.6002 15.62 9.22021 13.92 9.22021H7.15002" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                                            <path d="M8.57 10.7701L7 9.19012L8.57 7.62012" stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                        </svg>Back</p>
-                                        <p className='logoutbutton' onClick={handleLogout}>LogOut<svg id='ud-svgs2' viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 4C5.44772 4 5 4.44772 5 5V19C5 19.5523 5.44772 20 6 20H10C10.5523 20 11 20.4477 11 21C11 21.5523 10.5523 22 10 22H6C4.34315 22 3 20.6569 3 19V5C3 3.34315 4.34315 2 6 2H10C10.5523 2 11 2.44772 11 3C11 3.55228 10.5523 4 10 4H6ZM15.2929 7.29289C15.6834 6.90237 16.3166 6.90237 16.7071 7.29289L20.7071 11.2929C21.0976 11.6834 21.0976 12.3166 20.7071 12.7071L16.7071 16.7071C16.3166 17.0976 15.6834 17.0976 15.2929 16.7071C14.9024 16.3166 14.9024 15.6834 15.2929 15.2929L17.5858 13H11C10.4477 13 10 12.5523 10 12C10 11.4477 10.4477 11 11 11H17.5858L15.2929 8.70711C14.9024 8.31658 14.9024 7.68342 15.2929 7.29289Z" fill="currentColor"></path></svg> </p>
-                                    </div>
-                                </div>
-
-                                <div className="ud-analytics">
-                                    <div className='ud-analytics-box'>
-                                        <div className='svgbox'>
-                                            <svg xmlns="http://www.w3.org/2000/svg" id="ud-svgs3" enable-background="new 0 0 64 64" viewBox="0 0 64 64">
-                                                <rect width="7.1" height="14.9" x="3.2" y="43.4" fill="#34afaa"></rect>
-                                                <polygon fill="#fcd66f" points="19.4 33.6 22.9 36 22.9 58.3 15.7 58.3 15.7 36.9"></polygon>
-                                                <polygon fill="#f7747e" points="31.9 42 35.3 39 35.3 58.3 28.2 58.3 28.2 39.6"></polygon>
-                                                <polygon fill="#5dafd8" points="47.8 30.1 47.8 58.3 40.7 58.3 40.7 34.5 45 30.8 45.5 30.1"></polygon>
-                                                <polygon fill="#445c6c" points="57.7 11.4 60.4 13.2 60.4 58.3 53.3 58.3 53.3 18.1"></polygon>
-                                                <polygon fill="#e95c60" points="60.8 10.6 59.4 4.1 52.9 5.5 56 7.5 43.5 26.6 31.7 36.7 19.2 28.3 6.1 39.9 7.5 41.4 19.4 30.8 31.8 39.2 45 27.9 57.7 8.6"></polygon>
-                                                <rect width="64" height="3" y="56.9" fill="#58717f"></rect>
-                                            </svg>
+                                            <p onClick={() => navigate(-1)} className='backbutton'><svg id='ud-svgs2' xmlns="http://www.w3.org/2000/svg" width="800px" height="800px" viewBox="0 0 24 24" fill="none">
+                                                <path d="M9 22H15C20 22 22 20 22 15V9C22 4 20 2 15 2H9C4 2 2 4 2 9V15C2 20 4 22 9 22Z" stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                                <path d="M9.00002 15.3802H13.92C15.62 15.3802 17 14.0002 17 12.3002C17 10.6002 15.62 9.22021 13.92 9.22021H7.15002" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                                                <path d="M8.57 10.7701L7 9.19012L8.57 7.62012" stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                            </svg>Back</p>
+                                            <p className='logoutbutton' onClick={handleLogout}>LogOut<svg id='ud-svgs2' viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 4C5.44772 4 5 4.44772 5 5V19C5 19.5523 5.44772 20 6 20H10C10.5523 20 11 20.4477 11 21C11 21.5523 10.5523 22 10 22H6C4.34315 22 3 20.6569 3 19V5C3 3.34315 4.34315 2 6 2H10C10.5523 2 11 2.44772 11 3C11 3.55228 10.5523 4 10 4H6ZM15.2929 7.29289C15.6834 6.90237 16.3166 6.90237 16.7071 7.29289L20.7071 11.2929C21.0976 11.6834 21.0976 12.3166 20.7071 12.7071L16.7071 16.7071C16.3166 17.0976 15.6834 17.0976 15.2929 16.7071C14.9024 16.3166 14.9024 15.6834 15.2929 15.2929L17.5858 13H11C10.4477 13 10 12.5523 10 12C10 11.4477 10.4477 11 11 11H17.5858L15.2929 8.70711C14.9024 8.31658 14.9024 7.68342 15.2929 7.29289Z" fill="currentColor"></path></svg> </p>
                                         </div>
-                                        <div className='analytics-databox'>
-                                            <p className='databox-title'>Total Views</p>
-                                            <p className='databox-number'>{numeral(blogData.reduce((acc, blog) => acc + blog.views, 0)).format('0.a').toUpperCase()}</p>
-                                            {/* <p className="databox-analytics-value">
+                                    </div>
+
+                                    <div className="ud-analytics">
+                                        <div className='ud-analytics-box'>
+                                            <div className='svgbox'>
+                                                <svg xmlns="http://www.w3.org/2000/svg" id="ud-svgs3" enable-background="new 0 0 64 64" viewBox="0 0 64 64">
+                                                    <rect width="7.1" height="14.9" x="3.2" y="43.4" fill="#34afaa"></rect>
+                                                    <polygon fill="#fcd66f" points="19.4 33.6 22.9 36 22.9 58.3 15.7 58.3 15.7 36.9"></polygon>
+                                                    <polygon fill="#f7747e" points="31.9 42 35.3 39 35.3 58.3 28.2 58.3 28.2 39.6"></polygon>
+                                                    <polygon fill="#5dafd8" points="47.8 30.1 47.8 58.3 40.7 58.3 40.7 34.5 45 30.8 45.5 30.1"></polygon>
+                                                    <polygon fill="#445c6c" points="57.7 11.4 60.4 13.2 60.4 58.3 53.3 58.3 53.3 18.1"></polygon>
+                                                    <polygon fill="#e95c60" points="60.8 10.6 59.4 4.1 52.9 5.5 56 7.5 43.5 26.6 31.7 36.7 19.2 28.3 6.1 39.9 7.5 41.4 19.4 30.8 31.8 39.2 45 27.9 57.7 8.6"></polygon>
+                                                    <rect width="64" height="3" y="56.9" fill="#58717f"></rect>
+                                                </svg>
+                                            </div>
+                                            <div className='analytics-databox'>
+                                                <p className='databox-title'>Total Views</p>
+                                                <p className='databox-number'>{numeral(blogData.reduce((acc, blog) => acc + blog.views, 0)).format('0.a').toUpperCase()}</p>
+                                                {/* <p className="databox-analytics-value">
                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" id="databox-arrow">
                                                     <path d="M4 15a1 1 0 0 0 1 1h19.586l-4.292 4.292a1 1 0 0 0 1.414 1.414l6-6a.99.99 0 0 0 .292-.702V15c0-.13-.026-.26-.078-.382a.99.99 0 0 0-.216-.324l-6-6a1 1 0 0 0-1.414 1.414L24.586 14H5a1 1 0 0 0-1 1z"></path>
                                                 </svg>
                                                 <p>16%</p>this month
                                             </p> */}
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div className="ud-linebreak"></div>
+                                        <div className="ud-linebreak"></div>
 
-                                    <div className='ud-analytics-box'>
-                                        <div className='svgbox'>
-                                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="800px" width="800px" version="1.1" id="ud-svgs3" viewBox="0 0 512 512" xml:space="preserve">
-                                                <path style={{ fill: '#A5A5A5' }} d="M512,467.478L512,467.478C512,492.066,492.066,512,467.478,512H44.522  C19.933,512,0,492.066,0,467.478l0,0c0-24.588,19.933-44.522,44.522-44.522h422.957C492.066,422.957,512,442.89,512,467.478z" />
-                                                <path style={{ fill: '#777777' }} d="M169.739,478.609c0,4.61-3.738,8.348-8.348,8.348H72.348c-4.61,0-8.348-3.738-8.348-8.348  s3.738-8.348,8.348-8.348h89.043C166.002,470.261,169.739,473.998,169.739,478.609z M439.652,470.261H272.696  c-4.61,0-8.348,3.738-8.348,8.348s3.738,8.348,8.348,8.348h166.957c4.61,0,8.348-3.738,8.348-8.348S444.262,470.261,439.652,470.261  z M234.852,470.261h-1.113c-4.61,0-8.348,3.738-8.348,8.348s3.738,8.348,8.348,8.348h1.113c4.61,0,8.348-3.738,8.348-8.348  S239.462,470.261,234.852,470.261z M200.348,470.261h-1.113c-4.61,0-8.348,3.738-8.348,8.348s3.738,8.348,8.348,8.348h1.113  c4.61,0,8.348-3.738,8.348-8.348S204.958,470.261,200.348,470.261z" />
-                                                <path style={{ fill: '#CCCAC4' }} d="M478.609,155.826v244.87c0,24.588-19.934,44.522-44.522,44.522H77.913  c-24.588,0-44.522-19.934-44.522-44.522v-244.87c0-24.588,19.933-44.522,44.522-44.522h356.174  C458.675,111.304,478.609,131.238,478.609,155.826z" />
-                                                <path style={{ fill: '#F2EFE2' }} d="M434.087,422.957H77.913c-12.295,0-22.261-9.966-22.261-22.261v-244.87  c0-12.295,9.966-22.261,22.261-22.261h356.174c12.295,0,22.261,9.966,22.261,22.261v244.87  C456.348,412.99,446.382,422.957,434.087,422.957z" />
-                                                <path style={{ fill: '#BFBBA3' }} d="M406.261,203.13H105.739c-9.22,0-16.696-7.475-16.696-16.696l0,0c0-9.22,7.475-16.696,16.696-16.696  h300.522c9.22,0,16.696,7.475,16.696,16.696l0,0C422.957,195.655,415.481,203.13,406.261,203.13z M244.87,244.87L244.87,244.87  c0-9.22-7.475-16.696-16.696-16.696H105.739c-9.22,0-16.696,7.475-16.696,16.696l0,0c0,9.22,7.475,16.696,16.696,16.696h122.435  C237.395,261.565,244.87,254.09,244.87,244.87z M422.957,244.87L422.957,244.87c0-9.22-7.475-16.696-16.696-16.696H283.826  c-9.22,0-16.696,7.475-16.696,16.696l0,0c0,9.22,7.475,16.696,16.696,16.696h122.435C415.482,261.565,422.957,254.09,422.957,244.87  z" />
-                                                <path style={{ fill: '#FFD880' }} d="M406.261,384H105.739c-9.22,0-16.696-7.475-16.696-16.696v-66.783c0-9.22,7.475-16.696,16.696-16.696  h300.522c9.22,0,16.696,7.475,16.696,16.696v66.783C422.957,376.525,415.482,384,406.261,384z" />
-                                                <path style={{ fill: '#FC8059' }} d="M139.688,374.23l-2.332,2.332l0.086,0.086l-19.098,19.098c-1.37,1.37-3.229,2.14-5.167,2.14l0,0  c-1.938,0-3.797-0.77-5.167-2.14l-19.098-19.098l0.086-0.086l-2.332-2.332c-6.677-6.677-6.677-17.501,0-24.179l0,0  c6.677-6.677,17.501-6.677,24.179,0l2.332,2.332l2.332-2.332c6.677-6.677,17.501-6.677,24.179,0l0,0  C146.365,356.728,146.365,367.553,139.688,374.23z" />
-                                                <path style={{ fill: '#D6A154' }} d="M376.209,292.36l-22.261,29.682c-4.452,5.936-13.357,5.936-17.809,0l-22.261-29.682  c-1.445-1.927-2.226-4.27-2.226-6.678V22.261C311.652,9.966,321.618,0,333.913,0h22.261c12.295,0,22.261,9.966,22.261,22.261  v263.421C378.435,288.089,377.653,290.433,376.209,292.36z" />
-                                                <path style={{ fill: '#B26932' }} d="M370.087,300.522l-16.139,21.518c-4.452,5.936-13.357,5.936-17.809,0L320,300.522H370.087z" />
-                                                <path style={{ fill: '#FFD880' }} d="M311.652,256V22.261C311.652,9.966,321.618,0,333.913,0h22.261c12.295,0,22.261,9.966,22.261,22.261  V256H311.652z" />
-                                                <path style={{ fill: '#FCC159' }} d="M345.043,256V0h11.13c12.295,0,22.261,9.966,22.261,22.261V256H345.043z" />
-                                                <path style={{ fill: '#FC8059' }} d="M378.435,22.261v22.261h-66.783V22.261C311.652,9.966,321.618,0,333.913,0h22.261  C368.469,0,378.435,9.966,378.435,22.261z" />
-                                            </svg>
-                                        </div>
-                                        <div className='analytics-databox'>
-                                            <p className='databox-title'>Total Blogs</p>
-                                            <p className='databox-number'>{numeral(blogData.length).format('0.a').toUpperCase()}</p>
-                                            {/* <p className="databox-analytics-value">
+                                        <div className='ud-analytics-box'>
+                                            <div className='svgbox'>
+                                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="800px" width="800px" version="1.1" id="ud-svgs3" viewBox="0 0 512 512" xml:space="preserve">
+                                                    <path style={{ fill: '#A5A5A5' }} d="M512,467.478L512,467.478C512,492.066,492.066,512,467.478,512H44.522  C19.933,512,0,492.066,0,467.478l0,0c0-24.588,19.933-44.522,44.522-44.522h422.957C492.066,422.957,512,442.89,512,467.478z" />
+                                                    <path style={{ fill: '#777777' }} d="M169.739,478.609c0,4.61-3.738,8.348-8.348,8.348H72.348c-4.61,0-8.348-3.738-8.348-8.348  s3.738-8.348,8.348-8.348h89.043C166.002,470.261,169.739,473.998,169.739,478.609z M439.652,470.261H272.696  c-4.61,0-8.348,3.738-8.348,8.348s3.738,8.348,8.348,8.348h166.957c4.61,0,8.348-3.738,8.348-8.348S444.262,470.261,439.652,470.261  z M234.852,470.261h-1.113c-4.61,0-8.348,3.738-8.348,8.348s3.738,8.348,8.348,8.348h1.113c4.61,0,8.348-3.738,8.348-8.348  S239.462,470.261,234.852,470.261z M200.348,470.261h-1.113c-4.61,0-8.348,3.738-8.348,8.348s3.738,8.348,8.348,8.348h1.113  c4.61,0,8.348-3.738,8.348-8.348S204.958,470.261,200.348,470.261z" />
+                                                    <path style={{ fill: '#CCCAC4' }} d="M478.609,155.826v244.87c0,24.588-19.934,44.522-44.522,44.522H77.913  c-24.588,0-44.522-19.934-44.522-44.522v-244.87c0-24.588,19.933-44.522,44.522-44.522h356.174  C458.675,111.304,478.609,131.238,478.609,155.826z" />
+                                                    <path style={{ fill: '#F2EFE2' }} d="M434.087,422.957H77.913c-12.295,0-22.261-9.966-22.261-22.261v-244.87  c0-12.295,9.966-22.261,22.261-22.261h356.174c12.295,0,22.261,9.966,22.261,22.261v244.87  C456.348,412.99,446.382,422.957,434.087,422.957z" />
+                                                    <path style={{ fill: '#BFBBA3' }} d="M406.261,203.13H105.739c-9.22,0-16.696-7.475-16.696-16.696l0,0c0-9.22,7.475-16.696,16.696-16.696  h300.522c9.22,0,16.696,7.475,16.696,16.696l0,0C422.957,195.655,415.481,203.13,406.261,203.13z M244.87,244.87L244.87,244.87  c0-9.22-7.475-16.696-16.696-16.696H105.739c-9.22,0-16.696,7.475-16.696,16.696l0,0c0,9.22,7.475,16.696,16.696,16.696h122.435  C237.395,261.565,244.87,254.09,244.87,244.87z M422.957,244.87L422.957,244.87c0-9.22-7.475-16.696-16.696-16.696H283.826  c-9.22,0-16.696,7.475-16.696,16.696l0,0c0,9.22,7.475,16.696,16.696,16.696h122.435C415.482,261.565,422.957,254.09,422.957,244.87  z" />
+                                                    <path style={{ fill: '#FFD880' }} d="M406.261,384H105.739c-9.22,0-16.696-7.475-16.696-16.696v-66.783c0-9.22,7.475-16.696,16.696-16.696  h300.522c9.22,0,16.696,7.475,16.696,16.696v66.783C422.957,376.525,415.482,384,406.261,384z" />
+                                                    <path style={{ fill: '#FC8059' }} d="M139.688,374.23l-2.332,2.332l0.086,0.086l-19.098,19.098c-1.37,1.37-3.229,2.14-5.167,2.14l0,0  c-1.938,0-3.797-0.77-5.167-2.14l-19.098-19.098l0.086-0.086l-2.332-2.332c-6.677-6.677-6.677-17.501,0-24.179l0,0  c6.677-6.677,17.501-6.677,24.179,0l2.332,2.332l2.332-2.332c6.677-6.677,17.501-6.677,24.179,0l0,0  C146.365,356.728,146.365,367.553,139.688,374.23z" />
+                                                    <path style={{ fill: '#D6A154' }} d="M376.209,292.36l-22.261,29.682c-4.452,5.936-13.357,5.936-17.809,0l-22.261-29.682  c-1.445-1.927-2.226-4.27-2.226-6.678V22.261C311.652,9.966,321.618,0,333.913,0h22.261c12.295,0,22.261,9.966,22.261,22.261  v263.421C378.435,288.089,377.653,290.433,376.209,292.36z" />
+                                                    <path style={{ fill: '#B26932' }} d="M370.087,300.522l-16.139,21.518c-4.452,5.936-13.357,5.936-17.809,0L320,300.522H370.087z" />
+                                                    <path style={{ fill: '#FFD880' }} d="M311.652,256V22.261C311.652,9.966,321.618,0,333.913,0h22.261c12.295,0,22.261,9.966,22.261,22.261  V256H311.652z" />
+                                                    <path style={{ fill: '#FCC159' }} d="M345.043,256V0h11.13c12.295,0,22.261,9.966,22.261,22.261V256H345.043z" />
+                                                    <path style={{ fill: '#FC8059' }} d="M378.435,22.261v22.261h-66.783V22.261C311.652,9.966,321.618,0,333.913,0h22.261  C368.469,0,378.435,9.966,378.435,22.261z" />
+                                                </svg>
+                                            </div>
+                                            <div className='analytics-databox'>
+                                                <p className='databox-title'>Total Blogs</p>
+                                                <p className='databox-number'>{numeral(blogData.length).format('0.a').toUpperCase()}</p>
+                                                {/* <p className="databox-analytics-value">
                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" id="databox-arrow">
                                                     <path d="M4 15a1 1 0 0 0 1 1h19.586l-4.292 4.292a1 1 0 0 0 1.414 1.414l6-6a.99.99 0 0 0 .292-.702V15c0-.13-.026-.26-.078-.382a.99.99 0 0 0-.216-.324l-6-6a1 1 0 0 0-1.414 1.414L24.586 14H5a1 1 0 0 0-1 1z"></path>
                                                 </svg>
                                                 <p>16%</p>this month
                                             </p> */}
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div className="ud-linebreak"></div>
+                                        <div className="ud-linebreak"></div>
 
-                                    <div className='ud-analytics-box'>
-                                        <div className='svgbox'>
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="60px" height="60px" viewBox="0 0 24 24" fill="none">
-                                                <path d="M15.5 7.5C15.5 9.433 13.933 11 12 11C10.067 11 8.5 9.433 8.5 7.5C8.5 5.567 10.067 4 12 4C13.933 4 15.5 5.567 15.5 7.5Z" fill="#1C274C" />
-                                                <path opacity="0.4" d="M19.5 7.5C19.5 8.88071 18.3807 10 17 10C15.6193 10 14.5 8.88071 14.5 7.5C14.5 6.11929 15.6193 5 17 5C18.3807 5 19.5 6.11929 19.5 7.5Z" fill="#1C274C" />
-                                                <path opacity="0.4" d="M4.5 7.5C4.5 8.88071 5.61929 10 7 10C8.38071 10 9.5 8.88071 9.5 7.5C9.5 6.11929 8.38071 5 7 5C5.61929 5 4.5 6.11929 4.5 7.5Z" fill="#1C274C" />
-                                                <path d="M18 16.5C18 18.433 15.3137 20 12 20C8.68629 20 6 18.433 6 16.5C6 14.567 8.68629 13 12 13C15.3137 13 18 14.567 18 16.5Z" fill="#1C274C" />
-                                                <path opacity="0.4" d="M22 16.5C22 17.8807 20.2091 19 18 19C15.7909 19 14 17.8807 14 16.5C14 15.1193 15.7909 14 18 14C20.2091 14 22 15.1193 22 16.5Z" fill="#1C274C" />
-                                                <path opacity="0.4" d="M2 16.5C2 17.8807 3.79086 19 6 19C8.20914 19 10 17.8807 10 16.5C10 15.1193 8.20914 14 6 14C3.79086 14 2 15.1193 2 16.5Z" fill="#1C274C" />
-                                            </svg>
+                                        <div className='ud-analytics-box'>
+                                            <div className='svgbox'>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="60px" height="60px" viewBox="0 0 24 24" fill="none">
+                                                    <path d="M15.5 7.5C15.5 9.433 13.933 11 12 11C10.067 11 8.5 9.433 8.5 7.5C8.5 5.567 10.067 4 12 4C13.933 4 15.5 5.567 15.5 7.5Z" fill="#1C274C" />
+                                                    <path opacity="0.4" d="M19.5 7.5C19.5 8.88071 18.3807 10 17 10C15.6193 10 14.5 8.88071 14.5 7.5C14.5 6.11929 15.6193 5 17 5C18.3807 5 19.5 6.11929 19.5 7.5Z" fill="#1C274C" />
+                                                    <path opacity="0.4" d="M4.5 7.5C4.5 8.88071 5.61929 10 7 10C8.38071 10 9.5 8.88071 9.5 7.5C9.5 6.11929 8.38071 5 7 5C5.61929 5 4.5 6.11929 4.5 7.5Z" fill="#1C274C" />
+                                                    <path d="M18 16.5C18 18.433 15.3137 20 12 20C8.68629 20 6 18.433 6 16.5C6 14.567 8.68629 13 12 13C15.3137 13 18 14.567 18 16.5Z" fill="#1C274C" />
+                                                    <path opacity="0.4" d="M22 16.5C22 17.8807 20.2091 19 18 19C15.7909 19 14 17.8807 14 16.5C14 15.1193 15.7909 14 18 14C20.2091 14 22 15.1193 22 16.5Z" fill="#1C274C" />
+                                                    <path opacity="0.4" d="M2 16.5C2 17.8807 3.79086 19 6 19C8.20914 19 10 17.8807 10 16.5C10 15.1193 8.20914 14 6 14C3.79086 14 2 15.1193 2 16.5Z" fill="#1C274C" />
+                                                </svg>
 
-                                        </div>
-                                        <div className='analytics-databox'>
-                                            <p className='databox-title'>Connections</p>
-                                            <p className='databox-number'>{numeral(followerDetails.length).format('0.a').toUpperCase()}</p>
-                                            <div className="databox-analytics-value">
-                                                <div>
-                                                    <img src="" alt="" />
+                                            </div>
+                                            <div className='analytics-databox'>
+                                                <p className='databox-title'>Connections</p>
+                                                <p className='databox-number'>{numeral(followerDetails.length).format('0.a').toUpperCase()}</p>
+                                                <div className="databox-analytics-value">
+                                                    <div>
+                                                        <img src="" alt="" />
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div className="ud-blogslist-and-comments">
-                                    <div className="ud-blog-container">
-                                        <div className="allblogs">All Blogs</div>
-                                        <div className='ud-bloglist'>
-                                            <div className='blogbox'>
-                                                {blogData.length === 0 ? (
-                                                    <p style={{ alignSelf: 'center', justifySelf: 'center' }}>No Blog Available</p>
-                                                ) : (
-                                                    blogData.map((blog) => (
-                                                        <div onClick={() => {
-                                                            // console.log(blog);
+                                    <div className="ud-blogslist-and-comments">
+                                        <div className="ud-blog-container">
+                                            <div className="allblogs">All Blogs</div>
+                                            <div className='ud-bloglist'>
+                                                <div className='blogbox'>
+                                                    {blogData.length === 0 ? (
+                                                        <p style={{ alignSelf: 'center', justifySelf: 'center' }}>No Blog Available</p>
+                                                    ) : (
+                                                        blogData.map((blog) => (
+                                                            <div onClick={() => {
+                                                                // console.log(blog);
 
-                                                            handleSpecificComments(blog._id)
-                                                        }} className='blog-container'>
-                                                            <div key={blog._id} className="blogbox-blog">
-                                                                <h2 id='ud-blog-title'>{blog.title}</h2>
-                                                                <p style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '10px', fontSize: '.9rem' }}>
-                                                                    <p id='ud-blog-date'>{blog.name}</p>
-                                                                    <p id='ud-blog-date'>{date(blog.updatedAt)}</p>
-                                                                </p>
+                                                                handleSpecificComments(blog._id)
+                                                            }} className='blog-container'>
+                                                                <div key={blog._id} className="blogbox-blog">
+                                                                    <h2 id='ud-blog-title'>{blog.title}</h2>
+                                                                    <p className='ud-blog-author-detail' style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '10px', fontSize: '.9rem' }}>
+                                                                        <p id='ud-blog-date'>{blog.name}</p>
+                                                                        <p id='ud-blog-date'>{date(blog.updatedAt)}</p>
+                                                                    </p>
 
-                                                            </div>
-                                                            <div className='blogbox-edit-delete'>
-                                                                <div className='blog-edit'>
-                                                                    <svg id='ud-svgs-small' xmlns="http://www.w3.org/2000/svg" width="800px" height="800px" viewBox="0 0 24 24" ><path d="m3.99 16.854-1.314 3.504a.75.75 0 0 0 .966.965l3.503-1.314a3 3 0 0 0 1.068-.687L18.36 9.175s-.354-1.061-1.414-2.122c-1.06-1.06-2.122-1.414-2.122-1.414L4.677 15.786a3 3 0 0 0-.687 1.068zm12.249-12.63 1.383-1.383c.248-.248.579-.406.925-.348.487.08 1.232.322 1.934 1.025.703.703.945 1.447 1.025 1.934.058.346-.1.677-.348.925L19.774 7.76s-.353-1.06-1.414-2.12c-1.06-1.062-2.121-1.415-2.121-1.415z" /></svg>
                                                                 </div>
-                                                                {deleteConfirmationPopup && (<div className='deletepopupblackscreen'></div>)}
-                                                                {deleteConfirmationPopup && (<div className='deleteConfirmationPopup'>
-                                                                    <div className="deleteConfirmationPopup-content"></div>
-                                                                    <div className="confirmation-buttons">
-                                                                        <button className='d-button d-cancel' onClick={setDeleteConfirmationPopup(false)}>Cancel</button>
-                                                                        <button className='d-button d-cancel' onClick={() => handleBlogDelete(blog._id)}>Delete</button>
+                                                                <div className='blogbox-edit-delete'>
+                                                                    <div className='blog-edit'>
+                                                                        <svg id='ud-svgs-small' xmlns="http://www.w3.org/2000/svg" width="800px" height="800px" viewBox="0 0 24 24" ><path d="m3.99 16.854-1.314 3.504a.75.75 0 0 0 .966.965l3.503-1.314a3 3 0 0 0 1.068-.687L18.36 9.175s-.354-1.061-1.414-2.122c-1.06-1.06-2.122-1.414-2.122-1.414L4.677 15.786a3 3 0 0 0-.687 1.068zm12.249-12.63 1.383-1.383c.248-.248.579-.406.925-.348.487.08 1.232.322 1.934 1.025.703.703.945 1.447 1.025 1.934.058.346-.1.677-.348.925L19.774 7.76s-.353-1.06-1.414-2.12c-1.06-1.062-2.121-1.415-2.121-1.415z" /></svg>
                                                                     </div>
-                                                                </div>)}
+                                                                    {deleteConfirmationPopup && (<div className='deletepopupblackscreen'></div>)}
+                                                                    {deleteConfirmationPopup && (<div className='deleteConfirmationPopup'>
+                                                                        <div className="deleteConfirmationPopup-content"></div>
+                                                                        <div className="confirmation-buttons">
+                                                                            <button className='d-button d-cancel' onClick={setDeleteConfirmationPopup(false)}>Cancel</button>
+                                                                            <button className='d-button d-cancel' onClick={() => handleBlogDelete(blog._id)}>Delete</button>
+                                                                        </div>
+                                                                    </div>)}
 
-                                                                <button onClick={() => setDeleteConfirmationPopup(true)} className='blog-delete'>
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" id="ud-svgs">
-                                                                        <path d="M24.2,12.193,23.8,24.3a3.988,3.988,0,0,1-4,3.857H12.2a3.988,3.988,0,0,1-4-3.853L7.8,12.193a1,1,0,0,1,2-.066l.4,12.11a2,2,0,0,0,2,1.923h7.6a2,2,0,0,0,2-1.927l.4-12.106a1,1,0,0,1,2,.066Zm1.323-4.029a1,1,0,0,1-1,1H7.478a1,1,0,0,1,0-2h3.1a1.276,1.276,0,0,0,1.273-1.148,2.991,2.991,0,0,1,2.984-2.694h2.33a2.991,2.991,0,0,1,2.984,2.694,1.276,1.276,0,0,0,1.273,1.148h3.1A1,1,0,0,1,25.522,8.164Zm-11.936-1h4.828a3.3,3.3,0,0,1-.255-.944,1,1,0,0,0-.994-.9h-2.33a1,1,0,0,0-.994.9A3.3,3.3,0,0,1,13.586,7.164Zm1.007,15.151V13.8a1,1,0,0,0-2,0v8.519a1,1,0,0,0,2,0Zm4.814,0V13.8a1,1,0,0,0-2,0v8.519a1,1,0,0,0,2,0Z"></path>
-                                                                    </svg>
-                                                                </button>
+                                                                    <button onClick={() => setDeleteConfirmationPopup(true)} className='blog-delete'>
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" id="ud-svgs">
+                                                                            <path d="M24.2,12.193,23.8,24.3a3.988,3.988,0,0,1-4,3.857H12.2a3.988,3.988,0,0,1-4-3.853L7.8,12.193a1,1,0,0,1,2-.066l.4,12.11a2,2,0,0,0,2,1.923h7.6a2,2,0,0,0,2-1.927l.4-12.106a1,1,0,0,1,2,.066Zm1.323-4.029a1,1,0,0,1-1,1H7.478a1,1,0,0,1,0-2h3.1a1.276,1.276,0,0,0,1.273-1.148,2.991,2.991,0,0,1,2.984-2.694h2.33a2.991,2.991,0,0,1,2.984,2.694,1.276,1.276,0,0,0,1.273,1.148h3.1A1,1,0,0,1,25.522,8.164Zm-11.936-1h4.828a3.3,3.3,0,0,1-.255-.944,1,1,0,0,0-.994-.9h-2.33a1,1,0,0,0-.994.9A3.3,3.3,0,0,1,13.586,7.164Zm1.007,15.151V13.8a1,1,0,0,0-2,0v8.519a1,1,0,0,0,2,0Zm4.814,0V13.8a1,1,0,0,0-2,0v8.519a1,1,0,0,0,2,0Z"></path>
+                                                                        </svg>
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        ))
+                                                    )}
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                        <div className="ud-comments">
+                                            <h2 className="ud-commentbox-heading">
+                                                Blog Comments
+                                            </h2>
+                                            <div className="comments-box">
+                                                {newComment.length === 0 ? (
+                                                    <p style={{ alignSelf: 'center', justifySelf: 'center', margin: '10px 0px' }}>No Data Found</p>
+                                                ) : (
+
+                                                    newComment.map((comment) => (
+                                                        <div key={comment._id} className="ud-commentbox">
+                                                            <div className="senderPicture">
+                                                                <img id='senderPicture' src={comment.senderPicture} alt="pic" />
+                                                            </div>
+                                                            <div className="ud-comment-and-senderdetail">
+                                                                <div className="ud-senderDetail">
+
+                                                                    <div className="ud-senderName">
+                                                                        <strong>{comment.senderName}</strong>
+                                                                    </div>
+
+                                                                    <div className="ud-date-time">
+                                                                        {formatDateTime(comment.updatedAt)}
+                                                                    </div>
+                                                                </div>
+                                                                <div className="ud-commentMessage">
+                                                                    {comment.comments}
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     ))
                                                 )}
                                             </div>
-
                                         </div>
                                     </div>
+                                </div>
+                            )}
 
-                                    <div className="ud-comments">
-                                        <h2 className="ud-commentbox-heading">
-                                            Blog Comments
-                                        </h2>
-                                        <div className="comments-box">
-                                            {newComment.length === 0 ? (
-                                                <p style={{ alignSelf: 'center', justifySelf: 'center', margin: '10px 0px' }}>No Data Found</p>
+                            {blogs && (
+                                <div className="ud-rightside-body-blogs">
+                                    <div className="ud-blogside-header">
+                                        <h1>Blogs</h1>
+                                        <div onClick={() => setIsVisible(!isVisible)} className='menubutton'><svg xmlns="http://www.w3.org/2000/svg" width="800px" height="800px" viewBox="0 0 16 16" id="ud-svgs2">
+                                            <path d="M8 12C9.10457 12 10 12.8954 10 14C10 15.1046 9.10457 16 8 16C6.89543 16 6 15.1046 6 14C6 12.8954 6.89543 12 8 12Z" />
+                                            <path d="M8 6C9.10457 6 10 6.89543 10 8C10 9.10457 9.10457 10 8 10C6.89543 10 6 9.10457 6 8C6 6.89543 6.89543 6 8 6Z" />
+                                            <path d="M10 2C10 0.89543 9.10457 -4.82823e-08 8 0C6.89543 4.82823e-08 6 0.895431 6 2C6 3.10457 6.89543 4 8 4C9.10457 4 10 3.10457 10 2Z" />
+                                        </svg></div>
+                                    </div>
+
+                                    <div className="ud-blogside-container">
+                                        <div className='ud-blogside-blogbox'>
+                                            {blogData.length === 0 ? (
+                                                <p style={{ alignSelf: 'center', justifySelf: 'center' }}>No Blog Available</p>
                                             ) : (
+                                                blogData.map((blog) => (
+                                                    <div onClick={() => {
+                                                        // console.log(blog);
 
-                                                newComment.map((comment) => (
-                                                    <div key={comment._id} className="ud-commentbox">
-                                                        <div className="senderPicture">
-                                                            <img id='senderPicture' src={comment.senderPicture} alt="pic" />
+                                                        handleSpecificComments(blog._id)
+                                                    }} className='blog-container'>
+                                                        <div key={blog._id} className="blogbox-blog">
+                                                            <div className="bp-textpart">
+                                                                <Link className='link' id='blog-title' to={`/readBlog/${blog._id}`} ><h2 style={{ margin: '0px' }} id='ud-blog-title'>{blog.title}</h2></Link>
+                                                                <p className='blog-posts-authordetail' >
+                                                                    <p className='ud-date-margin' id='blogposts-userPicture'><img src={blog.userPicture} alt="" /></p>
+                                                                    <p className='ud-date-margin' id='ud-blog-date'>{blog.name}</p>
+                                                                    <p className='ud-date-margin' id='ud-blog-date'>{date(blog.updatedAt)}</p>
+                                                                </p>
+                                                                <div className='description-div bp-description'>
+                                                                    <p id='blog-description' className='bp-description-p' dangerouslySetInnerHTML={{ __html: blog.introduction }}></p>
+                                                                </div>
+                                                                <Link className='link' id='blog-readmore' to={`/readBlog/${blog._id}`}>Read more</Link>
+                                                            </div>
+
                                                         </div>
-                                                        <div className="ud-comment-and-senderdetail">
-                                                            <div className="ud-senderDetail">
-
-                                                                <div className="ud-senderName">
-                                                                    <strong>{comment.senderName}</strong>
-                                                                </div>
-
-                                                                <div className="ud-date-time">
-                                                                    {formatDateTime(comment.updatedAt)}
-                                                                </div>
+                                                        <div className='blogbox-edit-delete'>
+                                                            <div className='blog-edit'>
+                                                                <svg id='ud-svgs-small' xmlns="http://www.w3.org/2000/svg" width="800px" height="800px" viewBox="0 0 24 24" ><path d="m3.99 16.854-1.314 3.504a.75.75 0 0 0 .966.965l3.503-1.314a3 3 0 0 0 1.068-.687L18.36 9.175s-.354-1.061-1.414-2.122c-1.06-1.06-2.122-1.414-2.122-1.414L4.677 15.786a3 3 0 0 0-.687 1.068zm12.249-12.63 1.383-1.383c.248-.248.579-.406.925-.348.487.08 1.232.322 1.934 1.025.703.703.945 1.447 1.025 1.934.058.346-.1.677-.348.925L19.774 7.76s-.353-1.06-1.414-2.12c-1.06-1.062-2.121-1.415-2.121-1.415z" /></svg>
                                                             </div>
-                                                            <div className="ud-commentMessage">
-                                                                {comment.comments}
-                                                            </div>
+                                                            {deleteConfirmationPopup && (<div className='deletepopupblackscreen'></div>)}
+                                                            {deleteConfirmationPopup && (<div className='deleteConfirmationPopup'>
+                                                                <div className="deleteConfirmationPopup-content"></div>
+                                                                <div className="confirmation-buttons">
+                                                                    <button className='d-button d-cancel' onClick={setDeleteConfirmationPopup(false)}>Cancel</button>
+                                                                    <button className='d-button d-cancel' onClick={() => handleBlogDelete(blog._id)}>Delete</button>
+                                                                </div>
+                                                            </div>)}
+
+                                                            <button onClick={() => setDeleteConfirmationPopup(true)} className='blog-delete'>
+                                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" id="ud-svgs">
+                                                                    <path d="M24.2,12.193,23.8,24.3a3.988,3.988,0,0,1-4,3.857H12.2a3.988,3.988,0,0,1-4-3.853L7.8,12.193a1,1,0,0,1,2-.066l.4,12.11a2,2,0,0,0,2,1.923h7.6a2,2,0,0,0,2-1.927l.4-12.106a1,1,0,0,1,2,.066Zm1.323-4.029a1,1,0,0,1-1,1H7.478a1,1,0,0,1,0-2h3.1a1.276,1.276,0,0,0,1.273-1.148,2.991,2.991,0,0,1,2.984-2.694h2.33a2.991,2.991,0,0,1,2.984,2.694,1.276,1.276,0,0,0,1.273,1.148h3.1A1,1,0,0,1,25.522,8.164Zm-11.936-1h4.828a3.3,3.3,0,0,1-.255-.944,1,1,0,0,0-.994-.9h-2.33a1,1,0,0,0-.994.9A3.3,3.3,0,0,1,13.586,7.164Zm1.007,15.151V13.8a1,1,0,0,0-2,0v8.519a1,1,0,0,0,2,0Zm4.814,0V13.8a1,1,0,0,0-2,0v8.519a1,1,0,0,0,2,0Z"></path>
+                                                                </svg>
+                                                            </button>
                                                         </div>
                                                     </div>
                                                 ))
                                             )}
                                         </div>
+
+                                        <div className="ud-blogside-comments">
+                                            <h2 className="ud-commentbox-heading">
+                                                Comments
+                                            </h2>
+                                            <div className="comments-box">
+                                                {newComment.length === 0 ? (
+                                                    <p style={{ alignSelf: 'center', justifySelf: 'center', margin: '10px 0px' }}>No Data Found</p>
+                                                ) : (
+
+                                                    newComment.map((comment) => (
+                                                        <div key={comment._id} className="ud-commentbox">
+                                                            <div className="senderPicture">
+                                                                <img id='senderPicture' src={comment.senderPicture} alt="pic" />
+                                                            </div>
+                                                            <div className="ud-comment-and-senderdetail">
+                                                                <div className="ud-senderDetail">
+
+                                                                    <div className="ud-senderName">
+                                                                        <strong>{comment.senderName}</strong>
+                                                                    </div>
+
+                                                                    <div className="ud-date-time">
+                                                                        {formatDateTime(comment.updatedAt)}
+                                                                    </div>
+                                                                </div>
+                                                                <div className="ud-commentMessage">
+                                                                    {comment.comments}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    ))
+                                                )}
+                                            </div>
+                                        </div>
+
+
                                     </div>
                                 </div>
-                            </div>
                             )}
 
-                            { blogs && (
-                                <div className="ud-rightside-body-blogs">
-                                    
+                            {connections && (
+                                <div className="ud-rightside-body-connections">
+                                    <div className="section-header ud-connections-header">
+                                        <h1>Connections</h1>
+                                        <div onClick={() => setIsVisible(!isVisible)} className='menubutton'><svg xmlns="http://www.w3.org/2000/svg" width="800px" height="800px" viewBox="0 0 16 16" id="ud-svgs2">
+                                            <path d="M8 12C9.10457 12 10 12.8954 10 14C10 15.1046 9.10457 16 8 16C6.89543 16 6 15.1046 6 14C6 12.8954 6.89543 12 8 12Z" />
+                                            <path d="M8 6C9.10457 6 10 6.89543 10 8C10 9.10457 9.10457 10 8 10C6.89543 10 6 9.10457 6 8C6 6.89543 6.89543 6 8 6Z" />
+                                            <path d="M10 2C10 0.89543 9.10457 -4.82823e-08 8 0C6.89543 4.82823e-08 6 0.895431 6 2C6 3.10457 6.89543 4 8 4C9.10457 4 10 3.10457 10 2Z" />
+                                        </svg></div>
+                                    </div>
+                                    <div className="ud-followersdetail-container">
+                                        <div className="total-follower-value">
+                                            <p className="total-value total-follower">Total Followers : <strong className='total-follower-number'>{numeral(followerDetails.length).format('0.a').toUpperCase()}</strong></p>
+                                            <p className="total-value total-following">Total Following : <strong className='total-follower-number'>{numeral(followingDetails.length).format('0.a').toUpperCase()}</strong></p>
+                                        </div>
+                                    </div>
+
                                 </div>
                             )}
                         </div>

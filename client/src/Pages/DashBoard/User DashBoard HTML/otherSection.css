@@ -1,0 +1,147 @@
+
+.ud-rightside-body-blogs {
+    color: rgb(43, 42, 42);
+    /* border: solid; */
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 80%;
+    overflow: scroll;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    height: auto;
+}
+
+.ud-rightside-bodys::-webkit-scrollbar {
+    display: none;
+}
+
+.ud-blogside-container{
+    display: flex;
+    flex-direction: row;
+}
+
+.ud-blogside-header,.section-header{
+    width: 100%;
+    height: 60px;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.ud-blogside-blogbox{
+    width: 65%;
+    padding: 0 10px;
+    overflow: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    height: calc(100vh - 100px);
+    max-height: auto;
+}
+
+.ud-date-margin{
+    margin: 2px 0;
+    margin-right: 15px;
+}
+
+.link{
+    width: fit-content;
+    display: inline-block;
+}
+
+.ud-blogside-comments{
+    margin-top: 10px;
+    padding-left: 10px;
+    width: 35%;
+    height: calc(100vh - 100px);
+    overflow: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+/* connection section */
+
+.ud-rightside-body-connections {
+    color: rgb(43, 42, 42);
+    /* border: solid; */
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 80%;
+    overflow: scroll;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    height: auto;
+}
+
+.ud-rightside-connections::-webkit-scrollbar {
+    display: none;
+}
+
+.ud-followersdetail-container{
+    width: 100%;
+    padding: 0 10px;
+    overflow: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    height: calc(100vh - 100px);
+    max-height: auto;
+}
+
+.total-follower-value{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.total-value{
+    margin-right: 30px;
+}
+
+#ud-blog-title{
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+.blogbox-blog{
+    overflow: hidden;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+
+
+
+
+
+
+
+
+@media (max-width: 1280px){
+    .ud-rightside-body-blogs{
+        width: 100%;
+    }
+    .ud-rightside-body-connections{
+        width: 100%;
+    }
+    
+    
+}
+
+@media (max-width:960px){
+    .ud-blogside-container{
+        display: flex;
+        flex-direction: column;
+        height: auto;
+    }
+    .ud-blogside-blogbox{
+        width: 90%;
+        align-self: center;
+    }
+    .ud-blogside-comments{
+        height: auto;
+        width: 90%;
+        align-self: center;
+    }
+}
