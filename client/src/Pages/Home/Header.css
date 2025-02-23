@@ -313,10 +313,22 @@ body {
 
 
 @media (max-width: 700px){
+    #logo{
+        padding-top: 0;
+    }
     #buttons-div{
         padding-right: 0;
     }
     #create-your-blog-button{
         display: none;
+    }
+}
+
+@media (max-width:400px){
+    #logo{
+        font-size: 1.6rem;
+    }
+    #nav-bar{
+        height: 60px;
     }
 }
