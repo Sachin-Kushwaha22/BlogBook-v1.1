@@ -8,7 +8,7 @@ const requestIp = require('request-ip')
 
 async function handleBlogPost(req, res) {
 
-    const { userid, userPicture, personalDetail, title, content, } = req.body
+    const { userid, userPicture, personalDetail, title, introduction, content, } = req.body
     console.log(personalDetail);
 
     try {
@@ -20,6 +20,7 @@ async function handleBlogPost(req, res) {
             linkedin: personalDetail.linkedin,
             twitter: personalDetail.twitter,
             title,
+            introduction,
             description: content,
         });
         res.status(200).json({ 'message': 'blog saved successfully', 'status': 200 });

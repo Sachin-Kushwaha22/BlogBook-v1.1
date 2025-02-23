@@ -29,6 +29,10 @@ const blogScheme = new mongoose.Schema({
         type: String,
         required: true,
     },
+    introduction:{
+        type:String,
+        required:true,
+    },
     description: {
         type: String,
         required: true,

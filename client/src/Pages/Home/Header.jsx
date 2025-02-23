@@ -8,15 +8,19 @@ import { toast, } from 'react-toastify'
 import { Oval } from 'react-loader-spinner';
 import axios from 'axios';
 import Profile from '../../Pages/Profile/profile'
+import DarkMode from './DarkMode/DarkMode'
 
 function header() {
 
-
     const { loginWithRedirect, isAuthenticated, user, logout } = useAuth0();
 
+
+
     useEffect(() => {
+
+
         saveUser()
-        
+
     }, [isAuthenticated, user])
 
     const saveUser = async () => {
@@ -24,9 +28,9 @@ function header() {
             // console.log(user);
             if (isAuthenticated && user) {
                 localStorage.setItem('picture', user.picture)
-             } else {
-                 localStorage.removeItem('picture')
-             }
+            } else {
+                localStorage.removeItem('picture')
+            }
 
             try {
                 // console.log(user);
@@ -49,10 +53,10 @@ function header() {
     const handleSignInGoogle = () => {
         setLoginLoading(true)
         loginWithRedirect()
-        LocalStorage.setItem('picture',user.picture)
+        LocalStorage.setItem('picture', user.picture)
     }
 
-    
+
 
     const ref = useRef(null)
     const navigate = useNavigate()
@@ -87,16 +91,21 @@ function header() {
             <nav id='nav-bar'>
 
                 <div>
-                    <div id='logo'>BLOGBOOK</div>
+                    <div onClick={() => navigate('/')} id='logo'>BLOGBOOK</div>
                 </div>
 
                 <div>
                     <div id='buttons-div'>
-                        <div style={{ display: isAuthenticated && user ? 'none' : 'block' }} onClick={handleSignInGoogle} id='signin' disabled={loginLoading}>
+                        <DarkMode />
+
+
+                        <div style={{ display: isAuthenticated && user ? 'none' : 'block' }} onClick={handleSignInGoogle} disabled={loginLoading}>
                             {loginLoading ? (
-                                <Oval type="Oval" color="#ffffff" height={30} width={30} strokeWidth={4}
-                                    secondaryColor="#ffffff95"
-                                    ariaLabel="oval-loading" />
+                                <div className='signin-loading'>
+                                    <Oval type="Oval" color={theme === "light" ? "#06529d" : "#ffffff"} height={25} width={25} strokeWidth={4}
+                                        secondaryColor={theme === "light" ? "#89c4ff" : "#ffffff95"}
+                                        ariaLabel="oval-loading" />
+                                </div>
                             ) : (
                                 <div id='signin'>
                                     SIGN IN
@@ -111,10 +120,10 @@ function header() {
 
                         </div>
 
-                        <div className="profileclass">
-                            <div style={{ display: isAuthenticated && user ? 'block' : 'none' , margin:'20px'}} >
-                                <Profile />
-                            </div>
+                        <div style={{ display: isAuthenticated && user ? 'block' : 'none' }} className="profileclass">
+
+                            <Profile />
+
                         </div>
 
 

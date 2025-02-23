@@ -22,11 +22,10 @@ const setupSocket = require("./socket"); // Import Socket.IO setup
 
 const app = express()
 const server = http.createServer(app); // Create HTTP server
-//mongodb+srv://sachin8n:sachin2219@nodetesting01.n48lb.mongodb.net/
-//mongodb+srv://sachin8n:<db_password>@nodetesting01.n48lb.mongodb.net/?retryWrites=true&w=majority&appName=NodeTesting01
-connectToDatabase("mongodb+srv://sachin8n:sachin2219@nodetesting01.n48lb.mongodb.net/authentication-practise-database")
+
+connectToDatabase(process.env.DATABASE_URL)
     .then(() => { console.log("Connected to database !!") })
-    .catch((err) => { console.log("Error connecting to database !!", err) })
+    .catch((error) => { console.log("Error connecting to database !!", error) })
 
 app.use(
     cors({

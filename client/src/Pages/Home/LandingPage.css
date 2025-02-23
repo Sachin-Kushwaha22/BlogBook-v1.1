@@ -1,15 +1,37 @@
-.landing-page{
-    padding: 10px 60px;
-    padding-top: 100px;
-    background-color: #27282d;
-    color: white;
-    min-height: 35vh;
-}
-.intro{
-    margin-left: 150px;
-    margin-right: 150px;
+/* Dark Theme (default) */
+:root {
+    --bg-color: #27282d;
+    --text-color: #ffffff;
+    --logo-color: rgb(255, 128, 0);
+    /* --button-bg: #06529d; */
 }
 
+/* Light Theme */
+[data-theme="light"] {
+    --bg-color: #ffffff;
+    --nav-bg-color: #ffffff;
+    --logo-color: rgb(255, 128, 0);
+    --text-color: #39393a;
+    /* --button-bg: #1e88e5; */
+}
+
+
+.landing-page{
+    padding-top: 100px;
+    background-color:var(--bg-color);
+    color: var(--text-color);
+    /* min-height: 35vh; */
+    width: 100%;
+    text-align: justify;
+}
+
+.blogbookintro{
+    width: 70%;
+    display: flex;
+    align-self: center;
+    justify-self: center;
+    font-size: 1.5rem;
+}
 #blogbook{
     font-size: 3rem;
     margin: 0;
@@ -17,6 +39,78 @@
     line-height:0px;
 }
 
-#intro-para{
-    font-size: 1.5rem;
+.button-wrapper{
+    padding: 20px 0;
+}
+
+#create-your-blog-button-mobile {
+    font-family: "Oswald", sans-serif;
+    font-size: 1.1rem;
+    padding: 10px;
+    background-color: rgb(255, 143, 15);
+    border: none;
+    outline: none;
+    border-radius: 2px;
+    color: white;
+    width: 180px;
+    cursor: pointer;
+    transition: 0.2s;
+    display: flex;
+    align-items: center;
+    justify-self: center;
+    justify-content: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#create-your-blog-button-mobile:hover {
+    background-color: rgb(253, 155, 44);
+    color: white;
+    transform: scale(1.05, 1.05);
+    transition: 0.2s;
+}
+
+
+@media (max-width: 800px){
+    .landing-page{
+        width: 100%;
+    }
+    .blogbookintro{
+        width: 85%;
+        font-size: 1.2rem;
+    }
+    #blogbook{
+        font-size: 2.2rem;
+    }
+    .mobile-button{
+        display: none;
+    }
+    
+}
+
+
+@media (min-width: 701px){
+
+    #create-your-blog-button-mobile{
+        display: none;
+    }
+}
+
+@media (max-width: 700px){
+    #create-your-blog-button-mobile{
+        display: flex;
+    }
+}
+
+@media (max-width: 440px){
+    .landing-page{
+        width: 100%;
+    }
+    .blogbookintro{
+        width: 85%;
+        font-size: 1.1rem;
+    }
+    #blogbook{
+        font-size: 2.2rem;
+    }
+    
 }

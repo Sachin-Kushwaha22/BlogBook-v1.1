@@ -45,16 +45,21 @@ function BlogPosts() {
                 ) : (
                     blogData.map((post) => (
                         <div key={post._id} className="blog-post2">
-                            <Link id='blog-title' to={`/readBlog/${post._id}`} ><h2 id='blog-title'>{post.title}</h2></Link>
-                            <p className='blog-posts-authordetail' >
-                                <p id='blogposts-userPicture'><img src={post.userPicture} alt="" /></p>
-                                <p id='blog-date'>{post.name}</p>
-                                <p id='blog-date'>{date(post.updatedAt)}</p>
-                            </p>
-                            <div className='description-div'>
-                                <p id='blog-description' dangerouslySetInnerHTML={{ __html: post.description }}></p>
+                            <div className="bp-img">
+
                             </div>
-                            <Link id='blog-readmore' to={`/readBlog/${post._id}`}>Read more</Link>
+                            <div className="bp-textpart">
+                                <Link id='blog-title' to={`/readBlog/${post._id}`} ><h2 id='blog-title'>{post.title}</h2></Link>
+                                <p className='blog-posts-authordetail' >
+                                    <p id='blogposts-userPicture'><img src={post.userPicture} alt="" /></p>
+                                    <p id='blog-date'>{post.name}</p>
+                                    <p id='blog-date'>{date(post.updatedAt)}</p>
+                                </p>
+                                <div className='description-div bp-description'>
+                                <p id='blog-description' className='bp-description-p' dangerouslySetInnerHTML={{ __html: post.introduction }}></p>
+                            </div>
+                                <Link id='blog-readmore' to={`/readBlog/${post._id}`}>Read more</Link>
+                            </div>
                         </div>
                     ))
                 )}

@@ -91,13 +91,12 @@
     padding: 5px 10px;
     width: 100%;
     border-radius: 5px;
+    cursor: pointer;
 }
 
 .ud-option:hover {
-    background-color: #06529d;
-    color: white;
-    fill: white;
-    cursor: pointer;
+    /* background-color: #a6a7a98f !important; */
+    outline: solid 1px #5b5a5a;
 }
 
 .ud-rightside-body {
@@ -173,7 +172,7 @@
     align-content: center;
     justify-content: space-between;
     width: 20%;
-    height: auto;
+    height: 90px;
     /* border: solid; */
 }
 
@@ -184,6 +183,8 @@
     padding: 20px;
     background-color: #bcdaef;
     border-radius: 50%;
+    height: 70px;
+    width: 70px;
     /* border:solid 1px #01477d81;
     box-shadow: inset 0px 0px 5px 0px; */
 }
@@ -199,14 +200,17 @@
     font-weight: 100;
     color: #a9a9a9;
     text-align: right;
+    margin: 0;
 }
 
 .databox-number {
+    margin: 0;
     font-size: 2.3rem;
     text-align: right;
 }
 
 .databox-analytics-value {
+    margin: 0;
     display: flex;
     flex-direction: row;
     align-items: center;
