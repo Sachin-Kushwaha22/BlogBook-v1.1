@@ -1,5 +1,5 @@
 const config = {
-    serverUrl: 'http://localhost:9010'
+    serverUrl: 'https://blogbook-v1-backend.onrender.com'
 };
 
 export default config
