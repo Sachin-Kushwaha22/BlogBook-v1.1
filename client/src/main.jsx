@@ -20,7 +20,7 @@ createRoot(document.getElementById('root')).render(
         domain="dev-wjqmejczh66n5576.us.auth0.com"
         clientId="uoAnMJMTGEe2xWAHnlO0NeEWuBt7UwMc"
         authorizationParams={{
-          redirect_uri: 'https://blogbook-v1.onrender.com'
+          redirect_uri: 'https://blogbook-v1-1.onrender.com'
         }}
       >
 
