@@ -1,5 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Funnel+Display:wght@300..800&family=Geist+Mono:wght@100..900&family=Host+Grotesk:ital,wght@0,300..800;1,300..800&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Oswald:wght@200..700&family=Pacifico&family=Rajdhani:wght@300;400;500;600;700&family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap');
 
+
+[ud-select-option="true"] {
+    background-color: rgb(0, 62, 100);
+    color: white;
+    fill: white;
+}
+
+[ud-select-option="false"] {
+    /* background-color: white; */
+
+}
+
+
 .userDashboard {
     background-color: #ffffff;
     font-family: "Funnel Display", serif;
@@ -275,11 +288,15 @@
 .ud-bloglist {
     width: 100%;
     background-color: rgb(255, 255, 255);
+    
+}
+
+.blogbox{
     overflow: auto;
     scrollbar-width: none;
     -ms-overflow-style: none;
-    height: auto;
-    /* max-height: 400px; */
+    height: 400px;
+    max-height: auto;
 }
 
 .ud-bloglist::-webkit-scrollbar {
@@ -439,6 +456,7 @@
     font-size: 1.2rem;
     font-family: 'Poppins', sans-serif;
 }
+
 
 
 
@@ -1368,3 +1386,5 @@
     }
 
 }
+
+

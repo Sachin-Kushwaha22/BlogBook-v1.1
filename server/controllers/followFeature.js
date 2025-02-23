@@ -76,8 +76,23 @@ const handleCheckFollower = async(req, res) => {
     }
 }
 
+const handleGetFollowerDetail = async(req, res) => {
+    const { id } = req.params
+
+    try {
+        const followDetail = await FOLLOW.find({ authorId: id, isFollowing: true }).sort({ updatedAt: -1})
+        if(!followDetail) return res.status(404).json({ message: 'Data Not found'})
+
+        return res.status(200).json(followDetail)
+
+    } catch (error) {
+        console.log('error from handlegetfollowerdetail', error);
+    }
+}
+
 module.exports={
     handleFollower,
     handleFollowerUnfollow,
-    handleCheckFollower
+    handleCheckFollower,
+    handleGetFollowerDetail,
 }

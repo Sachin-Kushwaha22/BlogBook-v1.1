@@ -1,6 +1,7 @@
 import react, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import './UserDashBoard.css'
+
 import { toast } from 'react-toastify'
 import { useAuth0 } from '@auth0/auth0-react'
 import config from '../../../config'
@@ -10,7 +11,7 @@ import numeral from 'numeral';
 
 function UserDashBoard() {
     const navigate = useNavigate('')
-    const { isAuthenticated, user } = useAuth0()
+    const { isAuthenticated, user, logout } = useAuth0()
     const [userData, setUserData] = useState()
     const [blogData, setBlogData] = useState([])
     const [commentsData, setCommentsData] = useState([])
@@ -18,6 +19,15 @@ function UserDashBoard() {
     const [isVisible, setIsVisible] = useState(window.matchMedia("(max-width: 768px)").matches)
     const [newComment, setNewComment] = useState([])
     const [deleteConfirmationPopup, setDeleteConfirmationPopup] = useState(false)
+    const [followerDetails, setFollowerDetails] = useState([])
+
+    const [dashboard, setDashboard] = useState(false)
+    const [blogs, setBlogs] = useState(false)
+    const [connections, setConnections] = useState(false)
+    const [earning, setEarning] = useState(false)
+    const [billing, setBilling] = useState(false)
+    const [help, setHelp] = useState(false)
+
 
     const checkUserAuth = async () => {
         try {
@@ -57,6 +67,16 @@ function UserDashBoard() {
                 console.log("new comment", newComment);
             }
 
+            
+            const followerDetails = user.sub && await axios.get(`${config.serverUrl}/follow/api/getFollower/${user.sub}`,{
+                withCredentials:true,
+            }) 
+
+            if(followerDetails.status == 200){
+                console.log(followerDetails.data);
+                setFollowerDetails(followerDetails.data)
+            }
+
 
 
         } catch (error) {
@@ -72,7 +92,71 @@ function UserDashBoard() {
             fetchData();
         }
 
+        const option = localStorage.getItem('option')
+        switch (option) {
+            case 'dashboard':
+                setDashboard(true)
+                setBlogs(false)
+                setConnections(false)
+                setEarning(false)
+                setBilling(false)
+                setHelp(false)
+                localStorage.setItem('option', 'dashboard')
+                break;
+            case 'blogs':
+                setBlogs(true)
+                setDashboard(false)
+                setConnections(false)
+                setEarning(false)
+                setBilling(false)
+                setHelp(false)
+                localStorage.setItem('option', 'blogs')
+                break;
+            case 'connections':
+                setConnections(true)
+                setDashboard(false)
+                setBlogs(false)
+                setEarning(false)
+                setBilling(false)
+                setHelp(false)
+                localStorage.setItem('option', 'connections')
+                break;
+            case 'earning':
+                setConnections(false)
+                setDashboard(false)
+                setBlogs(false)
+                setEarning(true)
+                setBilling(false)
+                setHelp(false)
+                localStorage.setItem('option', 'earning')
+                break;
 
+            case 'billing':
+                setConnections(false)
+                setDashboard(false)
+                setBlogs(false)
+                setEarning(false)
+                setBilling(true)
+                setHelp(false)
+                localStorage.setItem('option', 'billing')
+                break;
+            case 'help':
+                setConnections(false)
+                setDashboard(false)
+                setBlogs(false)
+                setEarning(false)
+                setBilling(false)
+                setHelp(true)
+                localStorage.setItem('option', 'help')
+                break;
+
+            default:
+                setDashboard(true)
+                setBlogs(false)
+                setConnections(false)
+                localStorage.setItem('option', 'dashboard')
+                break;
+        }
     }, [isAuthenticated, user])
 
     const handleLogout = async () => {
@@ -85,6 +169,7 @@ function UserDashBoard() {
             if (response.status == 200) {
                 setTimeout(() => {
                     toast.info("You are Logged Out")
+                    logout()
                     navigate('/')
                 }, 1500);
             }
@@ -183,13 +268,29 @@ function UserDashBoard() {
 
                                 <div className="ud-sidebar-options">
                                     <div className='ud-options-list'>
-                                        <div className='ud-option'>
+                                        <div onClick={() => {
+                                            setDashboard(true)
+                                            setBlogs(false)
+                                            setConnections(false)
+                                            setEarning(false)
+                                            setBilling(false)
+                                            setHelp(false)
+                                            localStorage.setItem('option', 'dashboard')
+                                        }} className='ud-option ud-dashboard' ud-select-option={dashboard ? "true" : "false"}>
                                             <svg id='ud-svgs2' xmlns="http://www.w3.org/2000/svg" width="800px" height="800px" viewBox="0 0 24 24" >
                                                 <path d="M9.94513 2.25H14.0549C15.4225 2.24998 16.5248 2.24996 17.3918 2.36652C18.2919 2.48754 19.0497 2.74643 19.6517 3.34835C20.2536 3.95027 20.5125 4.70814 20.6335 5.60825C20.75 6.47522 20.75 7.57754 20.75 8.94513V15.8924C20.75 17.179 20.7501 18.2296 20.6366 19.0061C20.5224 19.7871 20.2572 20.5614 19.4836 20.9374C18.7099 21.3135 17.9372 21.0436 17.2525 20.6508C16.5719 20.2604 15.7458 19.6113 14.7342 18.8164L14.0079 18.2457C13.4003 17.7683 12.9961 17.4523 12.6603 17.2481C12.3419 17.0543 12.1574 17.0078 12 17.0078C11.8426 17.0078 11.6581 17.0543 11.3397 17.2481C11.0039 17.4523 10.5997 17.7683 9.99208 18.2458L9.26589 18.8163C8.25424 19.6112 7.42814 20.2604 6.74748 20.6508C6.06284 21.0436 5.29011 21.3135 4.51644 20.9374C3.74277 20.5614 3.47757 19.7871 3.36342 19.0061C3.24994 18.2296 3.24997 17.179 3.25 15.8924L3.25 8.94513C3.24998 7.57754 3.24996 6.47522 3.36652 5.60825C3.48754 4.70814 3.74644 3.95027 4.34835 3.34835C4.95027 2.74643 5.70814 2.48754 6.60825 2.36652C7.47522 2.24996 8.57754 2.24998 9.94513 2.25ZM6.80812 3.85315C6.07435 3.9518 5.68577 4.13225 5.40901 4.40901C5.13225 4.68577 4.9518 5.07435 4.85315 5.80812C4.75159 6.56347 4.75 7.56458 4.75 9V15.8276C4.75 17.1948 4.75196 18.1344 4.84766 18.7891C4.94458 19.4524 5.10153 19.554 5.17215 19.5884C5.24277 19.6227 5.41967 19.6833 6.00106 19.3497C6.57504 19.0205 7.31508 18.4415 8.3901 17.5968L9.10023 17.0389C9.66367 16.5961 10.1384 16.2231 10.56 15.9666C11.0077 15.6943 11.4657 15.5078 12 15.5078C12.5343 15.5078 12.9923 15.6943 13.44 15.9666C13.8617 16.2231 14.3364 16.5961 14.8998 17.0389L15.6099 17.5968C16.6849 18.4415 17.425 19.0205 17.9989 19.3497C18.5803 19.6833 18.7572 19.6227 18.8279 19.5884C18.8985 19.554 19.0554 19.4524 19.1523 18.7891C19.248 18.1344 19.25 17.1948 19.25 15.8276V9C19.25 7.56458 19.2484 6.56347 19.1469 5.80812C19.0482 5.07435 18.8678 4.68577 18.591 4.40901C18.3142 4.13225 17.9257 3.9518 17.1919 3.85315C16.4365 3.75159 15.4354 3.75 14 3.75H10C8.56459 3.75 7.56347 3.75159 6.80812 3.85315Z" />
                                             </svg>
                                             Dashboard
                                         </div>
-                                        <div className='ud-option'>
+                                        <div onClick={() => {
+                                            setDashboard(false)
+                                            setBlogs(true)
+                                            setConnections(false)
+                                            setEarning(false)
+                                            setBilling(false)
+                                            setHelp(false)
+                                            localStorage.setItem('option', 'blogs')
+                                        }} className='ud-option' ud-select-option={blogs ? "true" : "false"}>
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" id="ud-svgs2">
                                                 <g>
                                                     <path d="M26 12h-2V8a5 5 0 0 0-5-5H8a5 5 0 0 0-5 5v12a1 1 0 0 0 2 0V8a3 3 0 0 1 3-3h11a3 3 0 0 1 3 3v5a1 1 0 0 0 1 1h3a1 1 0 0 1 1 1v9a3 3 0 0 1-3 3H8a3 3 0 0 1-3-3 1 1 0 0 0-2 0 5 5 0 0 0 5 5h16a5 5 0 0 0 5-5v-9a3 3 0 0 0-3-3Z"></path>
@@ -198,14 +299,30 @@ function UserDashBoard() {
                                             </svg>
                                             Blogs
                                         </div>
-                                        <div className='ud-option'>
+                                        <div onClick={() => {
+                                            setDashboard(false)
+                                            setBlogs(false)
+                                            setConnections(true)
+                                            setEarning(false)
+                                            setBilling(false)
+                                            setHelp(false)
+                                            localStorage.setItem('option', 'connections')
+                                        }} className='ud-option' ud-select-option={connections ? "true" : "false"}>
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" id="ud-svgs2">
                                                 <path fill="none" d="M0 0h24v24H0V0z"></path>
                                                 <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5s-3 1.34-3 3 1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V18c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-1.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05.02.01.03.03.04.04 1.14.83 1.93 1.94 1.93 3.41V18c0 .35-.07.69-.18 1H22c.55 0 1-.45 1-1v-1.5c0-2.33-4.67-3.5-7-3.5z"></path>
                                             </svg>
                                             Connections
                                         </div>
-                                        <div className='ud-option'>
+                                        <div onClick={() => {
+                                            setConnections(false)
+                                            setDashboard(false)
+                                            setBlogs(false)
+                                            setEarning(true)
+                                            setBilling(false)
+                                            setHelp(false)
+                                            localStorage.setItem('option', 'earning')
+                                        }} className='ud-option' ud-select-option={earning ? "true" : "false"}>
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" id="ud-svgs2">
                                                 <path d="M30.92 1.62a1 1 0 0 0-.54-.54A1 1 0 0 0 30 1H26a1 1 0 0 0 0 2h1.59L26.23 4.36 21.74 9.75 16.45 7.11a1 1 0 0 0-1.16.19L9.9 12.74l-4.39-2.6a1 1 0 0 0-1.06 0l-3 2a1 1 0 0 0 1.1 1.66L5 12.18l4.52 2.68a1.06 1.06 0 0 0 .51.14 1 1 0 0 0 .71-.3L16.2 9.22l5.35 2.67a1 1 0 0 0 1.22-.25l4.94-5.93L29 4.41V6a1 1 0 0 0 2 0V2A1 1 0 0 0 30.92 1.62zM8 21H2a1 1 0 0 0-1 1v3H9V22A1 1 0 0 0 8 21zM1 30a1 1 0 0 0 1 1H8a1 1 0 0 0 1-1V27H1zM19 17H13a1 1 0 0 0-1 1v3h8V18A1 1 0 0 0 19 17zM12 30a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V27H12z"></path>
                                                 <rect width="8" height="2" x="12" y="23"></rect>
@@ -215,13 +332,29 @@ function UserDashBoard() {
                                             </svg>
                                             Earning
                                         </div>
-                                        <div className='ud-option'>
+                                        <div onClick={() => {
+                                            setConnections(false)
+                                            setDashboard(false)
+                                            setBlogs(false)
+                                            setEarning(false)
+                                            setBilling(true)
+                                            setHelp(false)
+                                            localStorage.setItem('option', 'billing')
+                                        }} className='ud-option' ud-select-option={billing ? "true" : "false"}>
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" clip-rule="evenodd" id="ud-svgs2">
                                                 <path d="M11 5H6a1 1 0 0 1 0-2h12a1 1 0 0 1 0 2h-3a4.97 4.97 0 0 1 .9 2H18a1 1 0 0 1 0 2h-2.1a5.002 5.002 0 0 1-4.9 4h-.586l6.293 6.293a1 1 0 0 1-1.414 1.414l-8-8A1 1 0 0 1 8 11h3a3 3 0 0 0 2.829-2H6a1 1 0 0 1 0-2h7.829A3 3 0 0 0 11 5Z"></path>
                                             </svg>
                                             Billing
                                         </div>
-                                        <div className='ud-option'>
+                                        <div onClick={() => {
+                                            setConnections(false)
+                                            setDashboard(false)
+                                            setBlogs(false)
+                                            setEarning(false)
+                                            setBilling(false)
+                                            setHelp(true)
+                                            localStorage.setItem('option', 'help')
+                                        }} className='ud-option' ud-select-option={help ? "true" : "false"}>
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" id="ud-svgs2">
                                                 <path d="M8,2 C11.3137085,2 14,4.6862915 14,8 C14,11.3137085 11.3137085,14 8,14 C4.6862915,14 2,11.3137085 2,8 C2,4.6862915 4.6862915,2 8,2 Z M8,3 C5.23857625,3 3,5.23857625 3,8 C3,10.7614237 5.23857625,13 8,13 C10.7614237,13 13,10.7614237 13,8 C13,5.23857625 10.7614237,3 8,3 Z M8,10.5 C8.41421356,10.5 8.75,10.8357864 8.75,11.25 C8.75,11.6642136 8.41421356,12 8,12 C7.58578644,12 7.25,11.6642136 7.25,11.25 C7.25,10.8357864 7.58578644,10.5 8,10.5 Z M8,4.5 C9.1045695,4.5 10,5.3954305 10,6.5 C10,7.23053233 9.7882219,7.63969063 9.24604859,8.20790744 L8.98196082,8.47745399 C8.60450815,8.87101977 8.5,9.08310002 8.5,9.5 C8.5,9.77614237 8.27614237,10 8,10 C7.72385763,10 7.5,9.77614237 7.5,9.5 C7.5,8.76946767 7.7117781,8.36030937 8.25395141,7.79209256 L8.51803918,7.52254601 C8.89549185,7.12898023 9,6.91689998 9,6.5 C9,5.94771525 8.55228475,5.5 8,5.5 C7.44771525,5.5 7,5.94771525 7,6.5 C7,6.77614237 6.77614237,7 6.5,7 C6.22385763,7 6,6.77614237 6,6.5 C6,5.3954305 6.8954305,4.5 8,4.5 Z"></path>
                                             </svg>
@@ -231,7 +364,8 @@ function UserDashBoard() {
                                 </div>
                             </div>
 
-                            <div className='ud-rightside-body'>
+                            { dashboard && (
+                                <div className='ud-rightside-body'>
                                 <div className="navbar-dimension"></div>
                                 <div className='ud-navbar'>
                                     <p className='ud-navbar-greeting'>Hello {userData.name} 👋🏼,</p>
@@ -242,7 +376,7 @@ function UserDashBoard() {
                                     </svg></div>
                                     <div className='ud-nav-buttons'>
 
-                                        <p onClick={() => navigate(-1)} className='backbutton'><svg  id='ud-svgs2' xmlns="http://www.w3.org/2000/svg" width="800px" height="800px" viewBox="0 0 24 24" fill="none">
+                                        <p onClick={() => navigate(-1)} className='backbutton'><svg id='ud-svgs2' xmlns="http://www.w3.org/2000/svg" width="800px" height="800px" viewBox="0 0 24 24" fill="none">
                                             <path d="M9 22H15C20 22 22 20 22 15V9C22 4 20 2 15 2H9C4 2 2 4 2 9V15C2 20 4 22 9 22Z" stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                             <path d="M9.00002 15.3802H13.92C15.62 15.3802 17 14.0002 17 12.3002C17 10.6002 15.62 9.22021 13.92 9.22021H7.15002" stroke="#292D32" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
                                             <path d="M8.57 10.7701L7 9.19012L8.57 7.62012" stroke="#292D32" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
@@ -267,12 +401,12 @@ function UserDashBoard() {
                                         <div className='analytics-databox'>
                                             <p className='databox-title'>Total Views</p>
                                             <p className='databox-number'>{numeral(blogData.reduce((acc, blog) => acc + blog.views, 0)).format('0.a').toUpperCase()}</p>
-                                            <p className="databox-analytics-value">
+                                            {/* <p className="databox-analytics-value">
                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" id="databox-arrow">
                                                     <path d="M4 15a1 1 0 0 0 1 1h19.586l-4.292 4.292a1 1 0 0 0 1.414 1.414l6-6a.99.99 0 0 0 .292-.702V15c0-.13-.026-.26-.078-.382a.99.99 0 0 0-.216-.324l-6-6a1 1 0 0 0-1.414 1.414L24.586 14H5a1 1 0 0 0-1 1z"></path>
                                                 </svg>
                                                 <p>16%</p>this month
-                                            </p>
+                                            </p> */}
                                         </div>
                                     </div>
 
@@ -298,12 +432,12 @@ function UserDashBoard() {
                                         <div className='analytics-databox'>
                                             <p className='databox-title'>Total Blogs</p>
                                             <p className='databox-number'>{numeral(blogData.length).format('0.a').toUpperCase()}</p>
-                                            <p className="databox-analytics-value">
+                                            {/* <p className="databox-analytics-value">
                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" id="databox-arrow">
                                                     <path d="M4 15a1 1 0 0 0 1 1h19.586l-4.292 4.292a1 1 0 0 0 1.414 1.414l6-6a.99.99 0 0 0 .292-.702V15c0-.13-.026-.26-.078-.382a.99.99 0 0 0-.216-.324l-6-6a1 1 0 0 0-1.414 1.414L24.586 14H5a1 1 0 0 0-1 1z"></path>
                                                 </svg>
                                                 <p>16%</p>this month
-                                            </p>
+                                            </p> */}
                                         </div>
                                     </div>
 
@@ -323,7 +457,7 @@ function UserDashBoard() {
                                         </div>
                                         <div className='analytics-databox'>
                                             <p className='databox-title'>Connections</p>
-                                            <p className='databox-number'>{numeral(blogData.reduce((acc, blog) => acc + blog.views, 0)).format('0.a').toUpperCase()}</p>
+                                            <p className='databox-number'>{numeral(followerDetails.length).format('0.a').toUpperCase()}</p>
                                             <div className="databox-analytics-value">
                                                 <div>
                                                     <img src="" alt="" />
@@ -417,6 +551,13 @@ function UserDashBoard() {
                                     </div>
                                 </div>
                             </div>
+                            )}
+
+                            { blogs && (
+                                <div className="ud-rightside-body-blogs">
+                                    
+                                </div>
+                            )}
                         </div>
                     </div>
                 )}
