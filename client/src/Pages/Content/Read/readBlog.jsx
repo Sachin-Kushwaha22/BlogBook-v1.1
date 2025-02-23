@@ -47,7 +47,7 @@ function ReadBlog() {
         viewsData = viewsData.filter(timestamp => now - timestamp < 24 * 60 * 60 * 1000);
 
         if (viewsData.length >= 5) {
-            console.log("View limit reached for this blog in the last 24 hours.");
+            // console.log("View limit reached for this blog in the last 24 hours.");
             return;
         }
 
@@ -74,7 +74,7 @@ function ReadBlog() {
             const response = await axios.get(`${config.serverUrl}/post/viewblog/${id}`, {
                 withCredentials: true,
             })
-            console.log('heyy2');
+            // console.log('heyy2');
             if (response.status == 200) {
                 setBlogPost(response.data);
                 setTimeout(() => {
@@ -138,7 +138,7 @@ function ReadBlog() {
                 }
             } catch (error) {
 
-                console.log('error from followerStatus func client :', error.response?.data?.message || error.message);
+                // console.log('error from followerStatus func client :', error.response?.data?.message || error.message);
                 toast.error(error.response?.data?.message || error.message)
             } finally {
                 setIsLoading(false)
@@ -162,7 +162,7 @@ function ReadBlog() {
         socket.connect(); // Ensure socket is connecting
 
         const handleNewComment = (newComment) => {
-            console.log("New comment received:", newComment);
+            // console.log("New comment received:", newComment);
             setAllComments((prevComments) => [newComment, ...prevComments]);
             setTimeout(() => {
                 commentScroll.current?.scrollIntoView({ behavior: 'smooth' });
@@ -213,7 +213,7 @@ function ReadBlog() {
                 }
 
             } catch (error) {
-                console.log('error from handlecommmentsave func client :', error.response?.data?.message || error.message);
+                // console.log('error from handlecommmentsave func client :', error.response?.data?.message || error.message);
             }
             finally {
                 setTimeout(() => {
@@ -268,7 +268,7 @@ function ReadBlog() {
                 setReload(reload => reload + 1)
             }
         } catch (error) {
-            console.log('error from handleCommentDelete func client :', error.response?.data?.message || error.message);
+            // console.log('error from handleCommentDelete func client :', error.response?.data?.message || error.message);
         }
     }
 
@@ -293,7 +293,7 @@ function ReadBlog() {
                     }, 1000);
                 }
             } catch (error) {
-                console.log('error from handlefollowbtn func client :', error.response?.data?.message || error.message);
+                // console.log('error from handlefollowbtn func client :', error.response?.data?.message || error.message);
                 toast.error(error.response?.data?.message || error.message)
             }
         } else {
@@ -326,7 +326,7 @@ function ReadBlog() {
                     }, 1000);
                 }
             } catch (error) {
-                console.log('error from handlefollowingbtn func client :', error.response?.data?.message || error.message);
+                // console.log('error from handlefollowingbtn func client :', error.response?.data?.message || error.message);
                 toast.error(error.response?.data?.message || error.message)
             }
         } else {

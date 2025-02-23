@@ -28,7 +28,7 @@ function footer() {
                 const response = await axios.post('http://localhost:9010/feedback', { userid: user.sub, feedback: feedback }, {
                     withCredentials: true,
                 })
-                console.log(response.data);
+                // console.log(response.data);
                 if (response.data.message) {
                     toast('Feedback Send')
                 }
@@ -38,7 +38,7 @@ function footer() {
                 }, 1000);
             } catch (error) {
                 setError(error)
-                console.log(error);
+                // console.log(error);
                 toast.error('An unexpected error occur. Try again')
                 setLoading(false)
 

@@ -43,7 +43,7 @@ function header() {
 
 
             } catch (error) {
-                console.log('error in react handlesigningoogle function', error);
+                // console.log('error in react handlesigningoogle function', error);
 
             }
 

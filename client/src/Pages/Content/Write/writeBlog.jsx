@@ -118,7 +118,7 @@ const BlogEditor = () => {
                 const response = await axios.post('http://localhost:9010/post/blog', blogData, {
                     withCredentials: true,
                 })
-                console.log(response.data)
+                // console.log(response.data)
                 // console.log('Blog published:', blogData);
                 toast.success('Your blog has been published!', {
                     autoClose: 3000
