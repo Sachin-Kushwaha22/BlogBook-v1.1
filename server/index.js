@@ -29,7 +29,7 @@ connectToDatabase(process.env.DATABASE_URL)
 
 app.use(
     cors({
-        origin: "https://blogbook-v1.onrender.com",
+        origin: "https://blogbook-v1-1.onrender.com",
         credentials: true,
     })
 );
