@@ -32,7 +32,7 @@ const UserProfile = () => {
 
     const handleSignOutGoogle = async () => {
         try {
-            const response = await axios.post('http://localhost:9010/google/user/signout', {}, {
+            const response = await axios.post('https://blogbook-v1-backend.onrender.com/google/user/signout', {}, {
                 withCredentials: true
             })
 
