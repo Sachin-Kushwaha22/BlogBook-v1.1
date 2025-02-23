@@ -160,23 +160,28 @@ function UserDashBoard() {
     }, [isAuthenticated, user])
 
     const handleLogout = async () => {
-
-        try {
-            const response = await axios.post(`${config.serverUrl}/user/api/logout`, null, {
-                withCredentials: true,
-            });
-
-            if (response.status == 200) {
-                setTimeout(() => {
+        setTimeout(() => {
                     toast.info("You are Logged Out")
                     logout()
                     navigate('/')
                 }, 1500);
-            }
-        } catch (error) {
-            // console.log('Error from logout details:', error.response?.data?.message || error.message);
-            toast.error(error.response?.data?.message || error.message)
-        }
+
+        // try {
+        //     const response = await axios.post(`${config.serverUrl}/user/api/logout`, null, {
+        //         withCredentials: true,
+        //     });
+
+        //     if (response.status == 200) {
+        //         setTimeout(() => {
+        //             toast.info("You are Logged Out")
+        //             logout()
+        //             navigate('/')
+        //         }, 1500);
+        //     }
+        // } catch (error) {
+        //     // console.log('Error from logout details:', error.response?.data?.message || error.message);
+        //     toast.error(error.response?.data?.message || error.message)
+        // }
     }
 
 
