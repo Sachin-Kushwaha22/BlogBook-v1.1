@@ -4,7 +4,7 @@ const socketIO = require("socket.io");
 const setupSocket = (server) => {
     const io = socketIO(server, {
         cors: {
-            origin: "http://localhost:5173", // Allow frontend connection
+            origin: "https://blogbook-v1-1.onrender.com", // Allow frontend connection
             credentials: true,
         }
     });

@@ -25,7 +25,7 @@ function footer() {
         e.preventDefault();
         if (isAuthenticated && user) {
             try {
-                const response = await axios.post('http://localhost:9010/feedback', { userid: user.sub, feedback: feedback }, {
+                const response = await axios.post('https://blogbook-v1-backend.onrender.com/feedback', { userid: user.sub, feedback: feedback }, {
                     withCredentials: true,
                 })
                 // console.log(response.data);
@@ -114,7 +114,7 @@ function footer() {
                     <div>
                         <h2 className='aboutusheading underline'>About Us</h2>
                         <ul className='aboutuslist '>
-                            <li className='underline'>Creator</li>
+                            <li className='underline' style={{cursor:'pointer'}} onClick={() => window.open("https://github.com/Sachin-Kushwaha22/")}>Creator</li>
                             <li className='underline'>Designer</li>
                             <li className='underline'>Location</li>
                             <li className='underline'>Authors</li>
