@@ -161,11 +161,10 @@ function UserDashBoard() {
 
     const handleLogout = async () => {
         setTimeout(() => {
-                    toast.info("You are Logged Out")
-                    logout()
-                    navigate('/')
-                }, 1500);
-
+            toast.info("You are Logged Out")
+            logout()
+            navigate('/')
+        }, 1500);
         // try {
         //     const response = await axios.post(`${config.serverUrl}/user/api/logout`, null, {
         //         withCredentials: true,
