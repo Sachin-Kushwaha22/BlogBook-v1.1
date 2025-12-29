@@ -114,7 +114,7 @@ function footer() {
                     <div>
                         <h2 className='aboutusheading underline'>About Us</h2>
                         <ul className='aboutuslist '>
-                            <li className='underline'>Creator</li>
+                            <li className='underline' style={{cursor:'pointer'}} onClick={() => window.open("https://github.com/Sachin-Kushwaha22/")}>Creator</li>
                             <li className='underline'>Designer</li>
                             <li className='underline'>Location</li>
                             <li className='underline'>Authors</li>
