@@ -60,7 +60,7 @@ function dashboard() {
         setLoading(true)
         e.preventDefault()
         try {
-            const response = await axios.post('http://localhost:9010/user/api/logout', null, {
+            const response = await axios.post('https://blogbook-v1-backend.onrender.com/user/api/logout', null, {
                 withCredentials: true,
             });
 
@@ -83,7 +83,7 @@ function dashboard() {
     const handleUserAnalytics = async () => {
 
         try {
-            const response = await axios.post('http://localhost:9010/user/api/analytics', null, {
+            const response = await axios.post('https://blogbook-v1-backend.onrender.com/user/api/analytics', null, {
                 withCredentials: true,
             });
             if (response.data.valid) {
@@ -109,7 +109,7 @@ function dashboard() {
     const handleBlogPostDelete = async (e) => {
         e.preventDefault()
         try {
-            const response = await axios.post('http://localhost:9010/blog/delete', null, {
+            const response = await axios.post('https://blogbook-v1-backend.onrender.com/blog/delete', null, {
                 withCredentials: true,
             })
         } catch (error) {

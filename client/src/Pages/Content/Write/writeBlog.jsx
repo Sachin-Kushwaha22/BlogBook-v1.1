@@ -13,13 +13,13 @@ const uploadImage = async (file) => {
     const formData = new FormData();
     formData.append('image', file);
 
-    const response = await fetch('http://localhost:9010/post/uploadblog', {
+    const response = await fetch('https://blogbook-v1-backend.onrender.com/post/uploadblog', {
         method: 'POST',
         body: formData,
     });
 
     const data = await response.json();
-    const imageUrl = `http://localhost:9010/post${data.imageUrl}`;
+    const imageUrl = `https://blogbook-v1-backend.onrender.com/post${data.imageUrl}`;
     return imageUrl;
 };
 
@@ -115,7 +115,7 @@ const BlogEditor = () => {
                 content
             };
             try {
-                const response = await axios.post('http://localhost:9010/post/blog', blogData, {
+                const response = await axios.post('https://blogbook-v1-backend.onrender.com/post/blog', blogData, {
                     withCredentials: true,
                 })
                 // console.log(response.data)

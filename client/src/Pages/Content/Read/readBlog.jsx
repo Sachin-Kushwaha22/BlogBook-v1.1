@@ -62,7 +62,7 @@ function ReadBlog() {
             }
 
         } catch (error) {
-            console.error('error generated from incrementViews func client', error.response?.data?.message || error.message);
+            // console.error('error generated from incrementViews func client', error.response?.data?.message || error.message);
         }
     }
 
@@ -95,7 +95,7 @@ function ReadBlog() {
 
             }
         } catch (error) {
-            console.error('error generated from fetchBlogPost func client', error.response?.data?.message || error.message);
+            // console.error('error generated from fetchBlogPost func client', error.response?.data?.message || error.message);
         }
     }
 
